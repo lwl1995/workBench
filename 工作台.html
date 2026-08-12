@@ -687,6 +687,8 @@
 
     .quick-add {
       position: absolute;
+      left: auto;
+      top: auto;
       right: 18px;
       bottom: 82px;
       z-index: 4;
@@ -2148,8 +2150,8 @@
             moved: false,
             startX: 0,
             startY: 0,
-            startRight: 18,
-            startBottom: 82
+            startLeft: 0,
+            startTop: 0
           },
           deleteDialogOpen: false,
           deleteTarget: null,
@@ -2435,14 +2437,17 @@
         },
         startQuickAddDrag(event) {
           const button = this.$refs.quickAdd;
-          if (!button) return;
+          const screen = this.$el.querySelector(".screen");
+          if (!button || !screen) return;
 
           this.quickAddDrag.active = true;
           this.quickAddDrag.moved = false;
           this.quickAddDrag.startX = event.clientX;
           this.quickAddDrag.startY = event.clientY;
-          this.quickAddDrag.startRight = this.quickAddPosition.right;
-          this.quickAddDrag.startBottom = this.quickAddPosition.bottom;
+          const screenRect = screen.getBoundingClientRect();
+          const buttonRect = button.getBoundingClientRect();
+          this.quickAddDrag.startLeft = buttonRect.left - screenRect.left;
+          this.quickAddDrag.startTop = buttonRect.top - screenRect.top;
 
           button.setPointerCapture?.(event.pointerId);
           window.addEventListener("pointermove", this.moveQuickAddDrag);
@@ -2457,14 +2462,20 @@
             this.quickAddDrag.moved = true;
           }
 
-          const screen = this.$el.querySelector(".screen");
           const button = this.$refs.quickAdd;
+          const screen = this.$el.querySelector(".screen");
           if (!screen || !button) return;
 
-          const maxRight = Math.max(12, screen.clientWidth - button.offsetWidth - 12);
-          const maxBottom = Math.max(12, screen.clientHeight - button.offsetHeight - 12);
-          this.quickAddPosition.right = Math.min(maxRight, Math.max(12, this.quickAddDrag.startRight - deltaX));
-          this.quickAddPosition.bottom = Math.min(maxBottom, Math.max(12, this.quickAddDrag.startBottom - deltaY));
+          const maxLeft = Math.max(12, screen.clientWidth - button.offsetWidth - 12);
+          const maxTop = Math.max(12, screen.clientHeight - button.offsetHeight - 12);
+          this.quickAddPosition.left = Math.min(
+            maxLeft,
+            Math.max(12, this.quickAddDrag.startLeft + deltaX)
+          );
+          this.quickAddPosition.top = Math.min(
+            maxTop,
+            Math.max(12, this.quickAddDrag.startTop + deltaY)
+          );
         },
         endQuickAddDrag() {
           this.quickAddDrag.active = false;
@@ -2487,6 +2498,14 @@
       },
       computed: {
         quickAddStyle() {
+          if (this.quickAddPosition.left !== null && this.quickAddPosition.top !== null) {
+            return {
+              left: `${this.quickAddPosition.left}px`,
+              top: `${this.quickAddPosition.top}px`,
+              right: "auto",
+              bottom: "auto"
+            };
+          }
           return {
             right: `${this.quickAddPosition.right}px`,
             bottom: `${this.quickAddPosition.bottom}px`
