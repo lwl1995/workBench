@@ -32,6 +32,10 @@
       box-sizing: border-box;
     }
 
+    [v-cloak] {
+      display: none !important;
+    }
+
     html,
     body {
       margin: 0;
@@ -1826,7 +1830,7 @@
   </style>
 </head>
 <body>
-  <div id="app" class="phone-shell">
+  <div id="app" class="phone-shell" v-cloak>
     <div class="screen">
       <div v-if="currentPage === 'home'" class="content">
         <section class="hero">
