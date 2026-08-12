@@ -178,6 +178,23 @@
       min-width: 0;
     }
 
+    .customer-add-inline {
+      flex: 0 0 48px;
+      width: 48px;
+      height: 48px;
+      border: 0;
+      border-radius: 16px;
+      background: #168cff;
+      color: #ffffff;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 10px 18px rgba(47, 125, 255, 0.18);
+    }
+
+    .customer-add-inline:active {
+      transform: translateY(1px);
+    }
+
     .city-select {
       display: flex;
       align-items: center;
@@ -680,7 +697,7 @@
 
     .visit-filter-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 48px;
       gap: 10px;
     }
 
@@ -842,6 +859,31 @@
       margin-bottom: 10px;
     }
 
+    .visit-item-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+      flex: 0 0 auto;
+    }
+
+    .visit-item-action {
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: #7d8da4;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .visit-item-action.edit {
+      color: var(--primary);
+    }
+
+    .visit-item-action.delete {
+      color: #e56a6a;
+    }
+
     .visit-item-title {
       margin: 0;
       color: #111111;
@@ -894,18 +936,16 @@
     }
 
     .visit-fab {
-      position: absolute;
-      right: 20px;
-      bottom: 88px;
-      width: 56px;
-      height: 56px;
+      width: 48px;
+      height: 46px;
+      align-self: center;
       border: 0;
-      border-radius: 50%;
+      border-radius: 15px;
       background: #2f7dff;
       color: #ffffff;
-      font-size: 22px;
+      font-size: 18px;
       cursor: pointer;
-      box-shadow: 0 14px 26px rgba(47, 125, 255, 0.28);
+      box-shadow: 0 10px 18px rgba(47, 125, 255, 0.18);
     }
 
     .visit-form-page {
@@ -980,36 +1020,6 @@
     .customer-empty-action:hover {
       background: var(--primary-deep);
       transform: translateY(-1px);
-    }
-
-    .quick-add {
-      position: absolute;
-      left: auto;
-      top: auto;
-      right: 18px;
-      bottom: 82px;
-      z-index: 4;
-      width: 52px;
-      height: 52px;
-      border: 0;
-      border-radius: 50%;
-      background: var(--primary);
-      color: #ffffff;
-      font-size: 21px;
-      cursor: grab;
-      box-shadow: 0 14px 26px rgba(47, 125, 255, 0.3);
-      touch-action: none;
-      user-select: none;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .quick-add:active {
-      cursor: grabbing;
-    }
-
-    .quick-add:hover {
-      background: var(--primary-deep);
-      transform: translateY(-2px);
     }
 
     .customer-form-page {
@@ -1734,6 +1744,16 @@
       transform: translateX(-50%) translateY(0);
     }
 
+    .toast.centered {
+      top: 50%;
+      bottom: auto;
+      transform: translateX(-50%) translateY(-50%) scale(0.96);
+    }
+
+    .toast.centered.show {
+      transform: translateX(-50%) translateY(-50%) scale(1);
+    }
+
     .dialog-mask {
       position: fixed;
       inset: 0;
@@ -2050,10 +2070,14 @@
             <input
               v-model="searchKeyword"
               type="search"
-              placeholder="搜索客户姓名、公司"
-              aria-label="搜索客户姓名、公司"
+              placeholder="搜索姓名、公司"
+              aria-label="搜索姓名、公司"
             >
           </label>
+
+          <button class="customer-add-inline" type="button" aria-label="新增客户" @click="openCustomerForm()">
+            <i class="fa-solid fa-plus"></i>
+          </button>
         </div>
 
         <div class="customer-tabs" role="tablist" aria-label="客户分类">
@@ -2096,7 +2120,7 @@
                 </button>
                 <button class="customer-card-action" type="button" @click.stop="recordVisit(customer)">
                   <i class="fa-regular fa-calendar-check"></i>
-                  拜访记录
+                  去拜访
                 </button>
                 <button class="customer-card-action danger" type="button" @click.stop="deleteCustomer(customer)">
                   <i class="fa-regular fa-trash-can"></i>
@@ -2180,7 +2204,7 @@
           <button class="visit-back" type="button" aria-label="返回客户详情" @click="closeVisitRecords">
             <i class="fa-solid fa-arrow-left"></i>
           </button>
-          <h1>拜访记录</h1>
+          <h1>{{ selectedCustomer?.name || '拜访记录' }}</h1>
         </div>
 
         <div class="visit-content">
@@ -2197,6 +2221,9 @@
               <i class="fa-solid fa-chevron-down"></i>
               <input v-model="visitEndDate" type="date" aria-label="结束日期">
             </button>
+            <button class="visit-fab" type="button" aria-label="新增拜访记录" @click="openVisitForm()">
+              <i class="fa-solid fa-plus"></i>
+            </button>
           </div>
 
           <section class="visit-section">
@@ -2204,9 +2231,9 @@
               <h2>数据统计</h2>
             </div>
             <div class="visit-stats">
-              <div class="visit-stat"><strong>{{ visitStats.total }}+</strong><span>总拜访次数</span></div>
-              <div class="visit-stat"><strong>{{ visitStats.year }}+</strong><span>本年拜访次数</span></div>
-              <div class="visit-stat"><strong>{{ visitStats.month }}+</strong><span>本月拜访次数</span></div>
+              <div class="visit-stat"><strong>{{ visitStats.total }}</strong><span>总拜访次数</span></div>
+              <div class="visit-stat"><strong>{{ visitStats.year }}</strong><span>本年拜访次数</span></div>
+              <div class="visit-stat"><strong>{{ visitStats.month }}</strong><span>本月拜访次数</span></div>
             </div>
           </section>
 
@@ -2215,17 +2242,25 @@
               <h2>拜访详情</h2>
               <div class="visit-section-tools">
                 <span>共 {{ filteredVisitRecords.length }} 条</span>
-                <button class="visit-more" type="button" @click="notify('已展开全部拜访记录')">查看更多</button>
+                <!-- <button class="visit-more" type="button" @click="notify('已展开全部拜访记录')">查看更多</button> -->
               </div>
             </div>
 
             <div v-if="filteredVisitRecords.length" class="visit-timeline">
-              <article v-for="(record, index) in filteredVisitRecords" :key="record.id" class="visit-item">
-                <div class="visit-node"></div>
+            <article v-for="(record, index) in filteredVisitRecords" :key="record.id" class="visit-item">
+              <div class="visit-node"></div>
                 <div class="visit-item-head">
                   <div>
                     <h3 class="visit-item-title">{{ record.title }}</h3>
                     <div class="visit-item-time">{{ record.time }}</div>
+                  </div>
+                  <div class="visit-item-actions">
+                    <button class="visit-item-action edit" type="button" @click.stop="editVisitRecord(record)">
+                      编辑
+                    </button>
+                    <button class="visit-item-action delete" type="button" @click.stop="deleteVisitRecord(record)">
+                      删除
+                    </button>
                   </div>
                 </div>
                 <div class="visit-card">
@@ -2249,9 +2284,6 @@
           </section>
         </div>
 
-        <button class="visit-fab" type="button" aria-label="新增拜访记录" @click="openVisitForm()">
-          <i class="fa-solid fa-plus"></i>
-        </button>
       </main>
 
       <main v-else-if="currentPage === 'visit-form'" class="visit-form-page" @click="visitFormOpen = false">
@@ -2259,7 +2291,7 @@
           <button class="form-back" type="button" aria-label="返回拜访记录" @click="closeVisitForm">
             <i class="fa-solid fa-arrow-left"></i>
           </button>
-          <h1>新增拜访记录</h1>
+          <h1>{{ editingVisitId ? '编辑拜访记录' : '新增拜访记录' }}</h1>
         </div>
 
         <form class="form-card" @submit.prevent="saveVisitRecord">
@@ -2457,19 +2489,6 @@
         </form>
       </main>
 
-      <button
-        v-if="currentPage === 'customers'"
-        ref="quickAdd"
-        class="quick-add"
-        type="button"
-        :style="quickAddStyle"
-        aria-label="添加客户"
-        @pointerdown="startQuickAddDrag"
-        @click="handleQuickAddClick"
-      >
-        <i class="fa-solid fa-plus"></i>
-      </button>
-
       <nav v-if="currentPage === 'home' || currentPage === 'customers'" class="bottom-nav" aria-label="底部导航">
         <button class="nav-item" :class="{ active: currentPage === 'home' }" type="button" @click="goTo('home')">
           <i class="fa-solid fa-house"></i>
@@ -2493,12 +2512,16 @@
         </button> -->
       </nav>
 
-      <div class="toast" :class="{ show: toastVisible }">{{ toastMessage }}</div>
+      <div class="toast" :class="{ show: toastVisible, centered: isCenteredToast }">{{ toastMessage }}</div>
 
       <div v-if="deleteDialogOpen" class="dialog-mask" @click.self="cancelDeleteCustomer">
         <div class="dialog-card">
-          <h3>删除客户</h3>
-          <p>确定删除客户“{{ deleteTarget?.name }}”吗？</p>
+          <h3>{{ deleteTargetType === 'visit' ? '删除拜访记录' : '删除客户' }}</h3>
+          <p>
+            {{ deleteTargetType === 'visit'
+              ? `确定删除拜访记录“${deleteTarget?.title || ''}”吗？`
+              : `确定删除客户“${deleteTarget?.name || ''}”吗？` }}
+          </p>
           <div class="dialog-actions">
             <button class="dialog-button cancel" type="button" @click="cancelDeleteCustomer">取消</button>
             <button class="dialog-button danger" type="button" @click="confirmDeleteCustomer">删除</button>
@@ -2549,26 +2572,14 @@
             time: "",
             need: ""
           },
+          editingVisitId: null,
           cityMenuOpen: false,
           cityKeyword: "",
           activeProvince: "北京市",
           activeCustomerTab: "all",
-          quickAddPosition: {
-            left: null,
-            top: null,
-            right: 18,
-            bottom: 82
-          },
-          quickAddDrag: {
-            active: false,
-            moved: false,
-            startX: 0,
-            startY: 0,
-            startLeft: 0,
-            startTop: 0
-          },
           deleteDialogOpen: false,
           deleteTarget: null,
+          deleteTargetType: "customer",
           // customerTabs: [
           //   { label: "全部", value: "all" },
           //   { label: "待跟进", value: "follow" },
@@ -2616,7 +2627,7 @@
               id: 1,
               name: "林晓晴",
               company: "星河数字科技",
-              phone: "138****4721",
+              phone: "13812344721",
               city: "深圳市",
               role: "采购负责人",
               tags: ["重点客户", "企业采购"],
@@ -2628,7 +2639,7 @@
               id: 2,
               name: "周明远",
               company: "远川商贸有限公司",
-              phone: "139****2186",
+              phone: "13956782186",
               city: "杭州市",
               role: "运营总监",
               tags: ["待报价"],
@@ -2640,7 +2651,7 @@
               id: 3,
               name: "陈思源",
               company: "北辰供应链",
-              phone: "136****9058",
+              phone: "13689019058",
               city: "上海市",
               role: "项目经理",
               tags: ["已签约"],
@@ -2688,7 +2699,65 @@
           ]
         };
       },
+      created() {
+        this.loadPersistedData();
+      },
       methods: {
+        normalizeCustomerPhones(customers) {
+          const defaultPhones = {
+            1: "13812344721",
+            2: "13956782186",
+            3: "13689019058"
+          };
+          let changed = false;
+          const normalized = customers.map((customer) => {
+            const fallbackPhone = defaultPhones[customer.id];
+            if (fallbackPhone && typeof customer.phone === "string" && customer.phone.includes("*")) {
+              changed = true;
+              return { ...customer, phone: fallbackPhone };
+            }
+            return customer;
+          });
+          return { normalized, changed };
+        },
+        loadPersistedData() {
+          try {
+            const storedCustomers = window.localStorage.getItem("workbench-customers");
+            const storedVisitRecords = window.localStorage.getItem("workbench-visit-records");
+            if (storedCustomers !== null) {
+              const parsedCustomers = JSON.parse(storedCustomers);
+              if (Array.isArray(parsedCustomers)) {
+                const { normalized, changed } = this.normalizeCustomerPhones(parsedCustomers);
+                this.customers = normalized;
+                if (changed) {
+                  this.persistCustomers();
+                }
+              }
+            }
+            if (storedVisitRecords !== null) {
+              const parsedVisitRecords = JSON.parse(storedVisitRecords);
+              if (Array.isArray(parsedVisitRecords)) {
+                this.visitRecords = parsedVisitRecords;
+              }
+            }
+          } catch (error) {
+            console.warn("loadPersistedData failed", error);
+          }
+        },
+        persistCustomers() {
+          try {
+            window.localStorage.setItem("workbench-customers", JSON.stringify(this.customers));
+          } catch (error) {
+            console.warn("persistCustomers failed", error);
+          }
+        },
+        persistVisitRecords() {
+          try {
+            window.localStorage.setItem("workbench-visit-records", JSON.stringify(this.visitRecords));
+          } catch (error) {
+            console.warn("persistVisitRecords failed", error);
+          }
+        },
         goTo(page) {
           this.currentPage = page;
           this.formCityMenuOpen = false;
@@ -2758,6 +2827,23 @@
         openVisitForm() {
           this.visitFormError = "";
           this.visitForm = { title: "", time: "", need: "" };
+          this.editingVisitId = null;
+          this.currentPage = "visit-form";
+          this.$nextTick(() => {
+            const content = this.$el.querySelector(".content");
+            if (content) content.scrollTop = 0;
+          });
+        },
+        editVisitRecord(record) {
+          this.editingVisitId = record.id;
+          const dt = new Date(record.createdAt);
+          const pad = (n) => String(n).padStart(2, "0");
+          this.visitForm = {
+            title: record.title,
+            time: `${dt.getFullYear()}-${pad(dt.getMonth() + 1)}-${pad(dt.getDate())}T${pad(dt.getHours())}:${pad(dt.getMinutes())}`,
+            need: record.need || ""
+          };
+          this.visitFormError = "";
           this.currentPage = "visit-form";
           this.$nextTick(() => {
             const content = this.$el.querySelector(".content");
@@ -2779,21 +2865,40 @@
           }
           const date = new Date(this.visitForm.time);
           const dateText = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")} ${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
-          this.visitRecords.unshift({
-            id: Date.now(),
+          const payload = {
             customerId: this.selectedCustomer?.id || null,
             title: this.visitForm.title,
             time: dateText,
             need: this.visitForm.need,
             createdAt: this.visitForm.time
-          });
+          };
+          if (this.editingVisitId) {
+            const index = this.visitRecords.findIndex((item) => item.id === this.editingVisitId);
+            if (index !== -1) {
+              this.visitRecords[index] = { ...this.visitRecords[index], ...payload };
+            }
+            this.persistVisitRecords();
+            this.notify("拜访记录已更新");
+          } else {
+            this.visitRecords.unshift({
+              id: Date.now(),
+              ...payload
+            });
+            this.persistVisitRecords();
+            this.notify("拜访记录新增成功");
+          }
           this.currentPage = "visit-records";
           this.visitForm = { title: "", time: "", need: "" };
           this.visitFormError = "";
-          this.notify("拜访记录新增成功");
+          this.editingVisitId = null;
         },
         toggleVisitDate(type) {
           this.visitFilterOpen = type;
+        },
+        deleteVisitRecord(record) {
+          this.deleteTarget = record;
+          this.deleteTargetType = "visit";
+          this.deleteDialogOpen = true;
         },
         editCustomer(customer) {
           this.editingCustomerId = customer.id;
@@ -2855,13 +2960,18 @@
             const index = this.customers.findIndex((item) => item.id === this.editingCustomerId);
             if (index !== -1) {
               this.customers[index] = { ...this.customers[index], ...payload };
+              if (this.selectedCustomer?.id === this.editingCustomerId) {
+                this.selectedCustomer = this.customers[index];
+              }
             }
+            this.persistCustomers();
             this.notify("客户信息已更新");
           } else {
             this.customers.unshift({
               id: Date.now(),
               ...payload
             });
+            this.persistCustomers();
             this.notify("客户新增成功");
           }
 
@@ -2870,18 +2980,35 @@
         },
         deleteCustomer(customer) {
           this.deleteTarget = customer;
+          this.deleteTargetType = "customer";
           this.deleteDialogOpen = true;
         },
         confirmDeleteCustomer() {
           if (!this.deleteTarget) return;
-          this.customers = this.customers.filter((item) => item.id !== this.deleteTarget.id);
+          if (this.deleteTargetType === "visit") {
+            this.visitRecords = this.visitRecords.filter((item) => item.id !== this.deleteTarget.id);
+            this.persistVisitRecords();
+            this.notify("拜访记录已删除");
+          } else {
+            const deletedCustomerId = this.deleteTarget.id;
+            this.customers = this.customers.filter((item) => item.id !== this.deleteTarget.id);
+            this.visitRecords = this.visitRecords.filter((item) => item.customerId !== deletedCustomerId);
+            this.persistCustomers();
+            this.persistVisitRecords();
+            if (this.selectedCustomer?.id === deletedCustomerId) {
+              this.selectedCustomer = null;
+              this.currentPage = "customers";
+            }
+            this.notify("客户已删除");
+          }
           this.deleteTarget = null;
           this.deleteDialogOpen = false;
-          this.notify("客户已删除");
+          this.deleteTargetType = "customer";
         },
         cancelDeleteCustomer() {
           this.deleteTarget = null;
           this.deleteDialogOpen = false;
+          this.deleteTargetType = "customer";
         },
         recordVisit(customer) {
           this.openVisitRecords(customer);
@@ -2915,58 +3042,6 @@
           this.cityMenuOpen = false;
           this.cityKeyword = "";
         },
-        startQuickAddDrag(event) {
-          const button = this.$refs.quickAdd;
-          const screen = this.$el.querySelector(".screen");
-          if (!button || !screen) return;
-
-          this.quickAddDrag.active = true;
-          this.quickAddDrag.moved = false;
-          this.quickAddDrag.startX = event.clientX;
-          this.quickAddDrag.startY = event.clientY;
-          const screenRect = screen.getBoundingClientRect();
-          const buttonRect = button.getBoundingClientRect();
-          this.quickAddDrag.startLeft = buttonRect.left - screenRect.left;
-          this.quickAddDrag.startTop = buttonRect.top - screenRect.top;
-
-          button.setPointerCapture?.(event.pointerId);
-          window.addEventListener("pointermove", this.moveQuickAddDrag);
-          window.addEventListener("pointerup", this.endQuickAddDrag, { once: true });
-        },
-        moveQuickAddDrag(event) {
-          if (!this.quickAddDrag.active) return;
-
-          const deltaX = event.clientX - this.quickAddDrag.startX;
-          const deltaY = event.clientY - this.quickAddDrag.startY;
-          if (Math.abs(deltaX) > 4 || Math.abs(deltaY) > 4) {
-            this.quickAddDrag.moved = true;
-          }
-
-          const button = this.$refs.quickAdd;
-          const screen = this.$el.querySelector(".screen");
-          if (!screen || !button) return;
-
-          const maxLeft = Math.max(12, screen.clientWidth - button.offsetWidth - 12);
-          const maxTop = Math.max(12, screen.clientHeight - button.offsetHeight - 12);
-          this.quickAddPosition.left = Math.min(
-            maxLeft,
-            Math.max(12, this.quickAddDrag.startLeft + deltaX)
-          );
-          this.quickAddPosition.top = Math.min(
-            maxTop,
-            Math.max(12, this.quickAddDrag.startTop + deltaY)
-          );
-        },
-        endQuickAddDrag() {
-          this.quickAddDrag.active = false;
-          window.removeEventListener("pointermove", this.moveQuickAddDrag);
-        },
-        handleQuickAddClick() {
-          if (!this.quickAddDrag.moved) {
-            this.openCustomerForm();
-          }
-          this.quickAddDrag.moved = false;
-        },
         notify(message) {
           this.toastMessage = message;
           this.toastVisible = true;
@@ -2977,19 +3052,15 @@
         }
       },
       computed: {
-        quickAddStyle() {
-          if (this.quickAddPosition.left !== null && this.quickAddPosition.top !== null) {
-            return {
-              left: `${this.quickAddPosition.left}px`,
-              top: `${this.quickAddPosition.top}px`,
-              right: "auto",
-              bottom: "auto"
-            };
-          }
-          return {
-            right: `${this.quickAddPosition.right}px`,
-            bottom: `${this.quickAddPosition.bottom}px`
-          };
+        isCenteredToast() {
+          return [
+            "客户新增成功",
+            "客户信息已更新",
+            "客户已删除",
+            "拜访记录已删除",
+            "拜访记录已更新",
+            "拜访记录新增成功"
+          ].includes(this.toastMessage);
         },
         filteredCustomers() {
           const keyword = this.searchKeyword.trim().toLowerCase();
@@ -3061,7 +3132,6 @@
       },
       beforeUnmount() {
         window.clearTimeout(this.toastTimer);
-        window.removeEventListener("pointermove", this.moveQuickAddDrag);
       }
     }).mount("#app");
   </script>
