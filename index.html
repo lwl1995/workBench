@@ -620,6 +620,299 @@
       color: #737b86;
     }
 
+    .visit-page {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 0 0 24px;
+      background: linear-gradient(180deg, #e6f1ff 0%, #f6fbff 18%, #ffffff 100%);
+    }
+
+    .visit-topbar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 56px;
+      flex: 0 0 56px;
+      background: linear-gradient(180deg, rgba(212, 233, 255, 0.92), rgba(243, 249, 255, 0.92));
+      border-bottom: 1px solid rgba(47, 125, 255, 0.08);
+    }
+
+    .visit-back {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      color: #111111;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .visit-topbar h1 {
+      margin: 0;
+      color: #111111;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .visit-content {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 14px 16px 106px;
+      scrollbar-width: none;
+    }
+
+    .visit-content::-webkit-scrollbar {
+      display: none;
+    }
+
+    .visit-filter-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .visit-filter-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: 46px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 15px;
+      background: #ffffff;
+      color: #5c6d84;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+    }
+
+    .visit-filter-card i:first-child {
+      color: var(--primary);
+      font-size: 14px;
+    }
+
+    .visit-filter-card span {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    .visit-filter-card .fa-chevron-down {
+      color: #8a9bb3;
+      font-size: 11px;
+    }
+
+    .visit-filter-card input[type="date"] {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .visit-section {
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 22px;
+      background: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .visit-section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .visit-section-head h2 {
+      margin: 0;
+      color: #111111;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .visit-section-tools {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #8a99ad;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .visit-more {
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .visit-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .visit-stat {
+      padding: 14px 10px 12px;
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid #edf1f5;
+      text-align: center;
+    }
+
+    .visit-stat strong {
+      display: block;
+      color: #111111;
+      font-size: 23px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .visit-stat span {
+      display: block;
+      margin-top: 7px;
+      color: #8f99a8;
+      font-size: 11px;
+    }
+
+    .visit-timeline {
+      position: relative;
+      padding-left: 6px;
+    }
+
+    .visit-timeline::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: 8px;
+      bottom: 8px;
+      border-left: 2px dashed #d9e6fb;
+    }
+
+    .visit-item {
+      position: relative;
+      padding: 0 0 14px 40px;
+    }
+
+    .visit-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .visit-node {
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #dbeaff;
+      border: 5px solid #ffffff;
+      box-shadow: 0 0 0 1px rgba(47, 125, 255, 0.12);
+    }
+
+    .visit-item-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .visit-item-title {
+      margin: 0;
+      color: #111111;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .visit-item-time {
+      margin-top: 5px;
+      color: #8d99aa;
+      font-size: 11px;
+    }
+
+    .visit-card {
+      padding: 12px 12px 10px;
+      border-radius: 16px;
+      background: #f6f7f9;
+      border: 1px solid #f0f2f5;
+    }
+
+    .visit-kv {
+      display: grid;
+      grid-template-columns: 70px minmax(0, 1fr);
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .visit-kv:last-child {
+      margin-bottom: 0;
+    }
+
+    .visit-kv-label {
+      color: #95a1b0;
+      font-size: 11px;
+    }
+
+    .visit-kv-value {
+      color: #222222;
+      font-size: 12px;
+      line-height: 1.55;
+      word-break: break-word;
+    }
+
+    .visit-empty {
+      padding: 42px 12px 50px;
+      color: #9aa5b3;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .visit-fab {
+      position: absolute;
+      right: 20px;
+      bottom: 88px;
+      width: 56px;
+      height: 56px;
+      border: 0;
+      border-radius: 50%;
+      background: #2f7dff;
+      color: #ffffff;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 14px 26px rgba(47, 125, 255, 0.28);
+    }
+
+    .visit-form-page {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 8px 0 86px;
+      background: #ffffff;
+    }
+
     .customer-card-action.primary {
       color: var(--primary);
     }
@@ -1790,7 +2083,6 @@
             <div class="customer-card-body">
               <div class="customer-card-title">
                 <strong>{{ customer.name }}</strong>
-                <span class="customer-status">{{ customer.status }}</span>
               </div>
               <p>{{ customer.company }} · {{ customer.city }}</p>
               <div class="customer-card-actions">
@@ -1839,7 +2131,6 @@
               <h2>{{ selectedCustomer.name }}</h2>
               <p>{{ selectedCustomer.company }}</p>
             </div>
-            <span class="detail-status">{{ selectedCustomer.status }}</span>
           </div>
 
           <section class="detail-section">
@@ -1877,17 +2168,123 @@
             <p class="detail-item-value">{{ selectedCustomer.remark || '暂无备注信息' }}</p>
           </section>
 
-          <div class="detail-actions">
-            <button class="detail-action secondary" type="button" @click="recordVisit(selectedCustomer)">
-              <i class="fa-regular fa-calendar-check"></i>
-              拜访记录
+        </section>
+      </main>
+
+      <main v-else-if="currentPage === 'visit-records'" class="visit-page" @click="visitFilterOpen = false">
+        <div class="visit-topbar">
+          <button class="visit-back" type="button" aria-label="返回客户详情" @click="closeVisitRecords">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <h1>拜访记录</h1>
+        </div>
+
+        <div class="visit-content">
+          <div class="visit-filter-grid">
+            <button class="visit-filter-card" type="button" @click.stop="toggleVisitDate('start')">
+              <i class="fa-regular fa-calendar-days"></i>
+              <span>{{ visitStartDate || '开始日期' }}</span>
+              <i class="fa-solid fa-chevron-down"></i>
+              <input v-model="visitStartDate" type="date" aria-label="开始日期">
             </button>
-            <button class="detail-action primary" type="button" @click="editCustomer(selectedCustomer)">
-              <i class="fa-solid fa-pen"></i>
-              编辑客户
+            <button class="visit-filter-card" type="button" @click.stop="toggleVisitDate('end')">
+              <i class="fa-regular fa-calendar-days"></i>
+              <span>{{ visitEndDate || '结束日期' }}</span>
+              <i class="fa-solid fa-chevron-down"></i>
+              <input v-model="visitEndDate" type="date" aria-label="结束日期">
             </button>
           </div>
-        </section>
+
+          <section class="visit-section">
+            <div class="visit-section-head">
+              <h2>数据统计</h2>
+            </div>
+            <div class="visit-stats">
+              <div class="visit-stat"><strong>{{ visitStats.total }}+</strong><span>总拜访次数</span></div>
+              <div class="visit-stat"><strong>{{ visitStats.year }}+</strong><span>本年拜访次数</span></div>
+              <div class="visit-stat"><strong>{{ visitStats.month }}+</strong><span>本月拜访次数</span></div>
+            </div>
+          </section>
+
+          <section class="visit-section">
+            <div class="visit-section-head">
+              <h2>拜访详情</h2>
+              <div class="visit-section-tools">
+                <span>共 {{ filteredVisitRecords.length }} 条</span>
+                <button class="visit-more" type="button" @click="notify('已展开全部拜访记录')">查看更多</button>
+              </div>
+            </div>
+
+            <div v-if="filteredVisitRecords.length" class="visit-timeline">
+              <article v-for="(record, index) in filteredVisitRecords" :key="record.id" class="visit-item">
+                <div class="visit-node"></div>
+                <div class="visit-item-head">
+                  <div>
+                    <h3 class="visit-item-title">{{ record.title }}</h3>
+                    <div class="visit-item-time">{{ record.time }}</div>
+                  </div>
+                </div>
+                <div class="visit-card">
+                  <div class="visit-kv">
+                    <div class="visit-kv-label">拜访标题</div>
+                    <div class="visit-kv-value">{{ record.title }}</div>
+                  </div>
+                  <div class="visit-kv">
+                    <div class="visit-kv-label">拜访时间</div>
+                    <div class="visit-kv-value">{{ record.time }}</div>
+                  </div>
+                  <div class="visit-kv">
+                    <div class="visit-kv-label">客户需求</div>
+                    <div class="visit-kv-value">{{ record.need || '暂无' }}</div>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div v-else class="visit-empty">暂无符合条件的拜访记录</div>
+          </section>
+        </div>
+
+        <button class="visit-fab" type="button" aria-label="新增拜访记录" @click="openVisitForm()">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </main>
+
+      <main v-else-if="currentPage === 'visit-form'" class="visit-form-page" @click="visitFormOpen = false">
+        <div class="form-topbar">
+          <button class="form-back" type="button" aria-label="返回拜访记录" @click="closeVisitForm">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <h1>新增拜访记录</h1>
+        </div>
+
+        <form class="form-card" @submit.prevent="saveVisitRecord">
+          <div class="form-card-scroll">
+            <h2 class="form-card-title">基础信息</h2>
+
+            <div class="form-field">
+              <label class="form-field-label" for="visit-title">拜访标题<span class="required-mark">*</span></label>
+              <input id="visit-title" v-model.trim="visitForm.title" class="form-control" type="text" placeholder="请输入拜访标题" maxlength="30">
+            </div>
+
+            <div class="form-field">
+              <label class="form-field-label" for="visit-time">拜访时间<span class="required-mark">*</span></label>
+              <input id="visit-time" v-model="visitForm.time" class="form-control" type="datetime-local">
+            </div>
+
+            <div class="form-field">
+              <label class="form-field-label" for="visit-need">客户需求</label>
+              <textarea id="visit-need" v-model="visitForm.need" class="form-control" placeholder="请输入客户需求" maxlength="200"></textarea>
+            </div>
+
+            <p v-if="visitFormError" class="form-error">{{ visitFormError }}</p>
+          </div>
+
+          <div class="form-actions">
+            <button class="form-action cancel" type="button" @click="closeVisitForm">取消</button>
+            <button class="form-action save" type="submit">保存</button>
+          </div>
+        </form>
       </main>
 
       <main v-else class="content customer-form-page" @click="formCityMenuOpen = false">
@@ -2118,6 +2515,7 @@
           toastMessage: "",
           toastTimer: null,
           currentPage: "home",
+          previousPage: "customers",
           selectedCustomer: null,
           editingCustomerId: null,
           formError: "",
@@ -2137,6 +2535,16 @@
           },
           searchKeyword: "",
           selectedCity: "全部城市",
+          visitStartDate: "",
+          visitEndDate: "",
+          visitFilterOpen: false,
+          visitFormOpen: false,
+          visitFormError: "",
+          visitForm: {
+            title: "",
+            time: "",
+            need: ""
+          },
           cityMenuOpen: false,
           cityKeyword: "",
           activeProvince: "北京市",
@@ -2237,6 +2645,20 @@
               category: "won"
             }
           ],
+          visitRecords: [
+            { id: 101, customerId: 1, title: "首次需求拜访", time: "2026-08-05 10:30", need: "关注私有化部署与权限体系", createdAt: "2026-08-05T10:30" },
+            { id: 102, customerId: 1, title: "方案复盘沟通", time: "2026-07-18 14:00", need: "确认报价范围与实施周期", createdAt: "2026-07-18T14:00" },
+            { id: 103, customerId: 1, title: "产品演示跟进", time: "2026-03-22 09:20", need: "希望补充移动端拜访流程演示", createdAt: "2026-03-22T09:20" },
+            { id: 104, customerId: 1, title: "高层决策拜访", time: "2025-11-16 16:40", need: "对接年度采购与预算审批", createdAt: "2025-11-16T16:40" },
+            { id: 105, customerId: 2, title: "线索初访", time: "2026-08-02 11:00", need: "了解渠道合作结算规则", createdAt: "2026-08-02T11:00" },
+            { id: 106, customerId: 2, title: "报价沟通", time: "2026-01-12 15:10", need: "需要标准版与高级版差异说明", createdAt: "2026-01-12T15:10" },
+            { id: 107, customerId: 3, title: "项目复盘拜访", time: "2026-08-09 13:30", need: "验收后培训与二期开通计划", createdAt: "2026-08-09T13:30" },
+            { id: 108, customerId: 3, title: "交付回访", time: "2026-05-06 10:15", need: "确认历史数据迁移情况", createdAt: "2026-05-06T10:15" },
+            { id: 109, customerId: 3, title: "季度回访", time: "2025-12-19 09:00", need: "关注流程优化建议", createdAt: "2025-12-19T09:00" },
+            { id: 110, customerId: 1, title: "二次上门交流", time: "2024-06-13 10:00", need: "了解组织架构与权限颗粒度", createdAt: "2024-06-13T10:00" },
+            { id: 111, customerId: 1, title: "试用反馈拜访", time: "2023-09-08 15:20", need: "整理移动端表单与统计建议", createdAt: "2023-09-08T15:20" },
+            { id: 112, customerId: 1, title: "售前回访", time: "2022-04-17 11:40", need: "确认老项目升级意愿", createdAt: "2022-04-17T11:40" }
+          ],
           modules: [
             { name: "客户管理", icon: "fa-regular fa-address-book", route: "customers", message: "已打开客户管理" },
             { name: "项目管理", icon: "fa-regular fa-folder", message: "已进入项目，查看当前项目进度与节点" },
@@ -2316,6 +2738,58 @@
         closeCustomerDetail() {
           this.selectedCustomer = null;
           this.currentPage = "customers";
+        },
+        openVisitRecords(customer) {
+          this.selectedCustomer = customer;
+          this.previousPage = this.currentPage === "customer-detail" ? "customer-detail" : "customers";
+          this.currentPage = "visit-records";
+          this.$nextTick(() => {
+            const panel = this.$el.querySelector(".visit-content");
+            if (panel) panel.scrollTop = 0;
+          });
+        },
+        closeVisitRecords() {
+          this.currentPage = this.previousPage === "customer-detail" ? "customer-detail" : "customers";
+        },
+        openVisitForm() {
+          this.visitFormError = "";
+          this.visitForm = { title: "", time: "", need: "" };
+          this.currentPage = "visit-form";
+          this.$nextTick(() => {
+            const content = this.$el.querySelector(".content");
+            if (content) content.scrollTop = 0;
+          });
+        },
+        closeVisitForm() {
+          this.currentPage = "visit-records";
+          this.visitFormError = "";
+        },
+        saveVisitRecord() {
+          if (!this.visitForm.title) {
+            this.visitFormError = "请输入拜访标题";
+            return;
+          }
+          if (!this.visitForm.time) {
+            this.visitFormError = "请选择拜访时间";
+            return;
+          }
+          const date = new Date(this.visitForm.time);
+          const dateText = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")} ${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
+          this.visitRecords.unshift({
+            id: Date.now(),
+            customerId: this.selectedCustomer?.id || null,
+            title: this.visitForm.title,
+            time: dateText,
+            need: this.visitForm.need,
+            createdAt: this.visitForm.time
+          });
+          this.currentPage = "visit-records";
+          this.visitForm = { title: "", time: "", need: "" };
+          this.visitFormError = "";
+          this.notify("拜访记录新增成功");
+        },
+        toggleVisitDate(type) {
+          this.visitFilterOpen = type;
         },
         editCustomer(customer) {
           this.editingCustomerId = customer.id;
@@ -2406,7 +2880,7 @@
           this.deleteDialogOpen = false;
         },
         recordVisit(customer) {
-          this.notify(`已打开${customer.name}的拜访记录`);
+          this.openVisitRecords(customer);
         },
         selectFormCity(city) {
           const province = this.visibleFormProvinces.find((item) => item.name === this.activeFormProvince)
@@ -2523,6 +2997,30 @@
             const matchesTab = this.activeCustomerTab === "all" || customer.category === this.activeCustomerTab;
             return matchesKeyword && matchesCity && matchesTab;
           });
+        },
+        filteredVisitRecords() {
+          const customerId = this.selectedCustomer?.id;
+          const start = this.visitStartDate ? new Date(`${this.visitStartDate}T00:00`) : null;
+          const end = this.visitEndDate ? new Date(`${this.visitEndDate}T23:59`) : null;
+          return this.visitRecords
+            .filter((record) => !customerId || record.customerId === customerId)
+            .filter((record) => {
+              const current = new Date(record.createdAt);
+              const matchesStart = !start || current >= start;
+              const matchesEnd = !end || current <= end;
+              return matchesStart && matchesEnd;
+            })
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        },
+        visitStats() {
+          const currentYear = 2026;
+          const currentMonth = "2026-08";
+          const records = this.filteredVisitRecords;
+          return {
+            total: records.length,
+            year: records.filter((item) => String(new Date(item.createdAt).getFullYear()) === String(currentYear)).length,
+            month: records.filter((item) => item.createdAt.startsWith(currentMonth)).length
+          };
         },
         visibleProvinces() {
           const keyword = this.cityKeyword.trim().toLowerCase();
