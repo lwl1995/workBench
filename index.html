@@ -1077,12 +1077,11 @@
     }
 
     .profile-section {
-      margin: 22px 18px 0;
+      margin: 14px 18px 0;
     }
 
     .profile-section .profile-card {
-      margin-right: 0;
-      margin-left: 0;
+      margin: 0;
     }
 
     .profile-section-title {
@@ -1180,6 +1179,15 @@
       cursor: pointer;
     }
 
+    .project-folder-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-align: center;
+    }
+
     .folder-icon {
       display: flex;
       align-items: center;
@@ -1189,6 +1197,18 @@
       margin-bottom: 16px;
       border-radius: 50%;
       font-size: 18px;
+    }
+
+    .folder-card .folder-icon {
+      display: flex;
+      margin-top: 0;
+      color: inherit;
+      font-size: 18px;
+    }
+
+    .folder-card .folder-icon i {
+      display: block;
+      line-height: 1;
     }
 
     .folder-icon.green {
@@ -1227,15 +1247,22 @@
       font-size: 11px;
     }
 
+    .project-folder-card .folder-icon {
+      margin-right: 0;
+      margin-left: 0;
+      margin-bottom: 0;
+    }
+
     .data-management-card {
       overflow: hidden;
+      padding-bottom: 10px;
     }
 
     .data-management-head {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 0 0 12px;
+      padding: 0 0 8px;
     }
 
     .data-management-head strong {
@@ -1249,10 +1276,10 @@
       align-items: center;
       gap: 12px;
       width: 100%;
-      min-height: 72px;
+      min-height: 66px;
       border: 0;
       border-bottom: 1px solid #f0f2f5;
-      padding: 12px 2px;
+      padding: 10px 2px;
       background: #ffffff;
       text-align: left;
       cursor: pointer;
@@ -1310,6 +1337,146 @@
     .data-management-item > i {
       color: #aab2bc;
       font-size: 13px;
+    }
+
+    .file-list-card {
+      margin-top: 16px;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .file-list-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 18px 12px;
+      border-bottom: 1px solid #eef2f6;
+    }
+
+    .file-list-summary-copy {
+      min-width: 0;
+    }
+
+    .file-list-summary strong {
+      display: block;
+      color: #111111;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .file-list-summary-note {
+      margin-top: 4px;
+      color: #8fa0b6;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .file-list-summary span {
+      color: #9aa5b3;
+      font-size: 12px;
+    }
+
+    .file-list-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 220px;
+      padding: 28px 20px;
+      color: #9aa5b3;
+      text-align: center;
+    }
+
+    .file-list-empty i {
+      font-size: 30px;
+      color: #bed3eb;
+    }
+
+    .project-file-item {
+      padding: 16px 18px;
+      border-bottom: 1px solid #f0f2f5;
+    }
+
+    .project-file-item:last-child {
+      border-bottom: 0;
+    }
+
+    .project-file-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .project-file-name {
+      margin: 0;
+      color: #111111;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.5;
+      word-break: break-all;
+    }
+
+    .keyword-highlight {
+      color: #168cff;
+      background: #eaf4ff;
+      border-radius: 6px;
+      padding: 0 2px;
+    }
+
+    .project-file-size {
+      flex: 0 0 auto;
+      color: #9aa5b3;
+      font-size: 12px;
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+
+    .project-file-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .project-file-meta span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: #f5f7fb;
+      color: #6f7f95;
+      font-size: 11px;
+    }
+
+    .project-file-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .project-file-actions button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 72px;
+      height: 32px;
+      border: 0;
+      border-radius: 12px;
+      background: #eef5ff;
+      color: #168cff;
+      font-size: 12px;
+      font-weight: 700;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .project-file-actions button.download {
+      background: #168cff;
+      color: #ffffff;
     }
 
     .profile-hidden-input,
@@ -1698,6 +1865,61 @@
       color: #8e98a6;
       font-size: 14px;
       cursor: pointer;
+    }
+
+    .project-attachment-item-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .project-attachment-item .attachment-action-button {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9px;
+      background: #edf5ff;
+      color: var(--primary);
+      font-size: 12px;
+    }
+
+    .project-attachment-item .attachment-action-button.delete {
+      background: #fff1f1;
+      color: #ef6a6a;
+    }
+
+    .attachment-detail-name {
+      overflow: hidden;
+      max-width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .attachment-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 7px;
+    }
+
+    .attachment-actions button {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--primary);
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .attachment-actions button:hover,
+    .project-attachment-item .attachment-action-button:hover {
+      opacity: 0.78;
     }
 
     .project-status-title {
@@ -2894,6 +3116,12 @@
       font-size: 11px;
     }
 
+    .statistics-card-value.stacked {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
     .grid-card {
       background: rgba(255, 255, 255, 0.98);
       border-radius: 28px;
@@ -3224,7 +3452,7 @@
       left: 50%;
       bottom: 94px;
       transform: translateX(-50%) translateY(20px);
-      min-width: 210px;
+      width: max-content;
       max-width: calc(100% - 40px);
       padding: 12px 16px;
       border-radius: 16px;
@@ -3251,6 +3479,12 @@
 
     .toast.centered.show {
       transform: translateX(-50%) translateY(-50%) scale(1);
+    }
+
+    .toast.success {
+      background: #e8f8ed;
+      color: #21894d;
+      box-shadow: 0 12px 24px rgba(33, 137, 77, 0.14);
     }
 
     .dialog-mask {
@@ -3317,6 +3551,133 @@
     .dialog-button.primary {
       background: #168cff;
       color: #ffffff;
+    }
+
+    .attachment-preview-dialog {
+      width: min(100%, 360px);
+      max-height: min(86vh, 680px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .attachment-preview-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .attachment-preview-head h3 {
+      min-width: 0;
+      overflow: hidden;
+      margin: 0;
+      text-align: left;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .attachment-preview-close {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      border: 0;
+      border-radius: 10px;
+      background: #f1f4f8;
+      color: #7d8794;
+      cursor: pointer;
+    }
+
+    .attachment-preview-body {
+      min-height: 120px;
+      overflow: auto;
+      border-radius: 14px;
+      background: #f5f7fa;
+    }
+
+    .attachment-preview-body img,
+    .attachment-preview-body video,
+    .attachment-preview-body iframe {
+      display: block;
+      width: 100%;
+      min-height: 260px;
+      border: 0;
+      object-fit: contain;
+      background: #ffffff;
+    }
+
+    .attachment-preview-body audio {
+      display: block;
+      width: calc(100% - 24px);
+      margin: 24px 12px;
+    }
+
+    .attachment-preview-text {
+      margin: 0;
+      padding: 14px;
+      color: #405166;
+      font-size: 12px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .attachment-preview-document {
+      min-height: 260px;
+      padding: 18px;
+      color: #27364b;
+      background: #ffffff;
+      font-size: 12px;
+      line-height: 1.75;
+    }
+
+    .attachment-preview-document p {
+      margin: 0 0 10px;
+    }
+
+    .attachment-preview-document h1,
+    .attachment-preview-document h2,
+    .attachment-preview-document h3,
+    .attachment-preview-document h4 {
+      margin: 0 0 12px;
+      color: #111111;
+      line-height: 1.45;
+    }
+
+    .attachment-preview-document img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .attachment-preview-document table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 12px;
+    }
+
+    .attachment-preview-document td,
+    .attachment-preview-document th {
+      padding: 5px;
+      border: 1px solid #dfe5ec;
+      text-align: left;
+    }
+
+    .attachment-preview-empty {
+      margin: 0;
+      padding: 40px 20px;
+      color: #8d98a6;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .attachment-preview-footer {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .attachment-preview-footer .dialog-button {
+      flex: 1;
     }
 
     .import-mode-actions {
@@ -3571,7 +3932,7 @@
                 </div>
                 <i class="fa-solid fa-chevron-right statistics-card-arrow"></i>
               </div>
-              <div class="statistics-card-value">
+              <div class="statistics-card-value stacked">
                 <strong>{{ statisticsRemainingReceiptAmount }}</strong>
                 <span>万元</span>
               </div>
@@ -3710,7 +4071,7 @@
               <div class="customer-card-title">
                 <strong>{{ customer.name }}</strong>
               </div>
-              <p>{{ customer.company }} · {{ customer.city }}</p>
+              <p>{{ customer.phone || '未填写联系电话' }}</p>
               <div class="customer-card-actions">
                 <button class="customer-card-action primary" type="button" @click.stop="editCustomer(customer)">
                   <i class="fa-solid fa-pen"></i>
@@ -4120,8 +4481,18 @@
                 </div>
                 <div v-if="projectAttachmentsByCategory(selectedProject.attachments, category.key).length" class="detail-grid">
                   <div v-for="file in projectAttachmentsByCategory(selectedProject.attachments, category.key)" :key="file.id || file.name">
-                    <span class="detail-item-label">{{ file.name }}</span>
+                    <span class="detail-item-label attachment-detail-name">{{ file.name }}</span>
                     <span class="detail-item-value">{{ file.sizeLabel || '已上传' }}</span>
+                    <div class="attachment-actions">
+                      <button type="button" @click.stop="previewAttachment(file)">
+                        <i class="fa-regular fa-eye"></i>
+                        预览
+                      </button>
+                      <button type="button" @click.stop="downloadAttachment(file)">
+                        <i class="fa-solid fa-download"></i>
+                        下载
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -4823,9 +5194,17 @@
                         <strong>{{ file.name }}</strong>
                         <span>{{ file.sizeLabel }}</span>
                       </div>
-                      <button type="button" @click="removeProjectAttachment(file)">
-                        <i class="fa-solid fa-xmark"></i>
-                      </button>
+                      <div class="project-attachment-item-actions">
+                        <button class="attachment-action-button" type="button" @click="previewAttachment(file)">
+                          <i class="fa-regular fa-eye"></i>
+                        </button>
+                        <button class="attachment-action-button" type="button" @click="downloadAttachment(file)">
+                          <i class="fa-solid fa-download"></i>
+                        </button>
+                        <button class="attachment-action-button delete" type="button" @click="removeProjectAttachment(file)">
+                          <i class="fa-solid fa-xmark"></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <p v-else class="project-group-empty">暂无{{ category.label }}</p>
@@ -5269,28 +5648,111 @@
         <section class="profile-section">
           <h2 class="profile-section-title">我的文件夹</h2>
           <div class="folder-grid">
-            <button class="folder-card" type="button" @click="notify('客户管理文件夹暂未单独开放')">
+            <!-- <button class="folder-card" type="button" @click="notify('客户管理文件夹暂未单独开放')">
               <span class="folder-icon green"><i class="fa-solid fa-users"></i></span>
               <strong>客户管理相关</strong>
               <span>{{ folderFileCount('customer') }} 个文件</span>
-            </button>
-            <button class="folder-card" type="button" @click="notify('项目管理文件夹已包含全部项目附件')">
-              <span class="folder-icon blue"><i class="fa-solid fa-table-cells-large"></i></span>
+            </button> -->
+            <button class="folder-card project-folder-card" type="button" @click="openProjectFilesPage">
+              <span class="folder-icon blue"><i class="fa-regular fa-folder"></i></span>
               <strong>项目管理相关</strong>
               <span>{{ folderFileCount('project') }} 个文件</span>
             </button>
-            <button class="folder-card" type="button" @click="notify('待办事项文件夹暂未单独开放')">
+            <!-- <button class="folder-card" type="button" @click="notify('待办事项文件夹暂未单独开放')">
               <span class="folder-icon yellow"><i class="fa-solid fa-check"></i></span>
               <strong>待办事项相关</strong>
               <span>{{ folderFileCount('todo') }} 个文件</span>
-            </button>
-            <button class="folder-card" type="button" @click="notify('独立文件页面暂未开放')">
+            </button> -->
+            <!-- <button class="folder-card" type="button" @click="notify('独立文件页面暂未开放')">
               <span class="folder-icon purple"><i class="fa-solid fa-folder"></i></span>
               <strong>独立文件</strong>
               <span>{{ folderFileCount('independent') }} 个文件</span>
-            </button>
+            </button> -->
           </div>
         </section>
+      </main>
+
+      <main v-else-if="currentPage === 'project-files'" class="content file-center-page">
+        <div class="file-center-topbar">
+          <button class="file-center-back" type="button" aria-label="返回文件中心" @click="closeProjectFilesPage">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <h1>项目管理文件</h1>
+        </div>
+
+        <div class="project-filter-row">
+          <label class="project-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+              v-model="projectFilesSearchKeyword"
+              type="search"
+              placeholder="搜索附件名称"
+              aria-label="搜索附件名称"
+            >
+          </label>
+        </div>
+
+        <section class="file-center-storage-card file-list-card">
+          <div class="file-list-summary">
+            <div class="file-list-summary-copy">
+              <strong>项目附件</strong>
+              <div v-if="projectFilesSearchKeyword.trim()" class="file-list-summary-note">
+                正在搜索“{{ projectFilesSearchKeyword.trim() }}”
+              </div>
+            </div>
+            <span>{{ filteredProjectStoredFiles.length }} 个文件</span>
+          </div>
+
+          <div v-if="filteredProjectStoredFiles.length">
+            <article v-for="file in projectFilesPageItems" :key="file.storageId || file.id" class="project-file-item">
+              <div class="project-file-head">
+                <p class="project-file-name" v-html="highlightProjectFileName(file.name || '未命名附件')"></p>
+                <span class="project-file-size">{{ file.sizeLabel || formatFileSize(file.size) }}</span>
+              </div>
+              <div class="project-file-meta">
+                <span>{{ file.projectName || '未关联项目' }}</span>
+                <span>{{ projectAttachmentCategoryLabel(file.category) }}</span>
+              </div>
+              <div class="project-file-actions">
+                <button type="button" @click="previewAttachment(file)">
+                  <i class="fa-regular fa-eye"></i>
+                  预览
+                </button>
+                <button class="download" type="button" @click="downloadAttachment(file)">
+                  <i class="fa-solid fa-download"></i>
+                  下载
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <div v-else class="file-list-empty">
+            <i class="fa-regular fa-folder-open"></i>
+            <span>{{ projectStoredFiles.length ? '暂无匹配附件' : '暂无项目附件文件' }}</span>
+          </div>
+        </section>
+
+        <div v-if="filteredProjectStoredFiles.length > 5" class="list-pagination" aria-label="项目文件列表分页">
+          <button
+            class="list-page-button"
+            type="button"
+            aria-label="上一页"
+            :disabled="projectFilesPage === 1"
+            @click="projectFilesPage = Math.max(1, projectFilesPage - 1)"
+          >
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <span class="list-page-text">{{ projectFilesPage }} / {{ projectFilesPageCount }}</span>
+          <button
+            class="list-page-button"
+            type="button"
+            aria-label="下一页"
+            :disabled="projectFilesPage === projectFilesPageCount"
+            @click="projectFilesPage = Math.min(projectFilesPageCount, projectFilesPage + 1)"
+          >
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
       </main>
 
       <nav v-if="currentPage === 'home' || currentPage === 'customers' || currentPage === 'projects' || currentPage === 'profile'" class="bottom-nav" aria-label="底部导航">
@@ -5316,7 +5778,7 @@
         </button>
       </nav>
 
-      <div class="toast" :class="{ show: toastVisible, centered: isCenteredToast }">{{ toastMessage }}</div>
+      <div class="toast" :class="{ show: toastVisible, centered: isCenteredToast, success: isSuccessToast }">{{ toastMessage }}</div>
 
       <div v-if="deleteDialogOpen" class="dialog-mask" @click.self="cancelDeleteCustomer">
         <div class="dialog-card">
@@ -5347,7 +5809,7 @@
               : deleteTargetType === 'project-reopen'
                     ? `项目“${deleteTarget?.name || ''}”确定要撤回吗？`
                     : deleteTargetType === 'clear-all'
-                      ? '确定要删除全部客户、项目、拜访和待办数据吗？此操作不可恢复。'
+                      ? '确定要删除全部数据吗？此操作不可恢复。'
                 : deleteTargetType === 'todo'
                   ? `确定删除待办事项“${deleteTarget?.title || ''}”吗？`
                   : deleteTargetType === 'todo-complete'
@@ -5385,9 +5847,54 @@
           <h3>导入数据</h3>
           <p>请选择导入方式，覆盖会替换当前数据，合并会保留当前数据并按编号更新同名记录。</p>
           <div class="dialog-actions import-mode-actions">
-            <button class="dialog-button cancel" type="button" @click="cancelImport">取消</button>
-            <button class="dialog-button primary" type="button" @click="importBackup('merge')">合并导入</button>
             <button class="dialog-button primary" type="button" @click="importBackup('overwrite')">覆盖导入</button>
+            <button class="dialog-button primary" type="button" @click="importBackup('merge')">合并导入</button>
+            <button class="dialog-button cancel" type="button" @click="cancelImport">取消</button>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="attachmentPreviewOpen" class="dialog-mask" @click.self="closeAttachmentPreview">
+        <div class="dialog-card attachment-preview-dialog">
+          <div class="attachment-preview-head">
+            <h3>{{ attachmentPreviewFile?.name || '附件预览' }}</h3>
+            <button class="attachment-preview-close" type="button" aria-label="关闭预览" @click="closeAttachmentPreview">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <div class="attachment-preview-body">
+            <img
+              v-if="attachmentPreviewKind === 'image'"
+              :src="attachmentPreviewUrl"
+              :alt="attachmentPreviewFile?.name || '附件预览'"
+            >
+            <iframe
+              v-else-if="attachmentPreviewKind === 'pdf'"
+              :src="attachmentPreviewUrl"
+              title="PDF附件预览"
+            ></iframe>
+            <video
+              v-else-if="attachmentPreviewKind === 'video'"
+              :src="attachmentPreviewUrl"
+              controls
+              playsinline
+            ></video>
+            <audio
+              v-else-if="attachmentPreviewKind === 'audio'"
+              :src="attachmentPreviewUrl"
+              controls
+            ></audio>
+            <article
+              v-else-if="attachmentPreviewKind === 'word' || attachmentPreviewKind === 'word-legacy'"
+              class="attachment-preview-document"
+              v-html="attachmentPreviewHtml"
+            ></article>
+            <pre v-else-if="attachmentPreviewKind === 'text'" class="attachment-preview-text">{{ attachmentPreviewText }}</pre>
+            <p v-else class="attachment-preview-empty">该文件类型暂不支持直接预览，请下载后查看。</p>
+          </div>
+          <div class="attachment-preview-footer">
+            <button class="dialog-button cancel" type="button" @click="closeAttachmentPreview">关闭</button>
+            <button class="dialog-button primary" type="button" @click="downloadAttachment(attachmentPreviewFile)">下载</button>
           </div>
         </div>
       </div>
@@ -5395,9 +5902,12 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <script>
     const { createApp } = Vue;
+
+    const pendingAttachmentBlobStore = new Map();
 
     createApp({
       data() {
@@ -5407,6 +5917,13 @@
           toastTimer: null,
           dbPromise: null,
           attachmentIndex: [],
+          attachmentPreviewOpen: false,
+          attachmentPreviewFile: null,
+          attachmentPreviewUrl: "",
+          attachmentPreviewKind: "",
+          attachmentPreviewText: "",
+          attachmentPreviewHtml: "",
+          reamLibraryPromise: null,
           currentPage: "home",
           previousPage: "customers",
           profileName: "",
@@ -5449,9 +5966,11 @@
           projectFormError: "",
           todoFormError: "",
           projectSearchKeyword: "",
+          projectFilesSearchKeyword: "",
           todoSearchKeyword: "",
           customerPage: 1,
           projectPage: 1,
+          projectFilesPage: 1,
           todoPage: 1,
           activeProjectStatusFilter: "all",
           activeProjectTab: "all",
@@ -5558,42 +6077,42 @@
             { name: "台湾省", cities: ["台北市", "新北市", "桃园市", "台中市", "台南市", "高雄市", "基隆市", "新竹市", "嘉义市", "新竹县", "苗栗县", "彰化县", "南投县", "云林县", "嘉义县", "屏东县", "宜兰县", "花莲县", "台东县", "澎湖县", "金门县", "连江县"] }
           ],
           customers: [
-            {
-              id: 1,
-              name: "林晓晴",
-              company: "星河数字科技",
-              phone: "13812344721",
-              city: "深圳市",
-              role: "采购负责人",
-              tags: ["重点客户", "企业采购"],
-              remark: "关注私有化部署方案",
-              status: "高意向",
-              category: "high"
-            },
-            {
-              id: 2,
-              name: "周明远",
-              company: "远川商贸有限公司",
-              phone: "13956782186",
-              city: "杭州市",
-              role: "运营总监",
-              tags: ["待报价"],
-              remark: "预计本周确认预算",
-              status: "待跟进",
-              category: "follow"
-            },
-            {
-              id: 3,
-              name: "陈思源",
-              company: "北辰供应链",
-              phone: "13689019058",
-              city: "上海市",
-              role: "项目经理",
-              tags: ["已签约"],
-              remark: "已完成首期交付",
-              status: "已成交",
-              category: "won"
-            }
+            // {
+            //   id: 1,
+            //   name: "林晓晴",
+            //   company: "星河数字科技",
+            //   phone: "13812344721",
+            //   city: "深圳市",
+            //   role: "采购负责人",
+            //   tags: ["重点客户", "企业采购"],
+            //   remark: "关注私有化部署方案",
+            //   status: "高意向",
+            //   category: "high"
+            // },
+            // {
+            //   id: 2,
+            //   name: "周明远",
+            //   company: "远川商贸有限公司",
+            //   phone: "13956782186",
+            //   city: "杭州市",
+            //   role: "运营总监",
+            //   tags: ["待报价"],
+            //   remark: "预计本周确认预算",
+            //   status: "待跟进",
+            //   category: "follow"
+            // },
+            // {
+            //   id: 3,
+            //   name: "陈思源",
+            //   company: "北辰供应链",
+            //   phone: "13689019058",
+            //   city: "上海市",
+            //   role: "项目经理",
+            //   tags: ["已签约"],
+            //   remark: "已完成首期交付",
+            //   status: "已成交",
+            //   category: "won"
+            // }
           ],
           visitRecords: [
             { id: 101, customerId: 1, title: "首次需求拜访", time: "2026-08-05 10:30", need: "关注私有化部署与权限体系", createdAt: "2026-08-05T10:30" },
@@ -5648,20 +6167,20 @@
             { name: "待办事项", icon: "fa-regular fa-square-check", route: "todos", message: "已打开待办，查看今日任务与处理进度" }
           ],
           followUps: [
-            {
-              name: "李女士 · 华东渠道",
-              stage: "高意向",
-              note: "上次沟通后希望补充报价明细，建议下午 3 点前回拨确认决策人意见。",
-              next: "今天 15:00",
-              channel: "电话跟进"
-            },
-            {
-              name: "王先生 · 企业采购",
-              stage: "待报价",
-              note: "已浏览方案演示页两次，倾向标准版，需要进一步强调售后与部署效率。",
-              next: "今天 16:30",
-              channel: "微信沟通"
-            }
+            // {
+            //   name: "李女士 · 华东渠道",
+            //   stage: "高意向",
+            //   note: "上次沟通后希望补充报价明细，建议下午 3 点前回拨确认决策人意见。",
+            //   next: "今天 15:00",
+            //   channel: "电话跟进"
+            // },
+            // {
+            //   name: "王先生 · 企业采购",
+            //   stage: "待报价",
+            //   note: "已浏览方案演示页两次，倾向标准版，需要进一步强调售后与部署效率。",
+            //   next: "今天 16:30",
+            //   channel: "微信沟通"
+            // }
           ]
         };
       },
@@ -5718,13 +6237,20 @@
           return result?.value ?? null;
         },
         async writeStoredData(key, value) {
-          const db = await this.openWorkbenchDb();
-          const transaction = db.transaction("data", "readwrite");
-          transaction.objectStore("data").put({ key, value });
-          return new Promise((resolve, reject) => {
-            transaction.oncomplete = resolve;
-            transaction.onerror = () => reject(transaction.error);
-          });
+          try {
+            const db = await this.openWorkbenchDb();
+            const transaction = db.transaction("data", "readwrite");
+            const safeValue = JSON.parse(JSON.stringify(value ?? null));
+            transaction.objectStore("data").put({ key, value: safeValue });
+            return new Promise((resolve, reject) => {
+              transaction.oncomplete = resolve;
+              transaction.onerror = () => reject(transaction.error);
+              transaction.onabort = () => reject(transaction.error || new Error("IndexedDB transaction aborted"));
+            });
+          } catch (error) {
+            console.error(`write stored data failed: ${key}`, error);
+            throw error;
+          }
         },
         async readAllStoredAttachments() {
           const db = await this.openWorkbenchDb();
@@ -5732,13 +6258,38 @@
           return this.requestIndexedDb(transaction.objectStore("attachments").getAll());
         },
         async writeStoredAttachment(attachment) {
-          const db = await this.openWorkbenchDb();
-          const transaction = db.transaction("attachments", "readwrite");
-          transaction.objectStore("attachments").put(attachment);
-          return new Promise((resolve, reject) => {
-            transaction.oncomplete = resolve;
-            transaction.onerror = () => reject(transaction.error);
-          });
+          try {
+            const db = await this.openWorkbenchDb();
+            const transaction = db.transaction("attachments", "readwrite");
+            const isBlobLike = (value) => value
+              && typeof value.size === "number"
+              && typeof value.arrayBuffer === "function";
+            const blob = isBlobLike(attachment?.blob)
+              ? attachment.blob
+              : new Blob([attachment?.blob || ""], {
+                type: attachment?.type || "application/octet-stream"
+              });
+            const safeAttachment = {
+              id: String(attachment.id || attachment.storageId),
+              storageId: String(attachment.storageId || attachment.id),
+              projectId: attachment.projectId ?? null,
+              name: String(attachment.name || "未命名附件"),
+              size: Number(attachment.size || blob.size || 0),
+              sizeLabel: String(attachment.sizeLabel || this.formatFileSize(blob.size)),
+              type: String(attachment.type || blob.type || "application/octet-stream"),
+              category: String(attachment.category || "other"),
+              blob
+            };
+            transaction.objectStore("attachments").put(safeAttachment);
+            return new Promise((resolve, reject) => {
+              transaction.oncomplete = resolve;
+              transaction.onerror = () => reject(transaction.error);
+              transaction.onabort = () => reject(transaction.error || new Error("IndexedDB attachment transaction aborted"));
+            });
+          } catch (error) {
+            console.error("write stored attachment failed", error);
+            throw error;
+          }
         },
         async deleteStoredAttachment(id) {
           const db = await this.openWorkbenchDb();
@@ -5773,54 +6324,102 @@
               this.readStoredData("todos"),
               this.readStoredData("profile")
             ]);
-            const hasIndexedData = [storedCustomers, storedVisitRecords, storedProjects, storedTodos, storedProfile]
-              .some((value) => value !== null);
+            const readLegacyArray = (key) => {
+              try {
+                const raw = window.localStorage.getItem(key);
+                if (raw === null) return null;
+                const value = JSON.parse(raw);
+                return Array.isArray(value) ? value : null;
+              } catch (error) {
+                console.warn(`read legacy data failed: ${key}`, error);
+                return null;
+              }
+            };
+            const legacyCustomers = readLegacyArray("workbench-customers");
+            const legacyVisitRecords = readLegacyArray("workbench-visit-records");
+            const legacyProjects = readLegacyArray("workbench-projects");
+            const legacyTodos = readLegacyArray("workbench-todos");
+            const useStoredArray = (stored, legacy) => (
+              Array.isArray(stored) ? stored : (Array.isArray(legacy) ? legacy : null)
+            );
+            const customers = useStoredArray(storedCustomers, legacyCustomers);
+            const visitRecords = useStoredArray(storedVisitRecords, legacyVisitRecords);
+            const projects = useStoredArray(storedProjects, legacyProjects);
+            const todos = useStoredArray(storedTodos, legacyTodos);
 
-            if (!hasIndexedData) {
-              const legacyCustomers = JSON.parse(window.localStorage.getItem("workbench-customers") || "null");
-              const legacyVisitRecords = JSON.parse(window.localStorage.getItem("workbench-visit-records") || "null");
-              const legacyProjects = JSON.parse(window.localStorage.getItem("workbench-projects") || "null");
-              const legacyTodos = JSON.parse(window.localStorage.getItem("workbench-todos") || "null");
-              if (Array.isArray(legacyCustomers)) {
-                this.customers = this.normalizeCustomerPhones(legacyCustomers).normalized;
-              }
-              if (Array.isArray(legacyVisitRecords)) {
-                this.visitRecords = legacyVisitRecords;
-              }
-              if (Array.isArray(legacyProjects)) {
-                this.projects = legacyProjects.map((project) => this.normalizeProjectRecord(project));
-              }
-              if (Array.isArray(legacyTodos)) {
-                this.todos = legacyTodos.map((item) => this.normalizeTodoRecord(item));
-              }
+            if (customers) {
+              this.customers = this.normalizeCustomerPhones(customers).normalized;
+            }
+            if (visitRecords) {
+              this.visitRecords = visitRecords;
+            }
+            if (projects) {
+              this.projects = projects.map((project) => this.normalizeProjectRecord(project));
+            }
+            if (todos) {
+              this.todos = todos.map((item) => this.normalizeTodoRecord(item));
+            }
+
+            const shouldPersistRecoveredData = (
+              !Array.isArray(storedCustomers) && Array.isArray(customers)
+              || !Array.isArray(storedVisitRecords) && Array.isArray(visitRecords)
+              || !Array.isArray(storedProjects) && Array.isArray(projects)
+              || !Array.isArray(storedTodos) && Array.isArray(todos)
+            );
+            if (shouldPersistRecoveredData) {
               await Promise.all([
                 this.persistCustomers(),
                 this.persistVisitRecords(),
                 this.persistProjects(),
                 this.persistTodos()
               ]);
-            } else {
-              if (Array.isArray(storedCustomers)) {
-                this.customers = this.normalizeCustomerPhones(storedCustomers).normalized;
-              }
-              if (Array.isArray(storedVisitRecords)) {
-                this.visitRecords = storedVisitRecords;
-              }
-              if (Array.isArray(storedProjects)) {
-                this.projects = storedProjects.map((project) => this.normalizeProjectRecord(project));
-              }
-              if (Array.isArray(storedTodos)) {
-                this.todos = storedTodos.map((item) => this.normalizeTodoRecord(item));
-              }
             }
             if (storedProfile) {
               this.profileName = storedProfile.name || "";
               this.profileAvatar = storedProfile.avatar || "";
             }
             this.attachmentIndex = await this.readAllStoredAttachments();
+            if (this.reconcileProjectAttachments()) {
+              await this.persistProjects();
+            }
           } catch (error) {
             console.warn("loadPersistedData failed", error);
           }
+        },
+        reconcileProjectAttachments() {
+          const attachmentsByProject = new Map();
+          this.attachmentIndex.forEach((attachment) => {
+            if (attachment.projectId === null || attachment.projectId === undefined) return;
+            const projectKey = String(attachment.projectId);
+            if (!attachmentsByProject.has(projectKey)) {
+              attachmentsByProject.set(projectKey, []);
+            }
+            const { blob, path, ...metadata } = attachment;
+            const normalized = {
+              ...metadata,
+              id: attachment.storageId || attachment.id,
+              storageId: attachment.storageId || attachment.id,
+              category: attachment.category || "other",
+              sizeLabel: attachment.sizeLabel || this.formatFileSize(attachment.size)
+            };
+            attachmentsByProject.get(projectKey).push(normalized);
+          });
+
+          let changed = false;
+          this.projects = this.projects.map((project) => {
+            const recovered = attachmentsByProject.get(String(project.id)) || [];
+            if (!recovered.length) return project;
+            const current = Array.isArray(project.attachments) ? project.attachments : [];
+            const currentIds = new Set(current.map((item) => item.storageId || item.id));
+            const missing = recovered.filter((item) => !currentIds.has(item.storageId || item.id));
+            if (!missing.length) return project;
+            changed = true;
+            return {
+              ...project,
+              attachments: [...current, ...missing]
+            };
+          });
+          return changed;
         },
         normalizeProjectRecord(project) {
           return {
@@ -5907,6 +6506,13 @@
             this.cityKeyword = "";
             this.activeProvince = "北京市";
             this.activeCustomerTab = "all";
+            this.$nextTick(() => {
+              if (this.customers.length && !this.filteredCustomers.length) {
+                this.searchKeyword = "";
+                this.selectedCity = "全部城市";
+                this.customerPage = 1;
+              }
+            });
           }
           if (page === "projects") {
             this.projectSearchKeyword = "";
@@ -5916,6 +6522,14 @@
             this.selectedProjectCategoryParent = "";
             this.selectedProjectCategoryChild = "";
             this.activeProjectCategoryParent = "设计";
+            this.$nextTick(() => {
+              if (this.projects.length && !this.filteredProjects.length) {
+                this.activeProjectStatusFilter = "all";
+                this.selectedProjectCategoryParent = "";
+                this.selectedProjectCategoryChild = "";
+                this.projectSearchKeyword = "";
+              }
+            });
           }
           if (page === "todos") {
             this.todoSearchKeyword = "";
@@ -5924,6 +6538,13 @@
             this.selectedTodoCategoryParent = "";
             this.selectedTodoCategoryChild = "";
             this.activeTodoCategoryParent = "设计";
+            this.$nextTick(() => {
+              if (this.todos.length && !this.filteredTodoItems.length) {
+                this.todoSearchKeyword = "";
+                this.activeTodoTab = "all";
+                this.todoPage = 1;
+              }
+            });
           }
           this.$nextTick(() => {
             const content = this.$el.querySelector(".content");
@@ -6043,7 +6664,7 @@
           this.currentPage = "visit-records";
           this.visitFormError = "";
         },
-        saveVisitRecord() {
+        async saveVisitRecord() {
           if (!this.visitForm.title) {
             this.visitFormError = "请输入拜访标题";
             return;
@@ -6053,6 +6674,7 @@
             return;
           }
           const dateText = this.visitForm.time;
+          const previousRecords = [...this.visitRecords];
           const payload = {
             customerId: this.selectedCustomer?.id || null,
             title: this.visitForm.title,
@@ -6061,21 +6683,29 @@
             remark: this.visitForm.remark,
             createdAt: `${this.visitForm.time}T00:00:00`
           };
+          let savedRecord;
           if (this.editingVisitId) {
             const index = this.visitRecords.findIndex((item) => item.id === this.editingVisitId);
             if (index !== -1) {
               this.visitRecords[index] = { ...this.visitRecords[index], ...payload };
+              savedRecord = this.visitRecords[index];
             }
-            this.persistVisitRecords();
-            this.notify("拜访记录已更新");
           } else {
-            this.visitRecords.unshift({
+            savedRecord = {
               id: Date.now(),
               ...payload
-            });
-            this.persistVisitRecords();
-            this.notify("拜访记录新增成功");
+            };
+            this.visitRecords.unshift(savedRecord);
           }
+          try {
+            await this.persistVisitRecords();
+          } catch (error) {
+            console.error("save visit record failed", error);
+            this.visitRecords = previousRecords;
+            this.visitFormError = "拜访记录保存失败，请重试";
+            return;
+          }
+          this.notify(this.editingVisitId ? "拜访记录已更新" : "拜访记录新增成功");
           this.currentPage = "visit-records";
           this.visitForm = { title: "", time: "", need: "", remark: "" };
           this.visitFormError = "";
@@ -6253,38 +6883,204 @@
               category,
               storageId: id
             };
-            this.writeStoredAttachment({ id, storageId: id, projectId: this.editingProjectId || null, ...metadata, blob: file })
-              .then(() => {
-                const existing = this.attachmentIndex.findIndex((item) => item.id === id);
-                if (existing === -1) this.attachmentIndex.push(metadata);
-                else this.attachmentIndex[existing] = metadata;
-              })
-              .catch((error) => console.warn("store attachment failed", error));
+            pendingAttachmentBlobStore.set(id, file);
             return metadata;
           });
           this.projectForm.attachments = [...this.projectForm.attachments, ...nextFiles];
           event.target.value = "";
         },
+        async bindProjectAttachments(projectId, attachments) {
+          const failed = [];
+          const tasks = (Array.isArray(attachments) ? attachments : [])
+            .filter((attachment) => attachment.storageId)
+            .map(async (attachment) => {
+              try {
+                const storageId = String(attachment.storageId);
+                const fallbackBlob = pendingAttachmentBlobStore.get(storageId);
+                let stored = null;
+                if (!fallbackBlob) {
+                  try {
+                    stored = await this.getStoredAttachment(storageId);
+                  } catch (error) {
+                    console.warn("read stored attachment failed", storageId, error);
+                  }
+                }
+                const blob = fallbackBlob || stored?.blob;
+                if (!blob || typeof blob.size !== "number") {
+                  failed.push(`${attachment.name || storageId}: 文件内容不可读取`);
+                  return;
+                }
+                const metadata = {
+                  id: storageId,
+                  storageId,
+                  name: String(attachment.name || stored?.name || "未命名附件"),
+                  size: Number(attachment.size || stored?.size || blob.size || 0),
+                  sizeLabel: attachment.sizeLabel || stored?.sizeLabel || this.formatFileSize(blob.size),
+                  type: attachment.type || stored?.type || blob.type || "application/octet-stream",
+                  category: attachment.category || stored?.category || "other",
+                  projectId
+                };
+                await this.writeStoredAttachment({ ...metadata, blob });
+                pendingAttachmentBlobStore.delete(storageId);
+              } catch (error) {
+                console.error("write project attachment failed", attachment?.storageId, error);
+                failed.push(`${attachment?.name || attachment?.storageId || "附件"}: ${error?.message || "写入失败"}`);
+              }
+            });
+          await Promise.all(tasks);
+          return failed;
+        },
         removeProjectAttachment(file) {
           this.projectForm.attachments = this.projectForm.attachments.filter((item) => item !== file && item.id !== file?.id);
           if (file?.storageId) {
+            pendingAttachmentBlobStore.delete(file.storageId);
             this.deleteStoredAttachment(file.storageId).catch((error) => console.warn("delete attachment failed", error));
             this.attachmentIndex = this.attachmentIndex.filter((item) => item.storageId !== file.storageId);
           }
         },
-        editProfileName() {
+        async resolveAttachmentBlob(file) {
+          if (!file) return null;
+          const storageId = file.storageId || file.id;
+          const pending = storageId ? pendingAttachmentBlobStore.get(String(storageId)) : null;
+          if (pending) return pending;
+          const stored = storageId ? await this.getStoredAttachment(storageId) : null;
+          return stored?.blob || null;
+        },
+        attachmentPreviewKindFor(file, blob) {
+          const type = String(file?.type || blob?.type || "").toLowerCase();
+          const name = String(file?.name || "").toLowerCase();
+          if (type.startsWith("image/") || /\.(png|jpe?g|gif|webp|bmp|svg)$/i.test(name)) return "image";
+          if (type === "application/pdf" || /\.pdf$/i.test(name)) return "pdf";
+          if (type.startsWith("video/") || /\.(mp4|webm|ogg|mov)$/i.test(name)) return "video";
+          if (type.startsWith("audio/") || /\.(mp3|wav|ogg|m4a|aac)$/i.test(name)) return "audio";
+          if (
+            type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            || /\.docx$/i.test(name)
+          ) return "word";
+          if (
+            type === "application/msword"
+            || /\.doc$/i.test(name)
+          ) return "word-legacy";
+          if (type.startsWith("text/") || /\.(txt|csv|json|xml|md|log)$/i.test(name)) return "text";
+          return "other";
+        },
+        async loadReamLibrary() {
+          if (window.Ream?.parse) return window.Ream;
+          if (!this.reamLibraryPromise) {
+            this.reamLibraryPromise = import("https://cdn.jsdelivr.net/npm/reamkit@1.15.2/+esm")
+              .then((module) => module.Ream || module.default || module)
+              .then((ream) => {
+                if (!ream?.parse) throw new Error("DOC预览组件加载失败");
+                window.Ream = ream;
+                return ream;
+              });
+          }
+          return this.reamLibraryPromise;
+        },
+        async convertLegacyWordToHtml(blob) {
+          const ream = await this.loadReamLibrary();
+          const document = ream.parse(new Uint8Array(await blob.arrayBuffer()));
+          const output = await document.convert("html");
+          if (typeof output === "string") return output;
+          if (output instanceof Uint8Array) return new TextDecoder().decode(output);
+          if (output?.bytes instanceof Uint8Array) return new TextDecoder().decode(output.bytes);
+          return String(output || "");
+        },
+        async previewAttachment(file) {
+          if (!file) return;
+          this.closeAttachmentPreview();
+          this.attachmentPreviewFile = file;
+          try {
+            const blob = await this.resolveAttachmentBlob(file);
+            if (!blob) {
+              this.attachmentPreviewKind = "other";
+              this.attachmentPreviewOpen = true;
+              return;
+            }
+            this.attachmentPreviewKind = this.attachmentPreviewKindFor(file, blob);
+            if (this.attachmentPreviewKind === "word") {
+              if (!window.mammoth) {
+                throw new Error("Word预览组件未加载");
+              }
+              const arrayBuffer = await blob.arrayBuffer();
+              const result = await window.mammoth.convertToHtml({ arrayBuffer });
+              this.attachmentPreviewHtml = result.value || "<p>该 Word 文档没有可显示内容。</p>";
+            } else if (this.attachmentPreviewKind === "word-legacy") {
+              this.attachmentPreviewHtml = await this.convertLegacyWordToHtml(blob);
+              if (!this.attachmentPreviewHtml.trim()) {
+                this.attachmentPreviewHtml = "<p>该 Word 文档没有可显示内容。</p>";
+              }
+            } else if (this.attachmentPreviewKind === "text") {
+              this.attachmentPreviewText = await blob.text();
+            } else if (this.attachmentPreviewKind !== "other") {
+              this.attachmentPreviewUrl = URL.createObjectURL(blob);
+            }
+            this.attachmentPreviewOpen = true;
+          } catch (error) {
+            console.error("preview attachment failed", error);
+            this.attachmentPreviewKind = "other";
+            this.attachmentPreviewOpen = true;
+          }
+        },
+        async downloadAttachment(file) {
+          if (!file) return;
+          try {
+            const blob = await this.resolveAttachmentBlob(file);
+            if (!blob) {
+              this.notify("附件内容不可读取，请重新上传");
+              return;
+            }
+            const url = URL.createObjectURL(blob);
+            const anchor = document.createElement("a");
+            anchor.href = url;
+            anchor.download = file.name || "附件";
+            document.body.appendChild(anchor);
+            anchor.click();
+            anchor.remove();
+            window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+          } catch (error) {
+            console.error("download attachment failed", error);
+            this.notify("附件下载失败");
+          }
+        },
+        closeAttachmentPreview() {
+          if (this.attachmentPreviewUrl) {
+            URL.revokeObjectURL(this.attachmentPreviewUrl);
+          }
+          this.attachmentPreviewOpen = false;
+          this.attachmentPreviewFile = null;
+          this.attachmentPreviewUrl = "";
+          this.attachmentPreviewKind = "";
+          this.attachmentPreviewText = "";
+          this.attachmentPreviewHtml = "";
+        },
+        async editProfileName() {
           const nextName = window.prompt("请输入姓名", this.profileName || "");
           if (nextName === null) return;
+          const previousName = this.profileName;
           this.profileName = nextName.trim();
-          this.persistProfile();
+          try {
+            await this.persistProfile();
+          } catch (error) {
+            console.error("save profile name failed", error);
+            this.profileName = previousName;
+            this.notify("个人信息保存失败");
+          }
         },
         handleProfileAvatarChange(event) {
           const file = event.target.files?.[0];
           if (!file) return;
           const reader = new FileReader();
-          reader.onload = () => {
+          reader.onload = async () => {
+            const previousAvatar = this.profileAvatar;
             this.profileAvatar = String(reader.result || "");
-            this.persistProfile();
+            try {
+              await this.persistProfile();
+            } catch (error) {
+              console.error("save profile avatar failed", error);
+              this.profileAvatar = previousAvatar;
+              this.notify("个人信息保存失败");
+            }
           };
           reader.readAsDataURL(file);
           event.target.value = "";
@@ -6296,8 +7092,40 @@
             if (content) content.scrollTop = 0;
           });
         },
+        openProjectFilesPage() {
+          this.currentPage = "project-files";
+          this.$nextTick(() => {
+            const content = this.$el.querySelector(".file-center-page");
+            if (content) content.scrollTop = 0;
+          });
+        },
         closeFileCenter() {
           this.currentPage = "profile";
+        },
+        closeProjectFilesPage() {
+          this.currentPage = "file-center";
+        },
+        projectAttachmentCategoryLabel(categoryKey) {
+          return this.projectAttachmentCategories.find((item) => item.key === (categoryKey || "other"))?.label || "其他附件";
+        },
+        escapeHtml(value) {
+          return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/\"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+        },
+        escapeRegExp(value) {
+          return String(value ?? "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        },
+        highlightProjectFileName(name) {
+          const text = String(name || "未命名附件");
+          const keyword = this.projectFilesSearchKeyword.trim();
+          const escapedText = this.escapeHtml(text);
+          if (!keyword) return escapedText;
+          const pattern = new RegExp(`(${this.escapeRegExp(keyword)})`, "ig");
+          return escapedText.replace(pattern, '<mark class="keyword-highlight">$1</mark>');
         },
         async exportBackup() {
           try {
@@ -6311,30 +7139,84 @@
               ...project,
               attachments: (project.attachments || []).map(({ blob, ...metadata }) => metadata)
             }));
-            const data = {
+            const safeSegment = (value, fallback) => {
+              const text = String(value || fallback)
+                .replace(/[\\/:*?"<>|]/g, "_")
+                .replace(/\s+/g, " ")
+                .trim()
+                .slice(0, 80);
+              return text || fallback;
+            };
+            const categoryLabels = Object.fromEntries(
+              this.projectAttachmentCategories.map((category) => [category.key, category.label])
+            );
+            const attachmentManifest = [];
+            for (const attachment of attachmentRecords) {
+              if (!attachment.blob) continue;
+              const project = projects.find((item) => (
+                (item.attachments || []).some((file) => (
+                  (file.storageId || file.id) === (attachment.storageId || attachment.id)
+                ))
+              ));
+              const projectFolder = project
+                ? `${project.id}_${safeSegment(project.name, "未命名项目")}`
+                : "未关联项目";
+              const categoryFolder = safeSegment(
+                categoryLabels[attachment.category] || attachment.category,
+                "其他附件"
+              );
+              const storageId = attachment.storageId || attachment.id;
+              const attachmentPath = `项目管理/附件/${projectFolder}/${categoryFolder}/${storageId}_${safeSegment(attachment.name, "未命名附件")}`;
+              attachmentManifest.push({
+                id: attachment.id,
+                storageId,
+                projectId: attachment.projectId || project?.id || null,
+                name: attachment.name,
+                path: attachmentPath,
+                size: attachment.size || attachment.blob.size || 0,
+                type: attachment.type || attachment.blob.type || "application/octet-stream",
+                category: attachment.category || "other"
+              });
+              zip.file(attachmentPath, attachment.blob);
+            }
+            const moduleFiles = {
+              customers: "客户管理/客户数据.json",
+              projects: "项目管理/项目数据.json",
+              visitRecords: "拜访记录/拜访记录数据.json",
+              todos: "待办事项/待办事项数据.json",
+              profile: "个人中心/个人信息.json"
+            };
+            const moduleData = {
               customers: this.customers,
-              visitRecords: this.visitRecords,
               projects,
+              visitRecords: this.visitRecords,
               todos: this.todos,
               profile: {
                 name: this.profileName,
                 avatar: this.profileAvatar
               }
             };
+            Object.entries(moduleFiles).forEach(([key, path]) => {
+              zip.file(path, JSON.stringify(moduleData[key], null, 2));
+            });
             const manifest = {
               format: "crm-backup",
-              version: 1,
+              version: 2,
               exportedAt: new Date().toISOString(),
               device: navigator.userAgent,
-              attachmentCount: attachmentRecords.length
+              structure: "module-directories",
+              modules: Object.fromEntries(
+                Object.entries(moduleFiles).map(([key, path]) => ({
+                  [key]: {
+                    path,
+                    count: Array.isArray(moduleData[key]) ? moduleData[key].length : 1
+                  }
+                })).flatMap((item) => Object.entries(item))
+              ),
+              attachments: attachmentManifest,
+              attachmentCount: attachmentManifest.length
             };
             zip.file("manifest.json", JSON.stringify(manifest, null, 2));
-            zip.file("data.json", JSON.stringify(data, null, 2));
-            for (const attachment of attachmentRecords) {
-              if (attachment.blob) {
-                zip.file(`attachments/${attachment.storageId || attachment.id}-${attachment.name}`, attachment.blob);
-              }
-            }
             const blob = await zip.generateAsync({ type: "blob", compression: "DEFLATE" });
             const url = URL.createObjectURL(blob);
             const anchor = document.createElement("a");
@@ -6342,7 +7224,7 @@
             anchor.download = "crm-backup.zip";
             anchor.click();
             URL.revokeObjectURL(url);
-            this.notify("数据已导出");
+            this.notify("文件已导出");
           } catch (error) {
             console.error("export backup failed", error);
             this.notify("数据导出失败");
@@ -6359,15 +7241,53 @@
           if (!this.pendingImportFile || !window.JSZip) return;
           try {
             const zip = await JSZip.loadAsync(this.pendingImportFile);
-            const dataFile = zip.file("data.json");
-            if (!dataFile) throw new Error("data.json missing");
-            const data = JSON.parse(await dataFile.async("text"));
-            const incomingProjects = Array.isArray(data.projects)
-              ? data.projects.map((project) => this.normalizeProjectRecord(project))
-              : [];
-            const incomingCustomers = Array.isArray(data.customers) ? data.customers : [];
-            const incomingVisitRecords = Array.isArray(data.visitRecords) ? data.visitRecords : [];
-            const incomingTodos = Array.isArray(data.todos) ? data.todos.map((item) => this.normalizeTodoRecord(item)) : [];
+            const readJson = async (path) => {
+              const file = path ? zip.file(path) : null;
+              if (!file) return null;
+              return JSON.parse(await file.async("text"));
+            };
+            const findJsonPath = (candidates) => {
+              for (const candidate of candidates) {
+                if (zip.file(candidate)) return candidate;
+              }
+              return null;
+            };
+            const manifest = await readJson("manifest.json");
+            const modulePath = (key, candidates) => (
+              manifest?.modules?.[key]?.path || findJsonPath(candidates)
+            );
+            const legacyData = await readJson("data.json");
+            const customersData = await readJson(modulePath("customers", [
+              "客户管理/客户数据.json",
+              "客户管理/customers.json"
+            ]));
+            const projectsData = await readJson(modulePath("projects", [
+              "项目管理/项目数据.json",
+              "项目管理/projects.json"
+            ]));
+            const visitRecordsData = await readJson(modulePath("visitRecords", [
+              "拜访记录/拜访记录数据.json",
+              "拜访记录/visitRecords.json"
+            ]));
+            const todosData = await readJson(modulePath("todos", [
+              "待办事项/待办事项数据.json",
+              "待办事项/todos.json"
+            ]));
+            const profileData = await readJson(modulePath("profile", [
+              "个人中心/个人信息.json",
+              "个人中心/profile.json"
+            ]));
+            const records = (value, key) => {
+              if (Array.isArray(value)) return value;
+              if (Array.isArray(value?.records)) return value.records;
+              return Array.isArray(legacyData?.[key]) ? legacyData[key] : [];
+            };
+            const incomingProjects = records(projectsData, "projects")
+              .map((project) => this.normalizeProjectRecord(project));
+            const incomingCustomers = records(customersData, "customers");
+            const incomingVisitRecords = records(visitRecordsData, "visitRecords");
+            const incomingTodos = records(todosData, "todos")
+              .map((item) => this.normalizeTodoRecord(item));
 
             if (mode === "overwrite") {
               this.customers = incomingCustomers;
@@ -6382,32 +7302,51 @@
               this.todos = this.mergeById(this.todos, incomingTodos);
             }
 
-            if (data.profile) {
-              this.profileName = data.profile.name || this.profileName;
-              this.profileAvatar = data.profile.avatar || this.profileAvatar;
+            const importedProfile = profileData || legacyData?.profile;
+            if (importedProfile) {
+              this.profileName = importedProfile.name || this.profileName;
+              this.profileAvatar = importedProfile.avatar || this.profileAvatar;
             }
 
+            const attachmentManifest = Array.isArray(manifest?.attachments)
+              ? manifest.attachments
+              : [];
             const importedAttachments = [];
-            for (const project of this.projects) {
-              for (const attachment of project.attachments || []) {
-                const pathPrefix = `attachments/${attachment.storageId || attachment.id}-`;
-                const matchedPath = Object.keys(zip.files).find((path) => path.startsWith(pathPrefix));
-                if (!matchedPath) continue;
-                const blob = await zip.file(matchedPath).async("blob");
-                const storageId = attachment.storageId || attachment.id;
-                const record = { ...attachment, id: storageId, storageId, projectId: project.id, blob };
-                await this.writeStoredAttachment(record);
-                importedAttachments.push({
-                  id: storageId,
-                  storageId,
-                  name: attachment.name,
-                  size: attachment.size,
-                  sizeLabel: attachment.sizeLabel || this.formatFileSize(attachment.size),
-                  type: attachment.type || blob.type || "application/octet-stream",
-                  category: attachment.category || "other",
-                  projectId: project.id
-                });
-              }
+            const attachmentSources = attachmentManifest.length
+              ? attachmentManifest
+              : this.projects.flatMap((project) => (project.attachments || []).map((attachment) => ({
+                ...attachment,
+                projectId: project.id
+              })));
+            const projectById = new Map(this.projects.map((project) => [String(project.id), project]));
+            for (const source of attachmentSources) {
+              const storageId = source.storageId || source.id;
+              if (!storageId) continue;
+              const project = projectById.get(String(source.projectId));
+              const projectAttachment = project?.attachments?.find((attachment) => (
+                (attachment.storageId || attachment.id) === storageId
+              ));
+              const legacyPathPrefix = `attachments/${storageId}-`;
+              const matchedPath = source.path && zip.file(source.path)
+                ? source.path
+                : Object.keys(zip.files).find((path) => path.startsWith(legacyPathPrefix));
+              if (!matchedPath || !zip.file(matchedPath)) continue;
+              const blob = await zip.file(matchedPath).async("blob");
+              const metadata = {
+                ...(projectAttachment || {}),
+                ...source,
+                id: storageId,
+                storageId,
+                projectId: source.projectId || project?.id || null
+              };
+              delete metadata.path;
+              await this.writeStoredAttachment({ ...metadata, blob });
+              importedAttachments.push({
+                ...metadata,
+                size: metadata.size || blob.size,
+                sizeLabel: metadata.sizeLabel || this.formatFileSize(metadata.size || blob.size),
+                type: metadata.type || blob.type || "application/octet-stream"
+              });
             }
             this.attachmentIndex = mode === "overwrite"
               ? importedAttachments
@@ -6482,7 +7421,7 @@
         projectStatusClass(status) {
           return status === "completed" ? "completed" : "";
         },
-        saveProject() {
+        async saveProject() {
           if (!this.projectForm.name) {
             this.projectFormError = "请输入项目名称";
             return;
@@ -6525,32 +7464,44 @@
           };
 
           if (this.editingProjectId) {
+            const previousProjects = [...this.projects];
             const index = this.projects.findIndex((item) => item.id === this.editingProjectId);
             if (index !== -1) {
               this.projects[index] = { ...this.projects[index], ...payload };
             }
-            this.projectForm.attachments.forEach((attachment) => {
-              if (attachment.storageId) {
-                this.getStoredAttachment(attachment.storageId)
-                  .then((stored) => stored && this.writeStoredAttachment({ ...stored, ...attachment, id: attachment.storageId, projectId }))
-                  .catch((error) => console.warn("update attachment metadata failed", error));
-              }
-            });
-            this.persistProjects();
+            try {
+              await this.persistProjects();
+            } catch (error) {
+              console.error("update project data failed", error);
+              this.projects = previousProjects;
+              this.projectFormError = "项目保存失败，请重试";
+              return;
+            }
+            const attachmentErrors = await this.bindProjectAttachments(projectId, this.projectForm.attachments);
+            if (attachmentErrors.length) {
+              console.warn("some project attachments were not saved", attachmentErrors);
+              this.notify("项目已保存，部分附件稍后可重新上传");
+            }
             this.notify("项目信息已更新");
           } else {
+            const previousProjects = [...this.projects];
             this.projects.unshift({
               id: projectId,
               ...payload
             });
-            this.projectForm.attachments.forEach((attachment) => {
-              if (attachment.storageId) {
-                this.getStoredAttachment(attachment.storageId)
-                  .then((stored) => stored && this.writeStoredAttachment({ ...stored, projectId }))
-                  .catch((error) => console.warn("bind attachment to project failed", error));
-              }
-            });
-            this.persistProjects();
+            try {
+              await this.persistProjects();
+            } catch (error) {
+              console.error("save project data failed", error);
+              this.projects = previousProjects;
+              this.projectFormError = "项目保存失败，请重试";
+              return;
+            }
+            const attachmentErrors = await this.bindProjectAttachments(projectId, this.projectForm.attachments);
+            if (attachmentErrors.length) {
+              console.warn("some project attachments were not saved", attachmentErrors);
+              this.notify("项目已保存，部分附件稍后可重新上传");
+            }
             this.notify("项目新增成功");
           }
 
@@ -6562,9 +7513,10 @@
           this.deleteTargetType = "project";
           this.deleteDialogOpen = true;
         },
-        completeProject(project) {
+        async completeProject(project) {
           const index = this.projects.findIndex((item) => item.id === project.id);
           if (index === -1) return;
+          const previousProjects = [...this.projects];
           this.projects[index] = {
             ...this.projects[index],
             projectStatus: "completed",
@@ -6574,16 +7526,26 @@
             this.selectedProject = this.projects[index];
             this.activeProjectDetailStage = "completed";
           }
-          this.persistProjects();
+          try {
+            await this.persistProjects();
+          } catch (error) {
+            console.error("complete project failed", error);
+            this.projects = previousProjects;
+            if (this.selectedProject?.id === project.id) {
+              this.selectedProject = this.projects[index];
+            }
+            this.notify("项目状态保存失败");
+          }
         },
         requestCompleteProject(project) {
           this.deleteTarget = project;
           this.deleteTargetType = "project-complete";
           this.deleteDialogOpen = true;
         },
-        reopenProject(project) {
+        async reopenProject(project) {
           const index = this.projects.findIndex((item) => item.id === project.id);
           if (index === -1) return;
+          const previousProjects = [...this.projects];
           this.projects[index] = {
             ...this.projects[index],
             projectStatus: "in_progress",
@@ -6595,16 +7557,26 @@
               this.activeProjectDetailStage = "executing";
             }
           }
-          this.persistProjects();
+          try {
+            await this.persistProjects();
+          } catch (error) {
+            console.error("reopen project failed", error);
+            this.projects = previousProjects;
+            if (this.selectedProject?.id === project.id) {
+              this.selectedProject = this.projects[index];
+            }
+            this.notify("项目状态保存失败");
+          }
         },
         requestReopenProject(project) {
           this.deleteTarget = project;
           this.deleteTargetType = "project-reopen";
           this.deleteDialogOpen = true;
         },
-        completeTodo(item) {
+        async completeTodo(item) {
           const index = this.todos.findIndex((todo) => todo.id === item.id);
           if (index === -1) return;
+          const previousTodos = [...this.todos];
           this.todos[index] = {
             ...this.todos[index],
             status: "done",
@@ -6613,7 +7585,17 @@
           if (this.selectedTodo?.id === item.id) {
             this.selectedTodo = this.todos[index];
           }
-          this.persistTodos();
+          try {
+            await this.persistTodos();
+          } catch (error) {
+            console.error("complete todo failed", error);
+            this.todos = previousTodos;
+            if (this.selectedTodo?.id === item.id) {
+              this.selectedTodo = this.todos[index];
+            }
+            this.notify("待办事项保存失败");
+            return;
+          }
           this.notify("待办事项已更新");
         },
         requestCompleteTodo(item) {
@@ -6621,9 +7603,10 @@
           this.deleteTargetType = "todo-complete";
           this.deleteDialogOpen = true;
         },
-        reopenTodo(item) {
+        async reopenTodo(item) {
           const index = this.todos.findIndex((todo) => todo.id === item.id);
           if (index === -1) return;
+          const previousTodos = [...this.todos];
           this.todos[index] = {
             ...this.todos[index],
             status: "pending",
@@ -6632,7 +7615,17 @@
           if (this.selectedTodo?.id === item.id) {
             this.selectedTodo = this.todos[index];
           }
-          this.persistTodos();
+          try {
+            await this.persistTodos();
+          } catch (error) {
+            console.error("reopen todo failed", error);
+            this.todos = previousTodos;
+            if (this.selectedTodo?.id === item.id) {
+              this.selectedTodo = this.todos[index];
+            }
+            this.notify("待办事项保存失败");
+            return;
+          }
           this.notify("待办事项已更新");
         },
         requestReopenTodo(item) {
@@ -6702,7 +7695,7 @@
           this.activeTodoFormCategoryParent = parent || "设计";
           this.todoFormCategoryOpen = false;
         },
-        saveTodo() {
+        async saveTodo() {
           if (!this.todoForm.title) {
             this.todoFormError = "请输入任务标题";
             return;
@@ -6723,6 +7716,7 @@
               : "待办中心"
           };
 
+          const previousTodos = [...this.todos];
           if (this.editingTodoId) {
             const index = this.todos.findIndex((item) => item.id === this.editingTodoId);
             if (index !== -1) {
@@ -6731,16 +7725,21 @@
                 this.selectedTodo = this.todos[index];
               }
             }
-            this.persistTodos();
-            this.notify("待办事项已更新");
           } else {
             this.todos.unshift({
               id: Date.now(),
               ...payload
             });
-            this.persistTodos();
-            this.notify("待办事项新增成功");
           }
+          try {
+            await this.persistTodos();
+          } catch (error) {
+            console.error("save todo failed", error);
+            this.todos = previousTodos;
+            this.todoFormError = "待办事项保存失败，请重试";
+            return;
+          }
+          this.notify(this.editingTodoId ? "待办事项已更新" : "待办事项新增成功");
 
           this.currentPage = "todos";
           this.resetTodoForm();
@@ -6750,7 +7749,7 @@
           this.deleteTargetType = "todo";
           this.deleteDialogOpen = true;
         },
-        saveCustomer() {
+        async saveCustomer() {
           if (!this.customerForm.name) {
             this.formError = "请输入客户姓名";
             return;
@@ -6777,6 +7776,7 @@
             category: this.editingCustomerId ? this.customers.find((item) => item.id === this.editingCustomerId)?.category || "follow" : "follow"
           };
 
+          const previousCustomers = [...this.customers];
           if (this.editingCustomerId) {
             const index = this.customers.findIndex((item) => item.id === this.editingCustomerId);
             if (index !== -1) {
@@ -6785,16 +7785,21 @@
                 this.selectedCustomer = this.customers[index];
               }
             }
-            this.persistCustomers();
-            this.notify("客户信息已更新");
           } else {
             this.customers.unshift({
               id: Date.now(),
               ...payload
             });
-            this.persistCustomers();
-            this.notify("客户新增成功");
           }
+          try {
+            await this.persistCustomers();
+          } catch (error) {
+            console.error("save customer failed", error);
+            this.customers = previousCustomers;
+            this.formError = "客户信息保存失败，请重试";
+            return;
+          }
+          this.notify(this.editingCustomerId ? "客户信息已更新" : "客户新增成功");
 
           this.currentPage = "customers";
           this.resetCustomerForm();
@@ -6804,53 +7809,86 @@
           this.deleteTargetType = "customer";
           this.deleteDialogOpen = true;
         },
-        confirmDeleteCustomer() {
+        async confirmDeleteCustomer() {
           if (!this.deleteTarget) return;
           if (this.deleteTargetType === "visit") {
+            const previousVisitRecords = [...this.visitRecords];
             this.visitRecords = this.visitRecords.filter((item) => item.id !== this.deleteTarget.id);
-            this.persistVisitRecords();
+            try {
+              await this.persistVisitRecords();
+            } catch (error) {
+              console.error("delete visit record failed", error);
+              this.visitRecords = previousVisitRecords;
+              this.notify("拜访记录删除失败");
+              return;
+            }
             this.notify("拜访记录已删除");
           } else if (this.deleteTargetType === "project") {
             const deletedProject = this.projects.find((item) => item.id === this.deleteTarget.id);
+            const previousProjects = [...this.projects];
             this.projects = this.projects.filter((item) => item.id !== this.deleteTarget.id);
             const deletedAttachmentIds = (deletedProject?.attachments || [])
               .map((item) => item.storageId || item.id)
               .filter(Boolean);
-            Promise.all(deletedAttachmentIds.map((id) => this.deleteStoredAttachment(id)))
-              .then(() => {
-                this.attachmentIndex = this.attachmentIndex.filter((item) => !deletedAttachmentIds.includes(item.storageId || item.id));
-              })
-              .catch((error) => console.warn("delete project attachments failed", error));
-            this.persistProjects();
+            try {
+              await this.persistProjects();
+              await Promise.all(deletedAttachmentIds.map((id) => this.deleteStoredAttachment(id)));
+              this.attachmentIndex = this.attachmentIndex.filter((item) => !deletedAttachmentIds.includes(item.storageId || item.id));
+            } catch (error) {
+              console.error("delete project failed", error);
+              this.projects = previousProjects;
+              this.notify("项目删除失败");
+              return;
+            }
             if (this.selectedProject?.id === this.deleteTarget.id) {
               this.selectedProject = null;
               this.currentPage = "projects";
             }
             this.notify("项目已删除");
           } else if (this.deleteTargetType === "project-complete") {
-            this.completeProject(this.deleteTarget);
+            await this.completeProject(this.deleteTarget);
           } else if (this.deleteTargetType === "project-reopen") {
-            this.reopenProject(this.deleteTarget);
+            await this.reopenProject(this.deleteTarget);
           } else if (this.deleteTargetType === "clear-all") {
-            this.clearAllData();
+            await this.clearAllData();
           } else if (this.deleteTargetType === "todo") {
+            const previousTodos = [...this.todos];
             this.todos = this.todos.filter((item) => item.id !== this.deleteTarget.id);
-            this.persistTodos();
+            try {
+              await this.persistTodos();
+            } catch (error) {
+              console.error("delete todo failed", error);
+              this.todos = previousTodos;
+              this.notify("待办事项删除失败");
+              return;
+            }
             if (this.selectedTodo?.id === this.deleteTarget.id) {
               this.selectedTodo = null;
               this.currentPage = "todos";
             }
             this.notify("待办事项已删除");
           } else if (this.deleteTargetType === "todo-complete") {
-            this.completeTodo(this.deleteTarget);
+            await this.completeTodo(this.deleteTarget);
           } else if (this.deleteTargetType === "todo-reopen") {
-            this.reopenTodo(this.deleteTarget);
+            await this.reopenTodo(this.deleteTarget);
           } else {
             const deletedCustomerId = this.deleteTarget.id;
+            const previousCustomers = [...this.customers];
+            const previousVisitRecords = [...this.visitRecords];
             this.customers = this.customers.filter((item) => item.id !== this.deleteTarget.id);
             this.visitRecords = this.visitRecords.filter((item) => item.customerId !== deletedCustomerId);
-            this.persistCustomers();
-            this.persistVisitRecords();
+            try {
+              await Promise.all([
+                this.persistCustomers(),
+                this.persistVisitRecords()
+              ]);
+            } catch (error) {
+              console.error("delete customer failed", error);
+              this.customers = previousCustomers;
+              this.visitRecords = previousVisitRecords;
+              this.notify("客户删除失败");
+              return;
+            }
             if (this.selectedCustomer?.id === deletedCustomerId) {
               this.selectedCustomer = null;
               this.currentPage = "customers";
@@ -7011,6 +8049,9 @@
         activeProjectStatusFilter() {
           this.projectPage = 1;
         },
+        projectFilesSearchKeyword() {
+          this.projectFilesPage = 1;
+        },
         todoSearchKeyword() {
           this.todoPage = 1;
         },
@@ -7027,6 +8068,35 @@
             size: totalSize,
             sizeLabel: this.formatStorageSize(totalSize)
           };
+        },
+        projectStoredFiles() {
+          const projectNameById = new Map(
+            this.projects.map((project) => [String(project.id), project.name || "未命名项目"])
+          );
+          return (Array.isArray(this.attachmentIndex) ? this.attachmentIndex : [])
+            .filter((item) => item.projectId || item.category)
+            .map((item) => ({
+              ...item,
+              projectName: item.projectId ? projectNameById.get(String(item.projectId)) || "未命名项目" : "未关联项目",
+              sizeLabel: item.sizeLabel || this.formatFileSize(item.size)
+            }))
+            .sort((a, b) => {
+              const timeA = Number(a.id) || 0;
+              const timeB = Number(b.id) || 0;
+              return timeB - timeA;
+            });
+        },
+        filteredProjectStoredFiles() {
+          const keyword = this.projectFilesSearchKeyword.trim().toLowerCase();
+          if (!keyword) return this.projectStoredFiles;
+          return this.projectStoredFiles.filter((item) => String(item.name || "").toLowerCase().includes(keyword));
+        },
+        projectFilesPageCount() {
+          return Math.max(1, Math.ceil(this.filteredProjectStoredFiles.length / 5));
+        },
+        projectFilesPageItems() {
+          const page = Math.min(this.projectFilesPage, this.projectFilesPageCount);
+          return this.filteredProjectStoredFiles.slice((page - 1) * 5, page * 5);
         },
         statisticsContractAmount() {
           const total = this.projects.reduce((sum, project) => {
@@ -7051,6 +8121,7 @@
         },
         isCenteredToast() {
           return [
+            "文件已导出",
             "客户新增成功",
             "客户信息已更新",
             "客户已删除",
@@ -7065,12 +8136,17 @@
             "拜访记录新增成功"
           ].includes(this.toastMessage);
         },
+        isSuccessToast() {
+          return this.toastMessage === "文件已导出";
+        },
         filteredCustomers() {
           const keyword = this.searchKeyword.trim().toLowerCase();
           return this.customers.filter((customer) => {
+            const name = String(customer.name || "");
+            const company = String(customer.company || "");
             const matchesKeyword = !keyword
-              || customer.name.toLowerCase().includes(keyword)
-              || customer.company.toLowerCase().includes(keyword);
+              || name.toLowerCase().includes(keyword)
+              || company.toLowerCase().includes(keyword);
             const matchesCity = this.selectedCity === "全部城市" || customer.city === this.selectedCity;
             return matchesKeyword && matchesCity;
           });
@@ -7136,7 +8212,7 @@
         filteredTodoItems() {
           const keyword = this.todoSearchKeyword.trim().toLowerCase();
           return this.todos.filter((item) => {
-            const matchesKeyword = !keyword || item.title.toLowerCase().includes(keyword);
+            const matchesKeyword = !keyword || String(item.title || "").toLowerCase().includes(keyword);
             const todoStatus = item.status || "pending";
             const matchesStatus = this.activeTodoTab === "all" || todoStatus === this.activeTodoTab;
             return matchesKeyword && matchesStatus;
