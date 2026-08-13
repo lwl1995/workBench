@@ -563,6 +563,62 @@
       color: #111111;
     }
 
+    .project-customer-picker {
+      position: relative;
+    }
+
+    .project-customer-suggestions {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      z-index: 14;
+      overflow: hidden;
+      padding: 6px;
+      border: 1px solid #edf1f5;
+      border-radius: 14px;
+      background: #ffffff;
+      box-shadow: 0 14px 28px rgba(35, 84, 166, 0.14);
+    }
+
+    .project-customer-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      min-height: 42px;
+      border: 0;
+      border-radius: 10px;
+      padding: 7px 10px;
+      background: transparent;
+      color: #111111;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .project-customer-option:hover,
+    .project-customer-option:focus-visible {
+      outline: 0;
+      background: #edf5ff;
+    }
+
+    .project-customer-option strong {
+      overflow: hidden;
+      min-width: 0;
+      font-size: 13px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .project-customer-option span {
+      overflow: hidden;
+      color: #9aa5b3;
+      font-size: 11px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     .project-category-menu {
       position: absolute;
       top: calc(100% + 6px);
@@ -1865,6 +1921,46 @@
       border-top: 1px solid #f0f2f5;
     }
 
+    .project-form-page {
+      position: relative;
+      overflow-y: auto;
+      padding-bottom: 0;
+    }
+
+    .project-form-page .form-card {
+      flex: 0 0 auto;
+      padding-bottom: 96px;
+    }
+
+    .project-form-page .form-actions {
+      position: sticky;
+      left: auto;
+      right: auto;
+      bottom: 0;
+      flex: 0 0 auto;
+      margin-top: auto;
+    }
+
+    .customer-entry-form-page {
+      position: relative;
+      overflow-y: auto;
+      padding-bottom: 0;
+    }
+
+    .customer-entry-form-page .form-card {
+      flex: 0 0 auto;
+      padding-bottom: 96px;
+    }
+
+    .customer-entry-form-page .form-actions {
+      position: sticky;
+      left: auto;
+      right: auto;
+      bottom: 0;
+      flex: 0 0 auto;
+      margin-top: auto;
+    }
+
     .form-city-wrap .city-search {
       width: 100%;
       margin: 0 0 10px;
@@ -2661,21 +2757,6 @@
           </button>
         </div>
 
-        <div class="customer-tabs" role="tablist" aria-label="客户分类">
-          <button
-            v-for="tab in customerTabs"
-            :key="tab.value"
-            class="customer-tab"
-            :class="{ active: activeCustomerTab === tab.value }"
-            type="button"
-            role="tab"
-            :aria-selected="activeCustomerTab === tab.value"
-            @click="activeCustomerTab = tab.value"
-          >
-            {{ tab.label }}
-          </button>
-        </div>
-
         <div v-if="filteredCustomers.length" class="customer-list">
           <article
             v-for="customer in filteredCustomers"
@@ -2788,21 +2869,6 @@
           </button>
         </div>
 
-        <div class="customer-tabs" role="tablist" aria-label="项目状态筛选">
-          <button
-            v-for="tab in customerTabs"
-            :key="`project-${tab.value}`"
-            class="customer-tab"
-            :class="{ active: activeProjectTab === tab.value }"
-            type="button"
-            role="tab"
-            :aria-selected="activeProjectTab === tab.value"
-            @click="activeProjectTab = tab.value"
-          >
-            {{ tab.label }}
-          </button>
-        </div>
-
         <div v-if="filteredProjects.length" class="project-list">
           <article v-for="project in filteredProjects" :key="project.id" class="project-card">
             <div class="project-card-head">
@@ -2810,7 +2876,7 @@
                 <strong>{{ project.name }}</strong>
                 <span class="project-card-badge" :class="project.businessStatus">{{ projectBusinessStatusLabel(project.businessStatus) }}</span>
               </div>
-              <p>{{ project.clientName || '未填写客户名称' }}</p>
+              <p>{{ project.clientName || '未填写客户姓名' }}</p>
             </div>
 
             <div class="project-card-grid">
@@ -3159,7 +3225,7 @@
         </form>
       </main>
 
-      <main v-else-if="currentPage === 'project-form'" class="content customer-form-page project-form-page" @click="projectFormCategoryOpen = false">
+      <main v-else-if="currentPage === 'project-form'" class="content customer-form-page project-form-page" @click="projectFormCategoryOpen = false; projectCustomerOpen = false">
         <div class="form-topbar">
           <button class="form-back" type="button" aria-label="返回项目管理" @click="cancelProjectForm">
             <i class="fa-solid fa-arrow-left"></i>
@@ -3196,15 +3262,31 @@
             </div>
 
             <div class="form-field">
-              <label class="form-field-label" for="project-client-name">客户名称<span class="required-mark">*</span></label>
-              <input
-                id="project-client-name"
-                v-model.trim="projectForm.clientName"
-                class="form-control"
-                type="text"
-                placeholder="请输入客户名称"
-                maxlength="40"
-              >
+              <label class="form-field-label" for="project-client-name">客户姓名<span class="required-mark">*</span></label>
+              <div class="project-customer-picker" @click.stop>
+                <input
+                  id="project-client-name"
+                  v-model.trim="projectForm.clientName"
+                  class="form-control"
+                  type="text"
+                  placeholder="请输入客户姓名"
+                  maxlength="40"
+                  autocomplete="off"
+                  @focus="projectCustomerOpen = true"
+                >
+                <div v-if="projectCustomerOpen && filteredProjectCustomers.length" class="project-customer-suggestions">
+                  <button
+                    v-for="customer in filteredProjectCustomers"
+                    :key="customer.id"
+                    class="project-customer-option"
+                    type="button"
+                    @click="selectProjectCustomer(customer)"
+                  >
+                    <strong>{{ customer.name }}</strong>
+                    <span>{{ customer.company || '未填写公司' }}</span>
+                  </button>
+                </div>
+              </div>
             </div>
 
             <div class="form-field">
@@ -3268,7 +3350,7 @@
 
             <section class="project-group-section">
               <div class="project-group-head">
-                <h3>回款金额</h3>
+                <h3>回款金额（元）</h3>
                 <button class="project-inline-add" type="button" @click="addProjectReceipt">
                   <i class="fa-solid fa-plus"></i>
                   新增
@@ -3299,7 +3381,7 @@
             </section>
 
             <div class="form-field">
-              <label class="form-field-label" for="project-receivable-amount">应收金额</label>
+              <label class="form-field-label" for="project-receivable-amount">应收金额（元）</label>
               <input
                 id="project-receivable-amount"
                 v-model.trim="projectForm.receivableAmount"
@@ -3578,7 +3660,7 @@
         </form>
       </main>
 
-      <main v-else-if="currentPage === 'customer-form'" class="content customer-form-page" @click="formCityMenuOpen = false">
+      <main v-else-if="currentPage === 'customer-form'" class="content customer-form-page customer-entry-form-page" @click="formCityMenuOpen = false">
         <div class="form-topbar">
           <button class="form-back" type="button" aria-label="返回客户管理" @click="cancelCustomerForm">
             <i class="fa-solid fa-arrow-left"></i>
@@ -3848,6 +3930,7 @@
           selectedTodoCategoryChild: "",
           projectFormCategoryOpen: false,
           activeProjectFormCategoryParent: "设计",
+          projectCustomerOpen: false,
           todoFormCategoryOpen: false,
           activeTodoFormCategoryParent: "设计",
           cityMenuOpen: false,
@@ -4134,6 +4217,7 @@
           this.formCityMenuOpen = false;
           this.projectCategoryOpen = false;
           this.projectFormCategoryOpen = false;
+          this.projectCustomerOpen = false;
           this.todoCategoryOpen = false;
           this.todoFormCategoryOpen = false;
           if (page === "customers") {
@@ -4342,6 +4426,7 @@
           this.editingProjectId = null;
           this.projectFormError = "";
           this.projectFormCategoryOpen = false;
+          this.projectCustomerOpen = false;
           this.activeProjectFormCategoryParent = "设计";
           this.projectForm = this.getDefaultProjectForm();
         },
@@ -4357,6 +4442,7 @@
           this.editingProjectId = project.id;
           this.projectFormError = "";
           this.projectFormCategoryOpen = false;
+          this.projectCustomerOpen = false;
           this.activeProjectFormCategoryParent = project.categoryParent || "设计";
           this.projectForm = {
             ...this.getDefaultProjectForm(),
@@ -4381,6 +4467,7 @@
         cancelProjectForm() {
           this.currentPage = "projects";
           this.projectFormCategoryOpen = false;
+          this.projectCustomerOpen = false;
           this.projectFormError = "";
         },
         makeProjectItemId() {
@@ -4434,13 +4521,17 @@
           this.activeProjectFormCategoryParent = parent || "设计";
           this.projectFormCategoryOpen = false;
         },
+        selectProjectCustomer(customer) {
+          this.projectForm.clientName = customer.name;
+          this.projectCustomerOpen = false;
+        },
         saveProject() {
           if (!this.projectForm.name) {
             this.projectFormError = "请输入项目名称";
             return;
           }
           if (!this.projectForm.clientName) {
-            this.projectFormError = "请输入客户名称";
+            this.projectFormError = "请输入客户姓名";
             return;
           }
           const payload = {
@@ -4781,8 +4872,7 @@
               || customer.name.toLowerCase().includes(keyword)
               || customer.company.toLowerCase().includes(keyword);
             const matchesCity = this.selectedCity === "全部城市" || customer.city === this.selectedCity;
-            const matchesTab = this.activeCustomerTab === "all" || customer.category === this.activeCustomerTab;
-            return matchesKeyword && matchesCity && matchesTab;
+            return matchesKeyword && matchesCity;
           });
         },
         filteredVisitRecords() {
@@ -4807,11 +4897,16 @@
           const keyword = this.projectSearchKeyword.trim().toLowerCase();
           return this.projects.filter((project) => {
             const matchesKeyword = !keyword || project.name.toLowerCase().includes(keyword);
-            const matchesBusinessStatus = this.activeProjectTab === "all" || project.businessStatus === this.activeProjectTab;
             const matchesCategory = !this.selectedProjectCategoryParent
               || (project.categoryParent === this.selectedProjectCategoryParent && project.categoryChild === this.selectedProjectCategoryChild);
-            return matchesKeyword && matchesBusinessStatus && matchesCategory;
+            return matchesKeyword && matchesCategory;
           });
+        },
+        filteredProjectCustomers() {
+          const keyword = this.projectForm.clientName.trim().toLowerCase();
+          return this.customers
+            .filter((customer) => customer.name && (!keyword || customer.name.toLowerCase().includes(keyword)))
+            .slice(0, 8);
         },
         filteredTodoItems() {
           const keyword = this.todoSearchKeyword.trim().toLowerCase();
