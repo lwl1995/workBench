@@ -2277,6 +2277,11 @@
       color: var(--primary);
     }
 
+    .home-reminder-section .section-head {
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
     .statistics-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2891,7 +2896,7 @@
           </div>
         </section>
 
-        <section class="section">
+        <section class="section home-reminder-section">
           <!-- <div class="section-head">
             <h2>常用功能</h2>
             <button type="button" @click="notify('已为你展开全部功能入口')"></button>
@@ -2955,7 +2960,6 @@
                 </div>
                 <div class="meta-row">
                   <span><i class="fa-regular fa-clock"></i>{{ task.time }}</span>
-                  <span><i class="fa-regular fa-user"></i>{{ task.owner }}</span>
                 </div>
               </div>
             </article>
