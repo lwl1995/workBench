@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -499,7 +499,7 @@
       height: 46px;
       padding: 0 14px;
       border-radius: 16px;
-      background: #f4f6f8;
+      background: #ffffff;
       color: #9cabbd;
     }
 
@@ -537,10 +537,14 @@
       border: 1px solid #f0f2f5;
       border-radius: 14px;
       padding: 0 13px;
-      background: #f6f7f9;
+      background: #ffffff;
       color: #6b7f98;
       font-size: 12px;
       cursor: pointer;
+    }
+
+    .project-form-category-control {
+      background: #f6f7f9;
     }
 
     .project-select.open i,
@@ -1266,52 +1270,39 @@
 
     .visit-filter-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 48px;
+      grid-template-columns: minmax(0, 1fr) 48px;
       gap: 10px;
     }
 
-    .visit-filter-card {
-      position: relative;
+    .visit-search {
       display: flex;
       align-items: center;
       gap: 10px;
       height: 46px;
       padding: 0 14px;
-      border: 0;
       border-radius: 15px;
       background: #ffffff;
-      color: #5c6d84;
       box-shadow: var(--shadow-sm);
-      cursor: pointer;
+      color: #a1acbc;
     }
 
-    .visit-filter-card i:first-child {
+    .visit-search i {
       color: var(--primary);
       font-size: 14px;
     }
 
-    .visit-filter-card span {
-      flex: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-size: 12px;
-      text-align: left;
-    }
-
-    .visit-filter-card .fa-chevron-down {
-      color: #8a9bb3;
-      font-size: 11px;
-    }
-
-    .visit-filter-card input[type="date"] {
-      position: absolute;
-      inset: 0;
+    .visit-search input {
       width: 100%;
-      height: 100%;
-      opacity: 0;
+      min-width: 0;
       border: 0;
-      cursor: pointer;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .visit-search input::placeholder {
+      color: #a1acbc;
     }
 
     .visit-section {
@@ -1696,6 +1687,27 @@
 
     .form-control::placeholder {
       color: #a5a9b0;
+    }
+
+    .datetime-field {
+      position: relative;
+    }
+
+    .datetime-field .form-control {
+      position: relative;
+      z-index: 1;
+      background: transparent;
+    }
+
+    .datetime-placeholder {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #a5a9b0;
+      font-size: 13px;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .form-city-wrap {
@@ -2770,6 +2782,10 @@
               </div>
             </div>
           </div>
+
+          <button class="customer-add-inline" type="button" aria-label="新增项目" @click="openProjectForm()">
+            <i class="fa-solid fa-plus"></i>
+          </button>
         </div>
 
         <div class="customer-tabs" role="tablist" aria-label="项目状态筛选">
@@ -2839,9 +2855,6 @@
           </button>
         </div>
 
-        <button class="project-fab" type="button" aria-label="新增项目" @click="openProjectForm()">
-          <i class="fa-solid fa-plus"></i>
-        </button>
       </main>
 
       <main v-else-if="currentPage === 'todos'" class="content todo-page" @click="todoCategoryOpen = false">
@@ -2903,6 +2916,10 @@
               </div>
             </div>
           </div>
+
+          <button class="customer-add-inline" type="button" aria-label="新增待办事项" @click="openTodoForm()">
+            <i class="fa-solid fa-plus"></i>
+          </button>
         </div>
 
         <div class="customer-tabs" role="tablist" aria-label="待办状态筛选">
@@ -2964,9 +2981,6 @@
           </button>
         </div>
 
-        <button class="project-fab todo-fab" type="button" aria-label="新增待办事项" @click="openTodoForm()">
-          <i class="fa-solid fa-plus"></i>
-        </button>
       </main>
 
       <main v-else-if="currentPage === 'customer-detail'" class="content customer-detail-page">
@@ -3026,7 +3040,7 @@
         </section>
       </main>
 
-      <main v-else-if="currentPage === 'visit-records'" class="visit-page" @click="visitFilterOpen = false">
+      <main v-else-if="currentPage === 'visit-records'" class="visit-page">
         <div class="visit-topbar">
           <button class="visit-back" type="button" aria-label="返回客户详情" @click="closeVisitRecords">
             <i class="fa-solid fa-arrow-left"></i>
@@ -3036,18 +3050,15 @@
 
         <div class="visit-content">
           <div class="visit-filter-grid">
-            <button class="visit-filter-card" type="button" @click.stop="toggleVisitDate('start')">
-              <i class="fa-regular fa-calendar-days"></i>
-              <span>{{ visitStartDate || '开始日期' }}</span>
-              <i class="fa-solid fa-chevron-down"></i>
-              <input v-model="visitStartDate" type="date" aria-label="开始日期">
-            </button>
-            <button class="visit-filter-card" type="button" @click.stop="toggleVisitDate('end')">
-              <i class="fa-regular fa-calendar-days"></i>
-              <span>{{ visitEndDate || '结束日期' }}</span>
-              <i class="fa-solid fa-chevron-down"></i>
-              <input v-model="visitEndDate" type="date" aria-label="结束日期">
-            </button>
+            <label class="visit-search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input
+                v-model.trim="visitSearchKeyword"
+                type="search"
+                placeholder="请输入拜访标题"
+                aria-label="请输入拜访标题"
+              >
+            </label>
             <button class="visit-fab" type="button" aria-label="新增拜访记录" @click="openVisitForm()">
               <i class="fa-solid fa-plus"></i>
             </button>
@@ -3069,17 +3080,16 @@
               <h2>拜访详情</h2>
               <div class="visit-section-tools">
                 <span>共 {{ filteredVisitRecords.length }} 条</span>
-                <!-- <button class="visit-more" type="button" @click="notify('已展开全部拜访记录')">查看更多</button> -->
               </div>
             </div>
 
             <div v-if="filteredVisitRecords.length" class="visit-timeline">
-            <article v-for="(record, index) in filteredVisitRecords" :key="record.id" class="visit-item">
-              <div class="visit-node"></div>
+              <article v-for="record in filteredVisitRecords" :key="record.id" class="visit-item">
+                <div class="visit-node"></div>
                 <div class="visit-item-head">
                   <div>
                     <h3 class="visit-item-title">{{ record.title }}</h3>
-                    <div class="visit-item-time">{{ record.time }}</div>
+                    <div class="visit-item-time">{{ (record.time || '').slice(0, 10) }}</div>
                   </div>
                   <div class="visit-item-actions">
                     <button class="visit-item-action edit" type="button" @click.stop="editVisitRecord(record)">
@@ -3096,8 +3106,8 @@
                     <div class="visit-kv-value">{{ record.title }}</div>
                   </div>
                   <div class="visit-kv">
-                    <div class="visit-kv-label">拜访时间</div>
-                    <div class="visit-kv-value">{{ record.time }}</div>
+                    <div class="visit-kv-label">拜访日期</div>
+                    <div class="visit-kv-value">{{ (record.time || '').slice(0, 10) }}</div>
                   </div>
                   <div class="visit-kv">
                     <div class="visit-kv-label">客户需求</div>
@@ -3110,7 +3120,6 @@
             <div v-else class="visit-empty">暂无符合条件的拜访记录</div>
           </section>
         </div>
-
       </main>
 
       <main v-else-if="currentPage === 'visit-form'" class="visit-form-page" @click="visitFormOpen = false">
@@ -3131,8 +3140,8 @@
             </div>
 
             <div class="form-field">
-              <label class="form-field-label" for="visit-time">拜访时间<span class="required-mark">*</span></label>
-              <input id="visit-time" v-model="visitForm.time" class="form-control" type="datetime-local">
+              <label class="form-field-label" for="visit-time">拜访日期<span class="required-mark">*</span></label>
+              <input id="visit-time" v-model="visitForm.time" class="form-control" type="date">
             </div>
 
             <div class="form-field">
@@ -3688,9 +3697,9 @@
 
             <section class="tag-section">
               <h3 class="tag-section-title">客户属性</h3>
-              <button class="tag-add-fab" type="button" aria-label="聚焦标签输入框" @click="focusTagInput">
+              <!-- <button class="tag-add-fab" type="button" aria-label="聚焦标签输入框" @click="focusTagInput">
                 <i class="fa-solid fa-plus"></i>
-              </button>
+              </button> -->
               <div v-if="customerForm.tags.length" class="tag-list">
                 <span v-for="tag in customerForm.tags" :key="tag" class="tag-chip">
                   {{ tag }}
@@ -3812,9 +3821,7 @@
           },
           searchKeyword: "",
           selectedCity: "全部城市",
-          visitStartDate: "",
-          visitEndDate: "",
-          visitFilterOpen: false,
+          visitSearchKeyword: "",
           visitFormOpen: false,
           visitFormError: "",
           visitForm: {
@@ -4222,7 +4229,7 @@
           const pad = (n) => String(n).padStart(2, "0");
           this.visitForm = {
             title: record.title,
-            time: `${dt.getFullYear()}-${pad(dt.getMonth() + 1)}-${pad(dt.getDate())}T${pad(dt.getHours())}:${pad(dt.getMinutes())}`,
+            time: `${dt.getFullYear()}-${pad(dt.getMonth() + 1)}-${pad(dt.getDate())}`,
             need: record.need || ""
           };
           this.visitFormError = "";
@@ -4242,17 +4249,16 @@
             return;
           }
           if (!this.visitForm.time) {
-            this.visitFormError = "请选择拜访时间";
+            this.visitFormError = "请选择拜访日期";
             return;
           }
-          const date = new Date(this.visitForm.time);
-          const dateText = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")} ${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
+          const dateText = this.visitForm.time;
           const payload = {
             customerId: this.selectedCustomer?.id || null,
             title: this.visitForm.title,
             time: dateText,
             need: this.visitForm.need,
-            createdAt: this.visitForm.time
+            createdAt: `${this.visitForm.time}T00:00:00`
           };
           if (this.editingVisitId) {
             const index = this.visitRecords.findIndex((item) => item.id === this.editingVisitId);
@@ -4273,9 +4279,6 @@
           this.visitForm = { title: "", time: "", need: "" };
           this.visitFormError = "";
           this.editingVisitId = null;
-        },
-        toggleVisitDate(type) {
-          this.visitFilterOpen = type;
         },
         deleteVisitRecord(record) {
           this.deleteTarget = record;
@@ -4784,16 +4787,10 @@
         },
         filteredVisitRecords() {
           const customerId = this.selectedCustomer?.id;
-          const start = this.visitStartDate ? new Date(`${this.visitStartDate}T00:00`) : null;
-          const end = this.visitEndDate ? new Date(`${this.visitEndDate}T23:59`) : null;
+          const keyword = this.visitSearchKeyword.trim().toLowerCase();
           return this.visitRecords
             .filter((record) => !customerId || record.customerId === customerId)
-            .filter((record) => {
-              const current = new Date(record.createdAt);
-              const matchesStart = !start || current >= start;
-              const matchesEnd = !end || current <= end;
-              return matchesStart && matchesEnd;
-            })
+            .filter((record) => !keyword || (record.title || "").toLowerCase().includes(keyword))
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         },
         visitStats() {
