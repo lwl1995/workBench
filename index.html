@@ -195,6 +195,15 @@
       transform: translateY(1px);
     }
 
+    .customer-add-inline:disabled,
+    .customer-add-inline.is-disabled {
+      background: #d9dee7;
+      color: #ffffff;
+      box-shadow: none;
+      cursor: not-allowed;
+      opacity: 0.9;
+    }
+
     .city-select {
       display: flex;
       align-items: center;
@@ -865,10 +874,47 @@
       position: relative;
       display: flex;
       flex-direction: column;
-      min-height: calc(100vh - 140px);
+      min-height: 100%;
       width: 100%;
       min-width: 0;
       padding: 12px 0 24px;
+    }
+
+    .todo-page-topbar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      margin-bottom: 6px;
+    }
+
+    .todo-page-topbar h1 {
+      margin: 0;
+      color: #111827;
+      font-size: 23px;
+      line-height: 1.2;
+      font-weight: 800;
+      text-align: center;
+      letter-spacing: -0.02em;
+    }
+
+    .todo-page-back {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      transform: translateY(-50%);
+      border: 0;
+      border-radius: 12px;
+      background: transparent;
+      color: #111827;
+      font-size: 18px;
+      cursor: pointer;
     }
 
     .todo-manage-list {
@@ -900,6 +946,29 @@
       margin-bottom: 6px;
     }
 
+    .todo-status-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 52px;
+      height: 28px;
+      padding: 0 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .todo-status-badge.pending {
+      background: #fff5cf;
+      color: #c78b00;
+    }
+
+    .todo-status-badge.done {
+      background: #e8f8ee;
+      color: #1f9d55;
+    }
+
     .todo-manage-title strong {
       color: var(--text);
       font-size: 15px;
@@ -922,6 +991,30 @@
       width: 100%;
       margin-right: 0;
       margin-left: 0;
+    }
+
+    .todo-filter-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: calc(100% - 36px);
+      margin: 16px 18px 0;
+    }
+
+    .todo-filter-tab {
+      height: 38px;
+      border: 0;
+      border-radius: 16px;
+      background: #ffffff;
+      color: #9aa5b3;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .todo-filter-tab.active {
+      background: #e8f2ff;
+      color: #168cff;
     }
 
     .project-group-head {
@@ -1023,6 +1116,46 @@
     .project-attachment-list {
       display: grid;
       gap: 8px;
+    }
+
+    .project-attachment-groups {
+      display: grid;
+      gap: 12px;
+    }
+
+    .project-attachment-group {
+      padding: 12px;
+      border: 1px solid #edf1f5;
+      border-radius: 16px;
+      background: #ffffff;
+    }
+
+    .project-attachment-group-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .project-attachment-group-head strong {
+      color: #27364b;
+      font-size: 13px;
+    }
+
+    .project-attachment-upload {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      height: 30px;
+      border: 0;
+      border-radius: 10px;
+      padding: 0 10px;
+      background: #edf5ff;
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
     }
 
     .project-attachment-item {
@@ -2120,6 +2253,132 @@
       cursor: pointer;
     }
 
+    .home-todo-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .home-todo-switch button {
+      padding: 5px 8px;
+      border-radius: 9px;
+      color: #8d98a8;
+      font-size: 12px;
+    }
+
+    .home-todo-switch button.active {
+      background: #e8f2ff;
+      color: var(--primary);
+    }
+
+    .home-todo-switch .home-todo-all {
+      padding-right: 0;
+      padding-left: 4px;
+      color: var(--primary);
+    }
+
+    .statistics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .statistics-card {
+      min-width: 0;
+      min-height: 112px;
+      padding: 14px;
+      border-radius: 20px;
+      background: #ffffff;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .statistics-card:active {
+      transform: translateY(1px);
+      box-shadow: 0 5px 14px rgba(35, 84, 166, 0.08);
+    }
+
+    .statistics-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .statistics-card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      color: #243b5a;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .statistics-card-title span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .statistics-card-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 32px;
+      width: 32px;
+      height: 32px;
+      border-radius: 11px;
+      color: #168cff;
+      background: #e8f2ff;
+      font-size: 15px;
+    }
+
+    .statistics-card:nth-child(2) .statistics-card-icon {
+      color: #8b6cff;
+      background: #f0ebff;
+    }
+
+    .statistics-card:nth-child(3) .statistics-card-icon {
+      color: #16a36a;
+      background: #e8f8ef;
+    }
+
+    .statistics-card:nth-child(4) .statistics-card-icon {
+      color: #f09a27;
+      background: #fff4df;
+    }
+
+    .statistics-card-arrow {
+      flex: 0 0 auto;
+      color: #c4ccd7;
+      font-size: 11px;
+    }
+
+    .statistics-card-value {
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+      margin-top: 16px;
+      color: #111827;
+    }
+
+    .statistics-card-value strong {
+      overflow: hidden;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 800;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .statistics-card-value span {
+      color: #8d98a8;
+      font-size: 11px;
+    }
+
     .grid-card {
       background: rgba(255, 255, 255, 0.98);
       border-radius: 28px;
@@ -2202,6 +2461,43 @@
 
     .todo-empty-body p {
       display: none;
+    }
+
+    .home-todo-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .home-todo-page-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 32px;
+      border: 0;
+      border-radius: 10px;
+      background: #ffffff;
+      color: #168cff;
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 0 6px 14px rgba(35, 84, 166, 0.08);
+      cursor: pointer;
+    }
+
+    .home-todo-page-btn:disabled {
+      background: #eef2f7;
+      color: #b3bdca;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    .home-todo-page-text {
+      color: #7f8da3;
+      font-size: 12px;
+      font-weight: 600;
     }
 
     .todo-item,
@@ -2620,11 +2916,35 @@
 
         <section class="section">
           <div class="section-head">
-            <h2>今日待办</h2>
-            <button type="button" @click="notify('待办列表已按优先级排序')">查看全部</button>
+            <h2>{{ activeHomeTodoTab === 'today' ? '待办提醒' : '待办提醒' }}</h2>
+            <div class="home-todo-switch">
+              <button
+                type="button"
+                :class="{ active: activeHomeTodoTab === 'today' }"
+                @click="switchHomeTodoTab('today')"
+              >
+                今日
+              </button>
+              <button
+                type="button"
+                :class="{ active: activeHomeTodoTab === 'tomorrow' }"
+                @click="switchHomeTodoTab('tomorrow')"
+              >
+                明日
+              </button>
+              <button class="home-todo-all" type="button" @click="goTo('todos')">查看全部</button>
+            </div>
           </div>
-          <div v-if="todayTodoItems.length" class="todo-list">
-            <article class="todo-item" v-for="task in todayTodoItems" :key="task.id || task.title">
+          <div v-if="homeTodoItems.length" class="todo-list">
+            <article
+              class="todo-item"
+              v-for="task in homeTodoPageItems"
+              :key="task.id || task.title"
+              tabindex="0"
+              role="button"
+              @click="openTodoDetail(task, 'home')"
+              @keyup.enter="openTodoDetail(task, 'home')"
+            >
               <div class="todo-tag">
                 <i :class="task.icon"></i>
               </div>
@@ -2633,7 +2953,6 @@
                   <strong>{{ task.title }}</strong>
                   <span class="badge" :class="{ warn: task.level === '紧急' }">{{ task.level }}</span>
                 </div>
-                <p>{{ task.desc }}</p>
                 <div class="meta-row">
                   <span><i class="fa-regular fa-clock"></i>{{ task.time }}</span>
                   <span><i class="fa-regular fa-user"></i>{{ task.owner }}</span>
@@ -2642,14 +2961,97 @@
             </article>
           </div>
           <div v-else class="todo-empty">
-            
             <div class="todo-empty-body">
-              <strong>今日暂无待办事项</strong>
+              <strong>{{ activeHomeTodoTab === 'today' ? '今日暂无待办事项' : '明日暂无待办事项' }}</strong>
             </div>
+          </div>
+          <div v-if="homeTodoItems.length > 5" class="home-todo-pagination" aria-label="首页待办分页">
+            <button
+              class="home-todo-page-btn"
+              type="button"
+              aria-label="上一页"
+              :disabled="homeTodoPage === 1"
+              @click="homeTodoPage = Math.max(1, homeTodoPage - 1)"
+            >
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <span class="home-todo-page-text">{{ homeTodoPage }} / {{ homeTodoPageCount }}</span>
+            <button
+              class="home-todo-page-btn"
+              type="button"
+              aria-label="下一页"
+              :disabled="homeTodoPage === homeTodoPageCount"
+              @click="homeTodoPage = Math.min(homeTodoPageCount, homeTodoPage + 1)"
+            >
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
           </div>
         </section>
 
         <section class="section">
+          <div class="section-head">
+            <h2>数据统计</h2>
+          </div>
+          <div class="statistics-grid">
+            <article class="statistics-card" role="button" tabindex="0" @click="goTo('customers')" @keyup.enter="goTo('customers')">
+              <div class="statistics-card-head">
+                <div class="statistics-card-title">
+                  <span class="statistics-card-icon"><i class="fa-regular fa-address-book"></i></span>
+                  <span>客户总数量</span>
+                </div>
+                <i class="fa-solid fa-chevron-right statistics-card-arrow"></i>
+              </div>
+              <div class="statistics-card-value">
+                <strong>{{ customers.length }}</strong>
+                <span>人</span>
+              </div>
+            </article>
+
+            <article class="statistics-card" role="button" tabindex="0" @click="goTo('projects')" @keyup.enter="goTo('projects')">
+              <div class="statistics-card-head">
+                <div class="statistics-card-title">
+                  <span class="statistics-card-icon"><i class="fa-regular fa-folder"></i></span>
+                  <span>项目合同总金额</span>
+                </div>
+                <i class="fa-solid fa-chevron-right statistics-card-arrow"></i>
+              </div>
+              <div class="statistics-card-value">
+                <strong>{{ statisticsContractAmount }}</strong>
+                <span>万元</span>
+              </div>
+            </article>
+
+            <article class="statistics-card" role="button" tabindex="0" @click="goTo('projects')" @keyup.enter="goTo('projects')">
+              <div class="statistics-card-head">
+                <div class="statistics-card-title">
+                  <span class="statistics-card-icon"><i class="fa-regular fa-folder-open"></i></span>
+                  <span>回款总金额</span>
+                </div>
+                <i class="fa-solid fa-chevron-right statistics-card-arrow"></i>
+              </div>
+              <div class="statistics-card-value">
+                <strong>{{ statisticsReceiptAmount }}</strong>
+                <span>万元</span>
+              </div>
+            </article>
+
+            <article class="statistics-card" role="button" tabindex="0" @click="goTo('projects')" @keyup.enter="goTo('projects')">
+              <div class="statistics-card-head">
+                <div class="statistics-card-title">
+                  <span class="statistics-card-icon"><i class="fa-solid fa-coins"></i></span>
+                  <span>剩余回款总金额</span>
+                </div>
+                <i class="fa-solid fa-chevron-right statistics-card-arrow"></i>
+              </div>
+              <div class="statistics-card-value">
+                <strong>{{ statisticsRemainingReceiptAmount }}</strong>
+                <span>万元</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section v-if="false" class="section">
           <div class="section-head">
             <h2>待跟进提醒</h2>
             <button type="button" @click="notify('已同步今日待跟进客户名单')">去处理</button>
@@ -2902,15 +3304,15 @@
                 <span class="project-card-value">{{ formatProjectCategory(project) || '未选择类别' }}</span>
               </div>
               <div>
-                <span class="project-card-label">合同金额</span>
+                <span class="project-card-label">合同金额（万元）</span>
                 <span class="project-card-value">{{ project.contractAmount || '未填写' }}</span>
               </div>
               <div>
-                <span class="project-card-label">回款总金额</span>
+                <span class="project-card-label">回款总金额（万元）</span>
                 <span class="project-card-value">{{ formatProjectReceiptTotal(project.receipts) }}</span>
               </div>
               <div>
-                <span class="project-card-label">剩余回款总金额</span>
+                <span class="project-card-label">剩余回款总金额（万元）</span>
                 <span class="project-card-value">{{ formatProjectRemainingReceipt(project) }}</span>
               </div>
               
@@ -2977,7 +3379,7 @@
                 <span class="detail-item-value">{{ selectedProject.description || '暂无项目描述' }}</span>
               </div>
               <div>
-                <span class="detail-item-label">合同签订时间</span>
+                <span class="detail-item-label">合同签订日期</span>
                 <span class="detail-item-value">{{ selectedProject.contractSignedAt || '未设置' }}</span>
               </div>
             </div>
@@ -2987,19 +3389,19 @@
             <h3 class="detail-section-title">金额信息</h3>
             <div class="detail-grid">
               <div>
-                <span class="detail-item-label">合同金额</span>
+                <span class="detail-item-label">合同金额（万元）</span>
                 <span class="detail-item-value">{{ selectedProject.contractAmount || '未填写' }}</span>
               </div>
               <div>
-                <span class="detail-item-label">回款总金额</span>
+                <span class="detail-item-label">回款总金额（万元）</span>
                 <span class="detail-item-value">{{ formatProjectReceiptTotal(selectedProject.receipts) }}</span>
               </div>
               <div>
-                <span class="detail-item-label">剩余回款总金额</span>
+                <span class="detail-item-label">剩余回款总金额（万元）</span>
                 <span class="detail-item-value">{{ formatProjectRemainingReceipt(selectedProject) }}</span>
               </div>
               <div>
-                <span class="detail-item-label">应收金额</span>
+                <span class="detail-item-label">应收金额（万元）</span>
                 <span class="detail-item-value">{{ selectedProject.receivableAmount || '未填写' }}</span>
               </div>
             </div>
@@ -3021,62 +3423,94 @@
 
           <section class="detail-section">
             <h3 class="detail-section-title">项目状态</h3>
-            <div class="detail-grid">
-              <div>
-                <span class="detail-item-label">当前阶段</span>
-                <span class="detail-item-value">{{ projectStageLabel(selectedProject.stage) }}</span>
+            <div class="project-status-tabs">
+              <button
+                v-for="tab in projectStageTabs"
+                :key="`detail-${tab.value}`"
+                class="project-status-tab"
+                :class="{ active: activeProjectDetailStage === tab.value }"
+                type="button"
+                @click="activeProjectDetailStage = tab.value"
+              >
+                {{ tab.label }}
+              </button>
+            </div>
+
+            <div v-if="activeProjectDetailStage === 'bidding'" class="project-status-card">
+              <div class="detail-grid">
+                <div>
+                  <span class="detail-item-label">投标截止时间</span>
+                  <span class="detail-item-value">{{ selectedProject.statusData?.bidding?.deadline || '未设置' }}</span>
+                </div>
+                <div>
+                  <span class="detail-item-label">注意事项</span>
+                  <span class="detail-item-value">{{ selectedProject.statusData?.bidding?.note || '暂无' }}</span>
+                </div>
               </div>
-              <div v-if="selectedProject.stage === 'bidding'">
-                <span class="detail-item-label">投标截止时间</span>
-                <span class="detail-item-value">{{ selectedProject.statusData?.bidding?.deadline || '未设置' }}</span>
+            </div>
+            <div v-else-if="activeProjectDetailStage === 'contract'" class="project-status-card">
+              <div class="detail-grid">
+                <div>
+                  <span class="detail-item-label">签订日期</span>
+                  <span class="detail-item-value">{{ selectedProject.statusData?.contract?.time || '未设置' }}</span>
+                </div>
+                <div>
+                  <span class="detail-item-label">注意事项</span>
+                  <span class="detail-item-value">{{ selectedProject.statusData?.contract?.note || '暂无' }}</span>
+                </div>
               </div>
-              <div v-else-if="selectedProject.stage === 'contract'">
-                <span class="detail-item-label">签订时间</span>
-                <span class="detail-item-value">{{ selectedProject.statusData?.contract?.time || '未设置' }}</span>
+            </div>
+            <div v-else-if="activeProjectDetailStage === 'executing'" class="project-status-card">
+              <div class="detail-grid">
+                <div>
+                  <span class="detail-item-label">注意事项</span>
+                  <span class="detail-item-value">{{ selectedProject.statusData?.executing?.note || '暂无' }}</span>
+                </div>
               </div>
-              <div v-else-if="selectedProject.stage === 'completed'">
-                <span class="detail-item-label">完工时间</span>
-                <span class="detail-item-value">{{ selectedProject.statusData?.completed?.time || '未设置' }}</span>
-              </div>
-              <div>
-                <span class="detail-item-label">注意事项</span>
-                <span class="detail-item-value">{{ selectedProject.stage === 'bidding'
-                  ? (selectedProject.statusData?.bidding?.note || '暂无')
-                  : selectedProject.stage === 'contract'
-                    ? (selectedProject.statusData?.contract?.note || '暂无')
-                    : selectedProject.stage === 'executing'
-                      ? (selectedProject.statusData?.executing?.note || '暂无')
-                      : (selectedProject.statusData?.completed?.note || '暂无') }}</span>
+            </div>
+            <div v-else class="project-status-card">
+              <div class="detail-grid">
+                <div>
+                  <span class="detail-item-label">完工时间</span>
+                  <span class="detail-item-value">{{ selectedProject.statusData?.completed?.time || '未设置' }}</span>
+                </div>
+                <div>
+                  <span class="detail-item-label">注意事项</span>
+                  <span class="detail-item-value">{{ selectedProject.statusData?.completed?.note || '暂无' }}</span>
+                </div>
               </div>
             </div>
           </section>
 
           <section class="detail-section">
             <h3 class="detail-section-title">上传附件</h3>
-            <div v-if="selectedProject.attachments && selectedProject.attachments.length" class="detail-grid">
-              <div v-for="file in selectedProject.attachments" :key="file.id || file.name">
-                <span class="detail-item-label">{{ file.name }}</span>
-                <span class="detail-item-value">{{ file.sizeLabel || '已上传' }}</span>
+            <div v-if="selectedProject.attachments && selectedProject.attachments.length" class="project-attachment-groups">
+              <div v-for="category in projectAttachmentCategories" :key="`detail-${category.key}`" class="project-attachment-group">
+                <div class="project-attachment-group-head">
+                  <strong>{{ category.label }}</strong>
+                  <span class="detail-item-label">{{ projectAttachmentsByCategory(selectedProject.attachments, category.key).length }} 个</span>
+                </div>
+                <div v-if="projectAttachmentsByCategory(selectedProject.attachments, category.key).length" class="detail-grid">
+                  <div v-for="file in projectAttachmentsByCategory(selectedProject.attachments, category.key)" :key="file.id || file.name">
+                    <span class="detail-item-label">{{ file.name }}</span>
+                    <span class="detail-item-value">{{ file.sizeLabel || '已上传' }}</span>
+                  </div>
+                </div>
               </div>
             </div>
             <p v-else class="detail-empty">暂无上传附件</p>
           </section>
 
-          <div class="detail-actions">
-            <button class="detail-action secondary" type="button" @click="editProject(selectedProject)">
-              <i class="fa-solid fa-pen"></i>
-              编辑项目
-            </button>
-            <button class="detail-action primary" type="button" @click="deleteProject(selectedProject)">
-              <i class="fa-regular fa-trash-can"></i>
-              删除项目
-            </button>
-          </div>
         </section>
       </main>
 
       <main v-else-if="currentPage === 'todos'" class="content todo-page" @click="todoCategoryOpen = false">
-        <h1 class="customer-title">待办事项</h1>
+        <div class="todo-page-topbar">
+          <button class="todo-page-back" type="button" aria-label="返回首页" @click="goTo('home')">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <h1>待办事项</h1>
+        </div>
 
         <div class="project-filter-row">
           <label class="project-search">
@@ -3089,62 +3523,23 @@
             >
           </label>
 
-          <div class="project-select-wrap">
-            <button
-              class="project-select"
-              :class="{ open: todoCategoryOpen }"
-              type="button"
-              :aria-expanded="todoCategoryOpen"
-              aria-label="待办类别筛选"
-              @click.stop="todoCategoryOpen = !todoCategoryOpen"
-            >
-              <span>{{ todoCategoryFilterLabel }}</span>
-              <i class="fa-solid fa-chevron-down"></i>
-            </button>
-
-            <div v-if="todoCategoryOpen" class="project-category-menu" @click.stop>
-              <button class="project-category-all" type="button" @click="selectTodoCategory('', '')">
-                全部类别
-              </button>
-              <div class="project-category-cascade">
-                <div class="project-category-parent-list">
-                  <button
-                    v-for="group in projectCategoryTree"
-                    :key="`todo-${group.name}`"
-                    class="project-category-parent"
-                    :class="{ active: activeTodoCategoryParent === group.name }"
-                    type="button"
-                    @click="activeTodoCategoryParent = group.name"
-                  >
-                    {{ group.name }}
-                  </button>
-                </div>
-                <div class="project-category-child-list">
-                  <button
-                    v-for="child in activeTodoCategoryChildren"
-                    :key="`todo-${activeTodoCategoryParent}-${child}`"
-                    class="project-category-child"
-                    :class="{ active: selectedTodoCategoryParent === activeTodoCategoryParent && selectedTodoCategoryChild === child }"
-                    type="button"
-                    @click="selectTodoCategory(activeTodoCategoryParent, child)"
-                  >
-                    {{ child }}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <button class="customer-add-inline" type="button" aria-label="新增待办事项" @click="openTodoForm()">
+          <button
+            class="customer-add-inline"
+            :class="{ 'is-disabled': activeTodoTab === 'done' }"
+            type="button"
+            aria-label="新增待办事项"
+            :disabled="activeTodoTab === 'done'"
+            @click="openTodoForm()"
+          >
             <i class="fa-solid fa-plus"></i>
           </button>
         </div>
 
-        <div class="customer-tabs" role="tablist" aria-label="待办状态筛选">
+        <div class="todo-filter-tabs" role="tablist" aria-label="待办状态筛选">
           <button
-            v-for="tab in customerTabs"
-            :key="`todo-${tab.value}`"
-            class="customer-tab"
+            v-for="tab in todoStatusTabs"
+            :key="`todo-status-${tab.value}`"
+            class="todo-filter-tab"
             :class="{ active: activeTodoTab === tab.value }"
             type="button"
             role="tab"
@@ -3156,13 +3551,22 @@
         </div>
 
         <div v-if="filteredTodoItems.length" class="todo-manage-list">
-          <article v-for="item in filteredTodoItems" :key="item.id" class="todo-manage-card">
+          <article
+            v-for="item in filteredTodoItems"
+            :key="item.id"
+            class="todo-manage-card"
+            tabindex="0"
+            role="button"
+            @click="openTodoDetail(item)"
+            @keyup.enter="openTodoDetail(item)"
+          >
             <div class="todo-manage-head">
               <div class="todo-manage-title">
                 <strong>{{ item.title }}</strong>
-                <span class="project-card-badge" :class="item.businessStatus">{{ projectBusinessStatusLabel(item.businessStatus) }}</span>
+                <span class="todo-status-badge" :class="todoStatusClass(item.status)">
+                  {{ todoStatusLabel(item.status) }}
+                </span>
               </div>
-              <p>{{ formatTodoCategory(item) || '未选择类别' }}</p>
             </div>
 
             <div class="project-card-grid">
@@ -3171,17 +3575,45 @@
                 <span class="project-card-value">{{ item.dueDate || '未设置' }}</span>
               </div>
               <div>
-                <span class="project-card-label">事项备注</span>
-                <span class="project-card-value">{{ item.remark || '暂无备注' }}</span>
+                <span class="project-card-label">项目类别</span>
+                <span class="project-card-value">{{ formatTodoCategory(item) || '未选择类别' }}</span>
               </div>
             </div>
 
             <div class="project-card-actions">
-              <button class="customer-card-action primary" type="button" @click="editTodo(item)">
+              <button
+                v-if="item.status !== 'done'"
+                class="customer-card-action primary"
+                type="button"
+                @click.stop="requestCompleteTodo(item)"
+              >
+                <i class="fa-solid fa-check"></i>
+                完成
+              </button>
+              <button
+                v-else
+                class="customer-card-action primary"
+                type="button"
+                @click.stop="requestReopenTodo(item)"
+              >
+                <i class="fa-solid fa-rotate-left"></i>
+                撤回
+              </button>
+              <button
+                v-if="item.status !== 'done'"
+                class="customer-card-action primary"
+                type="button"
+                @click.stop="editTodo(item)"
+              >
                 <i class="fa-solid fa-pen"></i>
                 编辑
               </button>
-              <button class="customer-card-action danger" type="button" @click="deleteTodo(item)">
+              <button
+                v-if="item.status !== 'done'"
+                class="customer-card-action danger"
+                type="button"
+                @click.stop="deleteTodo(item)"
+              >
                 <i class="fa-regular fa-trash-can"></i>
                 删除
               </button>
@@ -3191,14 +3623,68 @@
 
         <div v-else class="project-empty">
           <div class="project-empty-icon">
-            <i class="fa-regular fa-user"></i>
+            <i class="fa-regular fa-square-check"></i>
           </div>
-          <p>暂无待办事项数据</p>
-          <button class="customer-empty-action project-empty-action" type="button" @click="openTodoForm()">
+          <p>{{ activeTodoTab === 'done' ? '暂无已办事项数据' : '暂无待办事项数据' }}</p>
+          <button
+            v-if="activeTodoTab !== 'done'"
+            class="customer-empty-action project-empty-action"
+            type="button"
+            @click="openTodoForm()"
+          >
             添加第一个待办事项
           </button>
         </div>
 
+      </main>
+
+      <main v-else-if="currentPage === 'todo-detail'" class="content customer-detail-page">
+        <div class="detail-topbar">
+          <button class="detail-back" type="button" :aria-label="todoDetailPreviousPage === 'home' ? '返回首页' : '返回待办事项'" @click="closeTodoDetail">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <h1>待办详情</h1>
+        </div>
+
+        <section v-if="selectedTodo" class="detail-card">
+          <div class="detail-profile">
+            <div class="detail-avatar">
+              <i class="fa-regular fa-square-check"></i>
+            </div>
+            <div>
+              <h2>{{ selectedTodo.title }}</h2>
+              <p>{{ formatTodoCategory(selectedTodo) || '未选择类别' }}</p>
+            </div>
+          </div>
+
+          <section class="detail-section">
+            <h3 class="detail-section-title">基础信息</h3>
+            <div class="detail-grid">
+              <div>
+                <span class="detail-item-label">任务标题</span>
+                <span class="detail-item-value">{{ selectedTodo.title || '未填写' }}</span>
+              </div>
+              <div>
+                <span class="detail-item-label">到期日期</span>
+                <span class="detail-item-value">{{ selectedTodo.dueDate || '未设置' }}</span>
+              </div>
+              <div>
+                <span class="detail-item-label">项目类别</span>
+                <span class="detail-item-value">{{ formatTodoCategory(selectedTodo) || '未选择类别' }}</span>
+              </div>
+              <div>
+                <span class="detail-item-label">跟进状态</span>
+                <span class="detail-item-value">{{ todoStatusLabel(selectedTodo.status) }}</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="detail-section">
+            <h3 class="detail-section-title">事项备注</h3>
+            <p class="detail-item-value">{{ selectedTodo.remark || '暂无备注' }}</p>
+          </section>
+
+        </section>
       </main>
 
       <main v-else-if="currentPage === 'customer-detail'" class="content customer-detail-page">
@@ -3503,7 +3989,7 @@
             </div>
 
             <div class="form-field">
-              <label class="form-field-label" for="project-contract-amount">合同金额（元）</label>
+              <label class="form-field-label" for="project-contract-amount">合同金额（万元）</label>
               <input
                 id="project-contract-amount"
                 v-model.trim="projectForm.contractAmount"
@@ -3516,7 +4002,7 @@
 
             <section class="project-group-section">
               <div class="project-group-head">
-                <h3>回款金额（元）</h3>
+                <h3>回款金额（万元）</h3>
                 <button class="project-inline-add" type="button" @click="addProjectReceipt">
                   <i class="fa-solid fa-plus"></i>
                   新增
@@ -3552,7 +4038,7 @@
             </section>
 
             <div class="form-field">
-              <label class="form-field-label" for="project-receivable-amount">应收金额（元）</label>
+              <label class="form-field-label" for="project-receivable-amount">应收金额（万元）</label>
               <input
                 id="project-receivable-amount"
                 v-model.trim="projectForm.receivableAmount"
@@ -3564,8 +4050,11 @@
             </div>
 
             <div class="form-field">
-              <label class="form-field-label" for="project-contract-date">合同签订时间</label>
-              <input id="project-contract-date" v-model="projectForm.contractSignedAt" class="form-control" type="date">
+              <label class="form-field-label" for="project-contract-date">合同签订日期</label>
+              <div class="datetime-field">
+                <span v-if="!projectForm.contractSignedAt" class="datetime-placeholder">请选择合同签订日期</span>
+                <input id="project-contract-date" v-model="projectForm.contractSignedAt" class="form-control" type="date">
+              </div>
             </div>
 
             <section class="project-group-section">
@@ -3627,10 +4116,6 @@
             <section class="project-group-section">
               <div class="project-group-head">
                 <h3>上传附件</h3>
-                <button class="project-inline-add" type="button" @click="triggerProjectFileInput">
-                  <i class="fa-solid fa-plus"></i>
-                  上传
-                </button>
               </div>
               <input
                 ref="projectFileInput"
@@ -3639,19 +4124,34 @@
                 multiple
                 @change="handleProjectFileChange"
               >
-              <div class="project-upload-hint">支持合同、设计成果、成果确认单、请款文件、发票</div>
-              <div v-if="projectForm.attachments.length" class="project-attachment-list">
-                <div v-for="(file, index) in projectForm.attachments" :key="`${file.name}-${index}`" class="project-attachment-item">
-                  <div>
-                    <strong>{{ file.name }}</strong>
-                    <span>{{ file.sizeLabel }}</span>
+              <div class="project-upload-hint">请按附件类型分别上传，支持多文件选择</div>
+              <div class="project-attachment-groups">
+                <div v-for="category in projectAttachmentCategories" :key="category.key" class="project-attachment-group">
+                  <div class="project-attachment-group-head">
+                    <strong>{{ category.label }}</strong>
+                    <button class="project-attachment-upload" type="button" @click="triggerProjectFileInput(category.key)">
+                      <i class="fa-solid fa-plus"></i>
+                      上传
+                    </button>
                   </div>
-                  <button type="button" @click="removeProjectAttachment(index)">
-                    <i class="fa-solid fa-xmark"></i>
-                  </button>
+                  <div v-if="projectAttachmentsByCategory(projectForm.attachments, category.key).length" class="project-attachment-list">
+                    <div
+                      v-for="file in projectAttachmentsByCategory(projectForm.attachments, category.key)"
+                      :key="file.id || file.name"
+                      class="project-attachment-item"
+                    >
+                      <div>
+                        <strong>{{ file.name }}</strong>
+                        <span>{{ file.sizeLabel }}</span>
+                      </div>
+                      <button type="button" @click="removeProjectAttachment(file)">
+                        <i class="fa-solid fa-xmark"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <p v-else class="project-group-empty">暂无{{ category.label }}</p>
                 </div>
               </div>
-              <p v-else class="project-group-empty">暂无上传附件</p>
             </section>
 
             <section class="project-status-section">
@@ -3746,7 +4246,10 @@
 
             <div class="form-field">
               <label class="form-field-label" for="todo-due-date">到期日期</label>
-              <input id="todo-due-date" v-model="todoForm.dueDate" class="form-control" type="date">
+              <div class="datetime-field">
+                <span v-if="!todoForm.dueDate" class="datetime-placeholder">请选择到期日期</span>
+                <input id="todo-due-date" v-model="todoForm.dueDate" class="form-control" type="date">
+              </div>
             </div>
 
             <div class="form-field">
@@ -3796,26 +4299,13 @@
               </div>
             </div>
 
-            <div class="customer-tabs todo-form-tabs" role="tablist" aria-label="待办状态切换">
-              <button
-                v-for="tab in customerTabs"
-                :key="`todo-form-${tab.value}`"
-                class="customer-tab"
-                :class="{ active: todoForm.businessStatus === tab.value }"
-                type="button"
-                @click="todoForm.businessStatus = tab.value"
-              >
-                {{ tab.label }}
-              </button>
-            </div>
-
             <div class="form-field">
               <label class="form-field-label" for="todo-remark">事项备注</label>
               <textarea
                 id="todo-remark"
                 v-model="todoForm.remark"
                 class="form-control"
-                placeholder="请输入项目描述"
+                placeholder="请输入事项备注"
                 maxlength="100"
               ></textarea>
               <div class="remark-count">{{ todoForm.remark.length }}/100字</div>
@@ -3997,7 +4487,7 @@
         </form>
       </main>
 
-      <nav v-if="currentPage === 'home' || currentPage === 'customers' || currentPage === 'projects' || currentPage === 'todos'" class="bottom-nav" aria-label="底部导航">
+      <nav v-if="currentPage === 'home' || currentPage === 'customers' || currentPage === 'projects'" class="bottom-nav" aria-label="底部导航">
         <button class="nav-item" :class="{ active: currentPage === 'home' }" type="button" @click="goTo('home')">
           <i class="fa-solid fa-house"></i>
           <span>首页</span>
@@ -4010,21 +4500,31 @@
           <i class="fa-regular fa-folder"></i>
           <span>项目管理</span>
         </button>
-        <button class="nav-item" :class="{ active: currentPage === 'todos' }" type="button" @click="goTo('todos')">
+        <!-- <button class="nav-item" :class="{ active: currentPage === 'todos' }" type="button" @click="goTo('todos')">
           <i class="fa-regular fa-square-check"></i>
           <span>待办事项</span>
-        </button>
-        <!-- <button class="nav-item" type="button" @click="notify('我的模块暂未开放')">
+        </button> -->
+        <button class="nav-item" type="button" @click="notify('我的模块暂未开放')">
           <i class="fa-regular fa-user"></i>
           <span>我的</span>
-        </button> -->
+        </button>
       </nav>
 
       <div class="toast" :class="{ show: toastVisible, centered: isCenteredToast }">{{ toastMessage }}</div>
 
       <div v-if="deleteDialogOpen" class="dialog-mask" @click.self="cancelDeleteCustomer">
         <div class="dialog-card">
-          <h3>{{ deleteTargetType === 'visit' ? '删除拜访记录' : deleteTargetType === 'project' ? '删除项目' : deleteTargetType === 'todo' ? '删除待办事项' : '删除客户' }}</h3>
+          <h3>{{ deleteTargetType === 'visit'
+            ? '删除拜访记录'
+            : deleteTargetType === 'project'
+              ? '删除项目'
+              : deleteTargetType === 'todo'
+                ? '删除待办事项'
+                : deleteTargetType === 'todo-complete'
+                  ? '完成待办事项'
+                  : deleteTargetType === 'todo-reopen'
+                    ? '撤回已办事项'
+                    : '删除客户' }}</h3>
           <p>
             {{ deleteTargetType === 'visit'
               ? `确定删除拜访记录“${deleteTarget?.title || ''}”吗？`
@@ -4032,11 +4532,26 @@
                 ? `确定删除项目“${deleteTarget?.name || ''}”吗？`
                 : deleteTargetType === 'todo'
                   ? `确定删除待办事项“${deleteTarget?.title || ''}”吗？`
+                  : deleteTargetType === 'todo-complete'
+                    ? `待办事项“${deleteTarget?.title || ''}”确定已完成了吗？`
+                    : deleteTargetType === 'todo-reopen'
+                      ? `已办事项“${deleteTarget?.title || ''}”确定要撤回吗？`
                 : `确定删除客户“${deleteTarget?.name || ''}”吗？` }}
           </p>
           <div class="dialog-actions">
             <button class="dialog-button cancel" type="button" @click="cancelDeleteCustomer">取消</button>
-            <button class="dialog-button danger" type="button" @click="confirmDeleteCustomer">删除</button>
+            <button
+              class="dialog-button"
+              :class="deleteTargetType === 'todo-complete' || deleteTargetType === 'todo-reopen' ? 'primary' : 'danger'"
+              type="button"
+              @click="confirmDeleteCustomer"
+            >
+              {{ deleteTargetType === 'todo-complete'
+                ? '完成'
+                : deleteTargetType === 'todo-reopen'
+                  ? '撤回'
+                  : '删除' }}
+            </button>
           </div>
         </div>
       </div>
@@ -4057,6 +4572,9 @@
           previousPage: "customers",
           selectedCustomer: null,
           selectedProject: null,
+          selectedTodo: null,
+          todoDetailPreviousPage: "todos",
+          activeProjectDetailStage: "bidding",
           editingCustomerId: null,
           formError: "",
           formCityMenuOpen: false,
@@ -4093,6 +4611,8 @@
           todoSearchKeyword: "",
           activeProjectTab: "all",
           activeTodoTab: "all",
+          activeHomeTodoTab: "today",
+          homeTodoPage: 1,
           projectCategoryOpen: false,
           todoCategoryOpen: false,
           activeProjectCategoryParent: "设计",
@@ -4119,6 +4639,11 @@
             { label: "已成交", value: "won" },
             { label: "高意向", value: "high" }
           ],
+          todoStatusTabs: [
+            { label: "全部", value: "all" },
+            { label: "待办", value: "pending" },
+            { label: "已办", value: "done" }
+          ],
           projectCategoryTree: [
             { name: "设计", children: ["地产", "办公", "公寓", "商业", "酒店"] },
             { name: "软装", children: ["地产", "办公", "公寓", "商业", "酒店"] }
@@ -4129,6 +4654,15 @@
             { label: "实施中", value: "executing" },
             { label: "项目完工", value: "completed" }
           ],
+          projectAttachmentCategories: [
+            { label: "合同", key: "contract" },
+            { label: "设计成果", key: "design" },
+            { label: "成果确认单", key: "confirmation" },
+            { label: "请款文件", key: "payment" },
+            { label: "发票", key: "invoice" },
+            { label: "其他附件", key: "other" }
+          ],
+          projectAttachmentUploadCategory: "contract",
           provinces: [
             { name: "北京市", cities: ["东城区", "西城区", "朝阳区", "海淀区", "丰台区", "石景山区", "门头沟区", "房山区", "通州区", "顺义区", "昌平区", "大兴区", "怀柔区", "平谷区", "密云区", "延庆区"] },
             { name: "天津市", cities: ["和平区", "河东区", "河西区", "南开区", "河北区", "红桥区", "东丽区", "西青区", "津南区", "北辰区", "武清区", "宝坻区", "滨海新区", "宁河区", "静海区", "蓟州区"] },
@@ -4247,7 +4781,7 @@
             remark: "",
             categoryParent: "",
             categoryChild: "",
-            businessStatus: "follow"
+            status: "pending"
           },
           modules: [
             { name: "客户管理", icon: "fa-regular fa-address-book", route: "customers", message: "已打开客户管理" },
@@ -4324,7 +4858,9 @@
                   receipts: Array.isArray(project.receipts) ? project.receipts : [],
                   schemeDesigners: Array.isArray(project.schemeDesigners) ? project.schemeDesigners : [],
                   drawingDesigners: Array.isArray(project.drawingDesigners) ? project.drawingDesigners : [],
-                  attachments: Array.isArray(project.attachments) ? project.attachments : [],
+                  attachments: Array.isArray(project.attachments)
+                    ? project.attachments.map((item) => ({ ...item, category: item.category || "other" }))
+                    : [],
                   statusData: {
                     bidding: { deadline: "", note: "", ...(project.statusData?.bidding || {}) },
                     contract: { time: "", note: "", ...(project.statusData?.contract || {}) },
@@ -4344,10 +4880,10 @@
                   remark: item.remark || "",
                   categoryParent: item.categoryParent || "",
                   categoryChild: item.categoryChild || "",
-                  businessStatus: item.businessStatus || "follow",
+                  status: item.status || (item.businessStatus === "done" ? "done" : "pending"),
                   icon: item.icon || "fa-regular fa-square-check",
-                  level: item.level || this.projectBusinessStatusLabel(item.businessStatus || "follow"),
-                  desc: item.desc || item.remark || "待跟进事项",
+                  level: item.level || this.todoStatusLabel(item.status || (item.businessStatus === "done" ? "done" : "pending")),
+                  desc: item.desc || item.remark || "待办事项",
                   time: item.time || item.dueDate || "未设置日期",
                   owner: item.owner || (item.categoryParent && item.categoryChild ? `${item.categoryParent} · ${item.categoryChild}` : "待办中心")
                 }));
@@ -4460,6 +4996,7 @@
         },
         openProjectDetail(project) {
           this.selectedProject = project;
+          this.activeProjectDetailStage = project?.stage || "bidding";
           this.currentPage = "project-detail";
           this.$nextTick(() => {
             const content = this.$el.querySelector(".content");
@@ -4468,7 +5005,26 @@
         },
         closeProjectDetail() {
           this.selectedProject = null;
+          this.activeProjectDetailStage = "bidding";
           this.currentPage = "projects";
+        },
+        openTodoDetail(item, source = "todos") {
+          this.selectedTodo = item;
+          this.todoDetailPreviousPage = source === "home" ? "home" : "todos";
+          this.currentPage = "todo-detail";
+          this.$nextTick(() => {
+            const content = this.$el.querySelector(".content");
+            if (content) content.scrollTop = 0;
+          });
+        },
+        closeTodoDetail() {
+          this.selectedTodo = null;
+          this.currentPage = this.todoDetailPreviousPage === "home" ? "home" : "todos";
+          this.todoDetailPreviousPage = "todos";
+        },
+        switchHomeTodoTab(tab) {
+          this.activeHomeTodoTab = tab;
+          this.homeTodoPage = 1;
         },
         openVisitRecords(customer) {
           this.selectedCustomer = customer;
@@ -4647,7 +5203,7 @@
             receipts: (project.receipts || []).map((item) => ({ id: item.id || this.makeProjectItemId(), amount: item.amount || "" })),
             schemeDesigners: (project.schemeDesigners || []).map((item) => ({ id: item.id || this.makeProjectItemId(), name: item.name || "" })),
             drawingDesigners: (project.drawingDesigners || []).map((item) => ({ id: item.id || this.makeProjectItemId(), name: item.name || "" })),
-            attachments: (project.attachments || []).map((item) => ({ ...item })),
+            attachments: (project.attachments || []).map((item) => ({ ...item, category: item.category || "other" })),
             statusData: {
               bidding: { deadline: "", note: "", ...(project.statusData?.bidding || {}) },
               contract: { time: "", note: "", ...(project.statusData?.contract || {}) },
@@ -4682,7 +5238,8 @@
         removeProjectDesigner(field, index) {
           this.projectForm[field].splice(index, 1);
         },
-        triggerProjectFileInput() {
+        triggerProjectFileInput(category) {
+          this.projectAttachmentUploadCategory = category || "other";
           this.$refs.projectFileInput?.click();
         },
         formatFileSize(size) {
@@ -4698,13 +5255,18 @@
             name: file.name,
             size: file.size,
             sizeLabel: this.formatFileSize(file.size),
-            type: file.type || "application/octet-stream"
+            type: file.type || "application/octet-stream",
+            category: this.projectAttachmentUploadCategory || "other"
           }));
           this.projectForm.attachments = [...this.projectForm.attachments, ...nextFiles];
           event.target.value = "";
         },
-        removeProjectAttachment(index) {
-          this.projectForm.attachments.splice(index, 1);
+        removeProjectAttachment(file) {
+          this.projectForm.attachments = this.projectForm.attachments.filter((item) => item !== file && item.id !== file?.id);
+        },
+        projectAttachmentsByCategory(attachments, category) {
+          return (Array.isArray(attachments) ? attachments : [])
+            .filter((file) => (file.category || "other") === category);
         },
         selectProjectCategory(parent, child) {
           this.selectedProjectCategoryParent = parent;
@@ -4786,6 +5348,44 @@
           this.deleteTargetType = "project";
           this.deleteDialogOpen = true;
         },
+        completeTodo(item) {
+          const index = this.todos.findIndex((todo) => todo.id === item.id);
+          if (index === -1) return;
+          this.todos[index] = {
+            ...this.todos[index],
+            status: "done",
+            level: this.todoStatusLabel("done")
+          };
+          if (this.selectedTodo?.id === item.id) {
+            this.selectedTodo = this.todos[index];
+          }
+          this.persistTodos();
+          this.notify("待办事项已更新");
+        },
+        requestCompleteTodo(item) {
+          this.deleteTarget = item;
+          this.deleteTargetType = "todo-complete";
+          this.deleteDialogOpen = true;
+        },
+        reopenTodo(item) {
+          const index = this.todos.findIndex((todo) => todo.id === item.id);
+          if (index === -1) return;
+          this.todos[index] = {
+            ...this.todos[index],
+            status: "pending",
+            level: this.todoStatusLabel("pending")
+          };
+          if (this.selectedTodo?.id === item.id) {
+            this.selectedTodo = this.todos[index];
+          }
+          this.persistTodos();
+          this.notify("待办事项已更新");
+        },
+        requestReopenTodo(item) {
+          this.deleteTarget = item;
+          this.deleteTargetType = "todo-reopen";
+          this.deleteDialogOpen = true;
+        },
         getDefaultTodoForm() {
           return {
             title: "",
@@ -4793,7 +5393,7 @@
             remark: "",
             categoryParent: "",
             categoryChild: "",
-            businessStatus: this.activeTodoTab !== "all" ? this.activeTodoTab : "follow"
+            status: "pending"
           };
         },
         resetTodoForm() {
@@ -4823,7 +5423,7 @@
             remark: item.remark || "",
             categoryParent: item.categoryParent || "",
             categoryChild: item.categoryChild || "",
-            businessStatus: item.businessStatus || "follow"
+            status: item.status || "pending"
           };
           this.currentPage = "todo-form";
           this.$nextTick(() => {
@@ -4859,10 +5459,10 @@
             remark: this.todoForm.remark,
             categoryParent: this.todoForm.categoryParent,
             categoryChild: this.todoForm.categoryChild,
-            businessStatus: this.todoForm.businessStatus || "follow",
+            status: this.todoForm.status || "pending",
             icon: "fa-regular fa-square-check",
-            level: this.projectBusinessStatusLabel(this.todoForm.businessStatus || "follow"),
-            desc: this.todoForm.remark || "待跟进事项",
+            level: this.todoStatusLabel(this.todoForm.status || "pending"),
+            desc: this.todoForm.remark || "待办事项",
             time: this.todoForm.dueDate || "未设置日期",
             owner: this.todoForm.categoryParent && this.todoForm.categoryChild
               ? `${this.todoForm.categoryParent} · ${this.todoForm.categoryChild}`
@@ -4873,6 +5473,9 @@
             const index = this.todos.findIndex((item) => item.id === this.editingTodoId);
             if (index !== -1) {
               this.todos[index] = { ...this.todos[index], ...payload };
+              if (this.selectedTodo?.id === this.editingTodoId) {
+                this.selectedTodo = this.todos[index];
+              }
             }
             this.persistTodos();
             this.notify("待办事项已更新");
@@ -4964,7 +5567,15 @@
           } else if (this.deleteTargetType === "todo") {
             this.todos = this.todos.filter((item) => item.id !== this.deleteTarget.id);
             this.persistTodos();
+            if (this.selectedTodo?.id === this.deleteTarget.id) {
+              this.selectedTodo = null;
+              this.currentPage = "todos";
+            }
             this.notify("待办事项已删除");
+          } else if (this.deleteTargetType === "todo-complete") {
+            this.completeTodo(this.deleteTarget);
+          } else if (this.deleteTargetType === "todo-reopen") {
+            this.reopenTodo(this.deleteTarget);
           } else {
             const deletedCustomerId = this.deleteTarget.id;
             this.customers = this.customers.filter((item) => item.id !== this.deleteTarget.id);
@@ -5026,6 +5637,12 @@
           if (!item?.categoryParent || !item?.categoryChild) return "";
           return `${item.categoryParent} · ${item.categoryChild}`;
         },
+        todoStatusLabel(status) {
+          return this.todoStatusTabs.find((item) => item.value === status)?.label || "待办";
+        },
+        todoStatusClass(status) {
+          return status === "done" ? "done" : "pending";
+        },
         projectStageLabel(stage) {
           return this.projectStageTabs.find((item) => item.value === stage)?.label || "投标中";
         },
@@ -5063,6 +5680,27 @@
         }
       },
       computed: {
+        statisticsContractAmount() {
+          const total = this.projects.reduce((sum, project) => {
+            const value = Number(String(project.contractAmount || "").replace(/[^0-9.-]/g, ""));
+            return Number.isFinite(value) ? sum + value : sum;
+          }, 0);
+          return total.toLocaleString("zh-CN");
+        },
+        statisticsReceiptAmount() {
+          const total = this.projects.reduce((sum, project) => {
+            return sum + this.getProjectReceiptTotal(project.receipts);
+          }, 0);
+          return total.toLocaleString("zh-CN");
+        },
+        statisticsRemainingReceiptAmount() {
+          const total = this.projects.reduce((sum, project) => {
+            const contractAmount = Number(String(project.contractAmount || "").replace(/[^0-9.-]/g, ""));
+            const contractTotal = Number.isFinite(contractAmount) ? contractAmount : 0;
+            return sum + contractTotal - this.getProjectReceiptTotal(project.receipts);
+          }, 0);
+          return total.toLocaleString("zh-CN");
+        },
         isCenteredToast() {
           return [
             "客户新增成功",
@@ -5126,16 +5764,31 @@
           const keyword = this.todoSearchKeyword.trim().toLowerCase();
           return this.todos.filter((item) => {
             const matchesKeyword = !keyword || item.title.toLowerCase().includes(keyword);
-            const matchesBusinessStatus = this.activeTodoTab === "all" || item.businessStatus === this.activeTodoTab;
-            const matchesCategory = !this.selectedTodoCategoryParent
-              || (item.categoryParent === this.selectedTodoCategoryParent && item.categoryChild === this.selectedTodoCategoryChild);
-            return matchesKeyword && matchesBusinessStatus && matchesCategory;
+            const todoStatus = item.status || "pending";
+            const matchesStatus = this.activeTodoTab === "all" || todoStatus === this.activeTodoTab;
+            return matchesKeyword && matchesStatus;
           });
         },
         todayTodoItems() {
           const now = new Date();
           const todayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-          return this.todos.filter((item) => item.dueDate === todayKey);
+          return this.todos.filter((item) => item.dueDate === todayKey && (item.status || "pending") === "pending");
+        },
+        tomorrowTodoItems() {
+          const tomorrow = new Date();
+          tomorrow.setDate(tomorrow.getDate() + 1);
+          const tomorrowKey = `${tomorrow.getFullYear()}-${String(tomorrow.getMonth() + 1).padStart(2, "0")}-${String(tomorrow.getDate()).padStart(2, "0")}`;
+          return this.todos.filter((item) => item.dueDate === tomorrowKey && (item.status || "pending") === "pending");
+        },
+        homeTodoItems() {
+          return this.activeHomeTodoTab === "tomorrow" ? this.tomorrowTodoItems : this.todayTodoItems;
+        },
+        homeTodoPageCount() {
+          return Math.max(1, Math.ceil(this.homeTodoItems.length / 5));
+        },
+        homeTodoPageItems() {
+          const start = (Math.min(this.homeTodoPage, this.homeTodoPageCount) - 1) * 5;
+          return this.homeTodoItems.slice(start, start + 5);
         },
         activeProjectCategoryChildren() {
           return this.projectCategoryTree.find((item) => item.name === this.activeProjectCategoryParent)?.children || [];
