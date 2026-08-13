@@ -469,6 +469,575 @@
       cursor: pointer;
     }
 
+    .project-page {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 140px);
+      width: 100%;
+      min-width: 0;
+      padding: 12px 0 24px;
+    }
+
+    .project-filter-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+      width: calc(100% - 36px);
+      min-width: 0;
+      margin-right: 18px;
+      margin-left: 18px;
+    }
+
+    .project-search {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+      height: 46px;
+      padding: 0 14px;
+      border-radius: 16px;
+      background: #f4f6f8;
+      color: #9cabbd;
+    }
+
+    .project-search i {
+      font-size: 15px;
+    }
+
+    .project-search input {
+      width: 100%;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .project-search input::placeholder {
+      color: #a1acbc;
+    }
+
+    .project-select-wrap {
+      position: relative;
+      flex: 0 0 128px;
+      min-width: 0;
+    }
+
+    .project-select,
+    .project-form-category-control {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid #f0f2f5;
+      border-radius: 14px;
+      padding: 0 13px;
+      background: #f6f7f9;
+      color: #6b7f98;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .project-select.open i,
+    .project-form-category-control.open i {
+      transform: rotate(180deg);
+    }
+
+    .project-select i,
+    .project-form-category-control i {
+      color: #8e98a6;
+      font-size: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .project-form-category-control.has-value {
+      color: #111111;
+    }
+
+    .project-category-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      z-index: 12;
+      width: min(320px, calc(100vw - 56px));
+      overflow: hidden;
+      padding: 10px;
+      border: 1px solid rgba(47, 125, 255, 0.1);
+      border-radius: 16px;
+      background: #ffffff;
+      box-shadow: 0 16px 30px rgba(35, 84, 166, 0.18);
+    }
+
+    .project-form-category-menu {
+      left: 0;
+      right: auto;
+      width: 100%;
+    }
+
+    .project-category-all {
+      width: 100%;
+      height: 34px;
+      margin-bottom: 8px;
+      border: 0;
+      border-radius: 10px;
+      background: #edf5ff;
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .project-category-cascade {
+      display: grid;
+      grid-template-columns: 42% 58%;
+      height: 220px;
+      overflow: hidden;
+      border: 1px solid #edf1f5;
+      border-radius: 12px;
+    }
+
+    .project-category-parent-list,
+    .project-category-child-list {
+      min-width: 0;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+
+    .project-category-parent-list {
+      padding: 4px;
+      background: #f7f9fc;
+      border-right: 1px solid #edf1f5;
+    }
+
+    .project-category-child-list {
+      padding: 4px;
+      background: #ffffff;
+    }
+
+    .project-category-parent,
+    .project-category-child {
+      display: block;
+      width: 100%;
+      min-height: 34px;
+      border: 0;
+      border-radius: 8px;
+      padding: 0 8px;
+      background: transparent;
+      color: #536b89;
+      text-align: left;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .project-category-parent {
+      font-weight: 700;
+    }
+
+    .project-category-parent.active,
+    .project-category-parent:hover,
+    .project-category-child.active,
+    .project-category-child:hover {
+      background: #e2efff;
+      color: var(--primary);
+    }
+
+    .project-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+      width: calc(100% - 36px);
+      margin-right: 18px;
+      margin-left: 18px;
+      padding-bottom: 92px;
+    }
+
+    .project-card {
+      padding: 16px;
+      border-radius: 22px;
+      background: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .project-card-head {
+      margin-bottom: 14px;
+    }
+
+    .project-card-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .project-card-title strong {
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .project-card-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .project-card-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #edf5ff;
+      color: var(--primary);
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .project-card-badge.follow {
+      background: #eef5ff;
+      color: #168cff;
+    }
+
+    .project-card-badge.high {
+      background: #fff4d8;
+      color: #ff9f1c;
+    }
+
+    .project-card-badge.won {
+      background: #e9f9ef;
+      color: #16a34a;
+    }
+
+    .project-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 10px;
+    }
+
+    .project-card-label {
+      display: block;
+      margin-bottom: 5px;
+      color: #9aa5b3;
+      font-size: 11px;
+    }
+
+    .project-card-value {
+      display: block;
+      color: #222222;
+      font-size: 12px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .project-card-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .project-empty {
+      flex: 1;
+      min-height: 460px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 18px 110px;
+      text-align: center;
+    }
+
+    .project-empty-icon {
+      width: 82px;
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #f2f4f7;
+      color: #b5beca;
+      font-size: 34px;
+    }
+
+    .project-empty p {
+      margin: 18px 0 16px;
+      color: #a5a9b0;
+      font-size: 14px;
+    }
+
+    .project-empty-action {
+      width: min(100%, 280px);
+    }
+
+    .project-fab {
+      position: fixed;
+      right: calc(50% - min(100vw, 420px) / 2 + 18px);
+      bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+      width: 52px;
+      height: 52px;
+      border: 0;
+      border-radius: 18px;
+      background: #168cff;
+      color: #ffffff;
+      font-size: 20px;
+      box-shadow: 0 14px 24px rgba(47, 125, 255, 0.24);
+      cursor: pointer;
+      z-index: 6;
+    }
+
+    .project-group-section {
+      margin-bottom: 18px;
+      padding: 16px;
+      border-radius: 20px;
+      background: #f6f7f9;
+      border: 1px solid #f0f2f5;
+    }
+
+    .todo-page {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 140px);
+      width: 100%;
+      min-width: 0;
+      padding: 12px 0 24px;
+    }
+
+    .todo-manage-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+      width: calc(100% - 36px);
+      margin-right: 18px;
+      margin-left: 18px;
+      padding-bottom: 92px;
+    }
+
+    .todo-manage-card {
+      padding: 16px;
+      border-radius: 22px;
+      background: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .todo-manage-head {
+      margin-bottom: 14px;
+    }
+
+    .todo-manage-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .todo-manage-title strong {
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .todo-manage-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .todo-fab {
+      bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .todo-form-tabs {
+      margin-bottom: 18px;
+      width: 100%;
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    .project-group-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .project-group-head h3 {
+      margin: 0;
+      color: #111111;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .project-inline-add,
+    .project-inline-delete {
+      border: 0;
+      border-radius: 12px;
+      background: #168cff;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .project-inline-add {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 34px;
+      padding: 0 12px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .project-inline-delete {
+      flex: 0 0 40px;
+      height: 44px;
+      font-size: 12px;
+    }
+
+    .project-multi-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .project-multi-item {
+      display: grid;
+      gap: 6px;
+    }
+
+    .project-multi-label {
+      color: #6d7a8b;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .project-multi-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-group-empty {
+      margin: 0;
+      color: #9ca6b4;
+      font-size: 12px;
+    }
+
+    .project-total-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid #e8edf3;
+      color: #5b6f88;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .project-total-card strong {
+      color: var(--primary);
+      font-size: 16px;
+    }
+
+    .project-file-input {
+      display: none;
+    }
+
+    .project-upload-hint {
+      margin-bottom: 12px;
+      color: #9ba6b4;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .project-attachment-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .project-attachment-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: #ffffff;
+    }
+
+    .project-attachment-item strong {
+      display: block;
+      color: #111111;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .project-attachment-item span {
+      display: block;
+      color: #9aa5b3;
+      font-size: 11px;
+    }
+
+    .project-attachment-item button {
+      border: 0;
+      background: transparent;
+      color: #8e98a6;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .project-status-title {
+      color: #111111;
+    }
+
+    .project-status-section {
+      margin-bottom: 18px;
+    }
+
+    .project-status-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .project-status-tab {
+      min-width: 0;
+      height: 38px;
+      border: 0;
+      border-radius: 13px;
+      background: #ffffff;
+      color: #8b98aa;
+      padding: 0 4px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .project-status-tab.active {
+      background: #e2efff;
+      color: var(--primary);
+    }
+
+    .project-status-card {
+      margin-top: 12px;
+      padding: 16px;
+      border-radius: 18px;
+      background: #f6f7f9;
+      border: 1px solid #f0f2f5;
+    }
+
     .customer-detail-page {
       display: flex;
       flex-direction: column;
@@ -1940,8 +2509,8 @@
             <h2>今日待办</h2>
             <button type="button" @click="notify('待办列表已按优先级排序')">查看全部</button>
           </div>
-          <div v-if="todos.length" class="todo-list">
-            <article class="todo-item" v-for="task in todos" :key="task.title">
+          <div v-if="todayTodoItems.length" class="todo-list">
+            <article class="todo-item" v-for="task in todayTodoItems" :key="task.id || task.title">
               <div class="todo-tag">
                 <i :class="task.icon"></i>
               </div>
@@ -2142,6 +2711,264 @@
         </div>
       </main>
 
+      <main v-else-if="currentPage === 'projects'" class="content project-page" @click="projectCategoryOpen = false">
+        <h1 class="customer-title">项目管理</h1>
+
+        <div class="project-filter-row">
+          <label class="project-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+              v-model="projectSearchKeyword"
+              type="search"
+              placeholder="搜索项目名称"
+              aria-label="搜索项目名称"
+            >
+          </label>
+
+          <div class="project-select-wrap">
+            <button
+              class="project-select"
+              :class="{ open: projectCategoryOpen }"
+              type="button"
+              :aria-expanded="projectCategoryOpen"
+              aria-label="项目类别筛选"
+              @click.stop="projectCategoryOpen = !projectCategoryOpen"
+            >
+              <span>{{ projectCategoryFilterLabel }}</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div v-if="projectCategoryOpen" class="project-category-menu" @click.stop>
+              <button class="project-category-all" type="button" @click="selectProjectCategory('', '')">
+                全部类别
+              </button>
+              <div class="project-category-cascade">
+                <div class="project-category-parent-list">
+                  <button
+                    v-for="group in projectCategoryTree"
+                    :key="group.name"
+                    class="project-category-parent"
+                    :class="{ active: activeProjectCategoryParent === group.name }"
+                    type="button"
+                    @click="activeProjectCategoryParent = group.name"
+                  >
+                    {{ group.name }}
+                  </button>
+                </div>
+                <div class="project-category-child-list">
+                  <button
+                    v-for="child in activeProjectCategoryChildren"
+                    :key="`${activeProjectCategoryParent}-${child}`"
+                    class="project-category-child"
+                    :class="{ active: selectedProjectCategoryParent === activeProjectCategoryParent && selectedProjectCategoryChild === child }"
+                    type="button"
+                    @click="selectProjectCategory(activeProjectCategoryParent, child)"
+                  >
+                    {{ child }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="customer-tabs" role="tablist" aria-label="项目状态筛选">
+          <button
+            v-for="tab in customerTabs"
+            :key="`project-${tab.value}`"
+            class="customer-tab"
+            :class="{ active: activeProjectTab === tab.value }"
+            type="button"
+            role="tab"
+            :aria-selected="activeProjectTab === tab.value"
+            @click="activeProjectTab = tab.value"
+          >
+            {{ tab.label }}
+          </button>
+        </div>
+
+        <div v-if="filteredProjects.length" class="project-list">
+          <article v-for="project in filteredProjects" :key="project.id" class="project-card">
+            <div class="project-card-head">
+              <div class="project-card-title">
+                <strong>{{ project.name }}</strong>
+                <span class="project-card-badge" :class="project.businessStatus">{{ projectBusinessStatusLabel(project.businessStatus) }}</span>
+              </div>
+              <p>{{ project.clientName || '未填写客户名称' }}</p>
+            </div>
+
+            <div class="project-card-grid">
+              <div>
+                <span class="project-card-label">项目类别</span>
+                <span class="project-card-value">{{ formatProjectCategory(project) || '未选择类别' }}</span>
+              </div>
+              <div>
+                <span class="project-card-label">项目阶段</span>
+                <span class="project-card-value">{{ projectStageLabel(project.stage) }}</span>
+              </div>
+              <div>
+                <span class="project-card-label">合同金额</span>
+                <span class="project-card-value">{{ project.contractAmount || '未填写' }}</span>
+              </div>
+              <div>
+                <span class="project-card-label">回款总额</span>
+                <span class="project-card-value">{{ formatProjectReceiptTotal(project.receipts) }}</span>
+              </div>
+            </div>
+
+            <div class="project-card-actions">
+              <button class="customer-card-action primary" type="button" @click="editProject(project)">
+                <i class="fa-solid fa-pen"></i>
+                编辑
+              </button>
+              <button class="customer-card-action danger" type="button" @click="deleteProject(project)">
+                <i class="fa-regular fa-trash-can"></i>
+                删除
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <div v-else class="project-empty">
+          <div class="project-empty-icon">
+            <i class="fa-regular fa-folder-open"></i>
+          </div>
+          <p>暂无项目数据</p>
+          <button class="customer-empty-action project-empty-action" type="button" @click="openProjectForm()">
+            添加第一个项目
+          </button>
+        </div>
+
+        <button class="project-fab" type="button" aria-label="新增项目" @click="openProjectForm()">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </main>
+
+      <main v-else-if="currentPage === 'todos'" class="content todo-page" @click="todoCategoryOpen = false">
+        <h1 class="customer-title">待办事项</h1>
+
+        <div class="project-filter-row">
+          <label class="project-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+              v-model="todoSearchKeyword"
+              type="search"
+              placeholder="搜索事项名称"
+              aria-label="搜索事项名称"
+            >
+          </label>
+
+          <div class="project-select-wrap">
+            <button
+              class="project-select"
+              :class="{ open: todoCategoryOpen }"
+              type="button"
+              :aria-expanded="todoCategoryOpen"
+              aria-label="待办类别筛选"
+              @click.stop="todoCategoryOpen = !todoCategoryOpen"
+            >
+              <span>{{ todoCategoryFilterLabel }}</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div v-if="todoCategoryOpen" class="project-category-menu" @click.stop>
+              <button class="project-category-all" type="button" @click="selectTodoCategory('', '')">
+                全部类别
+              </button>
+              <div class="project-category-cascade">
+                <div class="project-category-parent-list">
+                  <button
+                    v-for="group in projectCategoryTree"
+                    :key="`todo-${group.name}`"
+                    class="project-category-parent"
+                    :class="{ active: activeTodoCategoryParent === group.name }"
+                    type="button"
+                    @click="activeTodoCategoryParent = group.name"
+                  >
+                    {{ group.name }}
+                  </button>
+                </div>
+                <div class="project-category-child-list">
+                  <button
+                    v-for="child in activeTodoCategoryChildren"
+                    :key="`todo-${activeTodoCategoryParent}-${child}`"
+                    class="project-category-child"
+                    :class="{ active: selectedTodoCategoryParent === activeTodoCategoryParent && selectedTodoCategoryChild === child }"
+                    type="button"
+                    @click="selectTodoCategory(activeTodoCategoryParent, child)"
+                  >
+                    {{ child }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="customer-tabs" role="tablist" aria-label="待办状态筛选">
+          <button
+            v-for="tab in customerTabs"
+            :key="`todo-${tab.value}`"
+            class="customer-tab"
+            :class="{ active: activeTodoTab === tab.value }"
+            type="button"
+            role="tab"
+            :aria-selected="activeTodoTab === tab.value"
+            @click="activeTodoTab = tab.value"
+          >
+            {{ tab.label }}
+          </button>
+        </div>
+
+        <div v-if="filteredTodoItems.length" class="todo-manage-list">
+          <article v-for="item in filteredTodoItems" :key="item.id" class="todo-manage-card">
+            <div class="todo-manage-head">
+              <div class="todo-manage-title">
+                <strong>{{ item.title }}</strong>
+                <span class="project-card-badge" :class="item.businessStatus">{{ projectBusinessStatusLabel(item.businessStatus) }}</span>
+              </div>
+              <p>{{ formatTodoCategory(item) || '未选择类别' }}</p>
+            </div>
+
+            <div class="project-card-grid">
+              <div>
+                <span class="project-card-label">到期日期</span>
+                <span class="project-card-value">{{ item.dueDate || '未设置' }}</span>
+              </div>
+              <div>
+                <span class="project-card-label">事项备注</span>
+                <span class="project-card-value">{{ item.remark || '暂无备注' }}</span>
+              </div>
+            </div>
+
+            <div class="project-card-actions">
+              <button class="customer-card-action primary" type="button" @click="editTodo(item)">
+                <i class="fa-solid fa-pen"></i>
+                编辑
+              </button>
+              <button class="customer-card-action danger" type="button" @click="deleteTodo(item)">
+                <i class="fa-regular fa-trash-can"></i>
+                删除
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <div v-else class="project-empty">
+          <div class="project-empty-icon">
+            <i class="fa-regular fa-user"></i>
+          </div>
+          <p>暂无待办事项数据</p>
+          <button class="customer-empty-action project-empty-action" type="button" @click="openTodoForm()">
+            添加第一个待办事项
+          </button>
+        </div>
+
+        <button class="project-fab todo-fab" type="button" aria-label="新增待办事项" @click="openTodoForm()">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </main>
+
       <main v-else-if="currentPage === 'customer-detail'" class="content customer-detail-page">
         <div class="detail-topbar">
           <button class="detail-back" type="button" aria-label="返回客户管理" @click="closeCustomerDetail">
@@ -2323,7 +3150,426 @@
         </form>
       </main>
 
-      <main v-else class="content customer-form-page" @click="formCityMenuOpen = false">
+      <main v-else-if="currentPage === 'project-form'" class="content customer-form-page project-form-page" @click="projectFormCategoryOpen = false">
+        <div class="form-topbar">
+          <button class="form-back" type="button" aria-label="返回项目管理" @click="cancelProjectForm">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <h1>{{ editingProjectId ? '编辑项目' : '新增项目' }}</h1>
+        </div>
+
+        <form class="form-card" @submit.prevent="saveProject">
+          <div class="form-card-scroll">
+            <h2 class="form-card-title">基础信息</h2>
+
+            <div class="form-field">
+              <label class="form-field-label" for="project-name">项目名称<span class="required-mark">*</span></label>
+              <input
+                id="project-name"
+                v-model.trim="projectForm.name"
+                class="form-control"
+                type="text"
+                placeholder="请输入项目名称"
+                maxlength="40"
+              >
+            </div>
+
+            <div class="form-field">
+              <label class="form-field-label" for="project-description">项目描述</label>
+              <textarea
+                id="project-description"
+                v-model="projectForm.description"
+                class="form-control"
+                placeholder="请输入项目描述"
+                maxlength="100"
+              ></textarea>
+              <div class="remark-count">{{ projectForm.description.length }}/100字</div>
+            </div>
+
+            <div class="form-field">
+              <label class="form-field-label" for="project-client-name">客户名称<span class="required-mark">*</span></label>
+              <input
+                id="project-client-name"
+                v-model.trim="projectForm.clientName"
+                class="form-control"
+                type="text"
+                placeholder="请输入客户名称"
+                maxlength="40"
+              >
+            </div>
+
+            <div class="form-field">
+              <label class="form-field-label">项目类别</label>
+              <div class="project-select-wrap">
+                <button
+                  class="form-control project-form-category-control"
+                  :class="{ open: projectFormCategoryOpen, 'has-value': projectForm.categoryChild }"
+                  type="button"
+                  @click.stop="projectFormCategoryOpen = !projectFormCategoryOpen"
+                >
+                  <span>{{ projectFormCategoryLabel }}</span>
+                  <i class="fa-solid fa-chevron-down"></i>
+                </button>
+
+                <div v-if="projectFormCategoryOpen" class="project-category-menu project-form-category-menu" @click.stop>
+                  <button class="project-category-all" type="button" @click="selectProjectFormCategory('', '')">
+                    不选择类别
+                  </button>
+                  <div class="project-category-cascade">
+                    <div class="project-category-parent-list">
+                      <button
+                        v-for="group in projectCategoryTree"
+                        :key="`form-${group.name}`"
+                        class="project-category-parent"
+                        :class="{ active: activeProjectFormCategoryParent === group.name }"
+                        type="button"
+                        @click="activeProjectFormCategoryParent = group.name"
+                      >
+                        {{ group.name }}
+                      </button>
+                    </div>
+                    <div class="project-category-child-list">
+                      <button
+                        v-for="child in activeProjectFormCategoryChildren"
+                        :key="`form-${activeProjectFormCategoryParent}-${child}`"
+                        class="project-category-child"
+                        :class="{ active: projectForm.categoryParent === activeProjectFormCategoryParent && projectForm.categoryChild === child }"
+                        type="button"
+                        @click="selectProjectFormCategory(activeProjectFormCategoryParent, child)"
+                      >
+                        {{ child }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label class="form-field-label" for="project-contract-amount">合同金额</label>
+              <input
+                id="project-contract-amount"
+                v-model.trim="projectForm.contractAmount"
+                class="form-control"
+                type="text"
+                placeholder="请输入合同金额"
+                maxlength="20"
+              >
+            </div>
+
+            <section class="project-group-section">
+              <div class="project-group-head">
+                <h3>回款金额</h3>
+                <button class="project-inline-add" type="button" @click="addProjectReceipt">
+                  <i class="fa-solid fa-plus"></i>
+                  新增
+                </button>
+              </div>
+              <div v-if="projectForm.receipts.length" class="project-multi-list">
+                <div v-for="(receipt, index) in projectForm.receipts" :key="receipt.id" class="project-multi-item">
+                  <label class="project-multi-label">第{{ index + 1 }}笔回款</label>
+                  <div class="project-multi-row">
+                    <input
+                      v-model.trim="receipt.amount"
+                      class="form-control"
+                      type="text"
+                      :placeholder="`请输入第${index + 1}笔回款`"
+                      maxlength="20"
+                    >
+                    <button class="project-inline-delete" type="button" @click="removeProjectReceipt(index)">
+                      <i class="fa-solid fa-minus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <p v-else class="project-group-empty">暂无回款记录</p>
+              <div class="project-total-card">
+                <span>回款总金额</span>
+                <strong>{{ projectReceiptTotalText }}</strong>
+              </div>
+            </section>
+
+            <div class="form-field">
+              <label class="form-field-label" for="project-receivable-amount">应收金额</label>
+              <input
+                id="project-receivable-amount"
+                v-model.trim="projectForm.receivableAmount"
+                class="form-control"
+                type="text"
+                placeholder="请输入应收金额"
+                maxlength="20"
+              >
+            </div>
+
+            <div class="form-field">
+              <label class="form-field-label" for="project-contract-date">合同签订时间</label>
+              <input id="project-contract-date" v-model="projectForm.contractSignedAt" class="form-control" type="date">
+            </div>
+
+            <section class="project-group-section">
+              <div class="project-group-head">
+                <h3>方案设计师</h3>
+                <button class="project-inline-add" type="button" @click="addProjectDesigner('schemeDesigners')">
+                  <i class="fa-solid fa-plus"></i>
+                  新增
+                </button>
+              </div>
+              <div v-if="projectForm.schemeDesigners.length" class="project-multi-list">
+                <div v-for="(designer, index) in projectForm.schemeDesigners" :key="designer.id" class="project-multi-item">
+                  <label class="project-multi-label">设计师{{ index + 1 }}</label>
+                  <div class="project-multi-row">
+                    <input
+                      v-model.trim="designer.name"
+                      class="form-control"
+                      type="text"
+                      placeholder="请输入方案设计师姓名"
+                      maxlength="20"
+                    >
+                    <button class="project-inline-delete" type="button" @click="removeProjectDesigner('schemeDesigners', index)">
+                      <i class="fa-solid fa-minus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <p v-else class="project-group-empty">暂无方案设计师</p>
+            </section>
+
+            <section class="project-group-section">
+              <div class="project-group-head">
+                <h3>施工图设计师</h3>
+                <button class="project-inline-add" type="button" @click="addProjectDesigner('drawingDesigners')">
+                  <i class="fa-solid fa-plus"></i>
+                  新增
+                </button>
+              </div>
+              <div v-if="projectForm.drawingDesigners.length" class="project-multi-list">
+                <div v-for="(designer, index) in projectForm.drawingDesigners" :key="designer.id" class="project-multi-item">
+                  <label class="project-multi-label">设计师{{ index + 1 }}</label>
+                  <div class="project-multi-row">
+                    <input
+                      v-model.trim="designer.name"
+                      class="form-control"
+                      type="text"
+                      placeholder="请输入施工图设计师姓名"
+                      maxlength="20"
+                    >
+                    <button class="project-inline-delete" type="button" @click="removeProjectDesigner('drawingDesigners', index)">
+                      <i class="fa-solid fa-minus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <p v-else class="project-group-empty">暂无施工图设计师</p>
+            </section>
+
+            <section class="project-group-section">
+              <div class="project-group-head">
+                <h3>上传附件</h3>
+                <button class="project-inline-add" type="button" @click="triggerProjectFileInput">
+                  <i class="fa-solid fa-plus"></i>
+                  上传
+                </button>
+              </div>
+              <input
+                ref="projectFileInput"
+                class="project-file-input"
+                type="file"
+                multiple
+                @change="handleProjectFileChange"
+              >
+              <div class="project-upload-hint">支持合同、设计成果、成果确认单、请款文件、发票</div>
+              <div v-if="projectForm.attachments.length" class="project-attachment-list">
+                <div v-for="(file, index) in projectForm.attachments" :key="`${file.name}-${index}`" class="project-attachment-item">
+                  <div>
+                    <strong>{{ file.name }}</strong>
+                    <span>{{ file.sizeLabel }}</span>
+                  </div>
+                  <button type="button" @click="removeProjectAttachment(index)">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+              </div>
+              <p v-else class="project-group-empty">暂无上传附件</p>
+            </section>
+
+            <section class="project-status-section">
+              <h3 class="tag-section-title project-status-title">项目状态</h3>
+              <div class="project-status-tabs">
+                <button
+                  v-for="tab in projectStageTabs"
+                  :key="tab.value"
+                  class="project-status-tab"
+                  :class="{ active: projectForm.stage === tab.value }"
+                  type="button"
+                  @click="projectForm.stage = tab.value"
+                >
+                  {{ tab.label }}
+                </button>
+              </div>
+
+              <div v-if="projectForm.stage === 'bidding'" class="project-status-card">
+                <div class="form-field">
+                  <label class="form-field-label" for="project-bid-deadline">投标截止时间</label>
+                  <input id="project-bid-deadline" v-model="projectForm.statusData.bidding.deadline" class="form-control" type="datetime-local">
+                </div>
+                <div class="form-field">
+                  <label class="form-field-label" for="project-bid-note">注意事项</label>
+                  <textarea id="project-bid-note" v-model="projectForm.statusData.bidding.note" class="form-control" placeholder="请输入注意事项" maxlength="100"></textarea>
+                </div>
+              </div>
+
+              <div v-else-if="projectForm.stage === 'contract'" class="project-status-card">
+                <div class="form-field">
+                  <label class="form-field-label" for="project-contract-time">签订时间</label>
+                  <input id="project-contract-time" v-model="projectForm.statusData.contract.time" class="form-control" type="datetime-local">
+                </div>
+                <div class="form-field">
+                  <label class="form-field-label" for="project-contract-note">注意事项</label>
+                  <textarea id="project-contract-note" v-model="projectForm.statusData.contract.note" class="form-control" placeholder="请输入注意事项" maxlength="100"></textarea>
+                </div>
+              </div>
+
+              <div v-else-if="projectForm.stage === 'executing'" class="project-status-card">
+                <div class="form-field">
+                  <label class="form-field-label" for="project-executing-note">注意事项</label>
+                  <textarea id="project-executing-note" v-model="projectForm.statusData.executing.note" class="form-control" placeholder="请输入注意事项" maxlength="100"></textarea>
+                </div>
+              </div>
+
+              <div v-else class="project-status-card">
+                <div class="form-field">
+                  <label class="form-field-label" for="project-completed-time">完工时间</label>
+                  <input id="project-completed-time" v-model="projectForm.statusData.completed.time" class="form-control" type="datetime-local">
+                </div>
+                <div class="form-field">
+                  <label class="form-field-label" for="project-completed-note">注意事项</label>
+                  <textarea id="project-completed-note" v-model="projectForm.statusData.completed.note" class="form-control" placeholder="请输入注意事项" maxlength="100"></textarea>
+                </div>
+              </div>
+            </section>
+
+            <p v-if="projectFormError" class="form-error">{{ projectFormError }}</p>
+          </div>
+
+          <div class="form-actions">
+            <button class="form-action cancel" type="button" @click="cancelProjectForm">取消</button>
+            <button class="form-action save" type="submit">保存</button>
+          </div>
+        </form>
+      </main>
+
+      <main v-else-if="currentPage === 'todo-form'" class="content customer-form-page todo-form-page" @click="todoFormCategoryOpen = false">
+        <div class="form-topbar">
+          <button class="form-back" type="button" aria-label="返回待办事项" @click="cancelTodoForm">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <h1>{{ editingTodoId ? '编辑待办事项' : '新增待办事项' }}</h1>
+        </div>
+
+        <form class="form-card" @submit.prevent="saveTodo">
+          <div class="form-card-scroll">
+            <h2 class="form-card-title">基础信息</h2>
+
+            <div class="form-field">
+              <label class="form-field-label" for="todo-title">任务标题<span class="required-mark">*</span></label>
+              <input
+                id="todo-title"
+                v-model.trim="todoForm.title"
+                class="form-control"
+                type="text"
+                placeholder="请输入项目名称"
+                maxlength="40"
+              >
+            </div>
+
+            <div class="form-field">
+              <label class="form-field-label" for="todo-due-date">到期日期</label>
+              <input id="todo-due-date" v-model="todoForm.dueDate" class="form-control" type="date">
+            </div>
+
+            <div class="form-field">
+              <label class="form-field-label">项目类别</label>
+              <div class="project-select-wrap">
+                <button
+                  class="form-control project-form-category-control"
+                  :class="{ open: todoFormCategoryOpen, 'has-value': todoForm.categoryChild }"
+                  type="button"
+                  @click.stop="todoFormCategoryOpen = !todoFormCategoryOpen"
+                >
+                  <span>{{ todoFormCategoryLabel }}</span>
+                  <i class="fa-solid fa-chevron-down"></i>
+                </button>
+
+                <div v-if="todoFormCategoryOpen" class="project-category-menu project-form-category-menu" @click.stop>
+                  <button class="project-category-all" type="button" @click="selectTodoFormCategory('', '')">
+                    不选择类别
+                  </button>
+                  <div class="project-category-cascade">
+                    <div class="project-category-parent-list">
+                      <button
+                        v-for="group in projectCategoryTree"
+                        :key="`todo-form-${group.name}`"
+                        class="project-category-parent"
+                        :class="{ active: activeTodoFormCategoryParent === group.name }"
+                        type="button"
+                        @click="activeTodoFormCategoryParent = group.name"
+                      >
+                        {{ group.name }}
+                      </button>
+                    </div>
+                    <div class="project-category-child-list">
+                      <button
+                        v-for="child in activeTodoFormCategoryChildren"
+                        :key="`todo-form-${activeTodoFormCategoryParent}-${child}`"
+                        class="project-category-child"
+                        :class="{ active: todoForm.categoryParent === activeTodoFormCategoryParent && todoForm.categoryChild === child }"
+                        type="button"
+                        @click="selectTodoFormCategory(activeTodoFormCategoryParent, child)"
+                      >
+                        {{ child }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="customer-tabs todo-form-tabs" role="tablist" aria-label="待办状态切换">
+              <button
+                v-for="tab in customerTabs"
+                :key="`todo-form-${tab.value}`"
+                class="customer-tab"
+                :class="{ active: todoForm.businessStatus === tab.value }"
+                type="button"
+                @click="todoForm.businessStatus = tab.value"
+              >
+                {{ tab.label }}
+              </button>
+            </div>
+
+            <div class="form-field">
+              <label class="form-field-label" for="todo-remark">事项备注</label>
+              <textarea
+                id="todo-remark"
+                v-model="todoForm.remark"
+                class="form-control"
+                placeholder="请输入项目描述"
+                maxlength="100"
+              ></textarea>
+              <div class="remark-count">{{ todoForm.remark.length }}/100字</div>
+            </div>
+
+            <p v-if="todoFormError" class="form-error">{{ todoFormError }}</p>
+          </div>
+
+          <div class="form-actions">
+            <button class="form-action cancel" type="button" @click="cancelTodoForm">取消</button>
+            <button class="form-action save" type="submit">保存</button>
+          </div>
+        </form>
+      </main>
+
+      <main v-else-if="currentPage === 'customer-form'" class="content customer-form-page" @click="formCityMenuOpen = false">
         <div class="form-topbar">
           <button class="form-back" type="button" aria-label="返回客户管理" @click="cancelCustomerForm">
             <i class="fa-solid fa-arrow-left"></i>
@@ -2489,7 +3735,7 @@
         </form>
       </main>
 
-      <nav v-if="currentPage === 'home' || currentPage === 'customers'" class="bottom-nav" aria-label="底部导航">
+      <nav v-if="currentPage === 'home' || currentPage === 'customers' || currentPage === 'projects' || currentPage === 'todos'" class="bottom-nav" aria-label="底部导航">
         <button class="nav-item" :class="{ active: currentPage === 'home' }" type="button" @click="goTo('home')">
           <i class="fa-solid fa-house"></i>
           <span>首页</span>
@@ -2498,11 +3744,11 @@
           <i class="fa-regular fa-address-book"></i>
           <span>客户管理</span>
         </button>
-        <button class="nav-item" type="button" @click="notify('项目模块暂未开放')">
+        <button class="nav-item" :class="{ active: currentPage === 'projects' }" type="button" @click="goTo('projects')">
           <i class="fa-regular fa-folder"></i>
           <span>项目管理</span>
         </button>
-        <button class="nav-item" type="button" @click="notify('待办模块暂未开放')">
+        <button class="nav-item" :class="{ active: currentPage === 'todos' }" type="button" @click="goTo('todos')">
           <i class="fa-regular fa-square-check"></i>
           <span>待办事项</span>
         </button>
@@ -2516,11 +3762,15 @@
 
       <div v-if="deleteDialogOpen" class="dialog-mask" @click.self="cancelDeleteCustomer">
         <div class="dialog-card">
-          <h3>{{ deleteTargetType === 'visit' ? '删除拜访记录' : '删除客户' }}</h3>
+          <h3>{{ deleteTargetType === 'visit' ? '删除拜访记录' : deleteTargetType === 'project' ? '删除项目' : deleteTargetType === 'todo' ? '删除待办事项' : '删除客户' }}</h3>
           <p>
             {{ deleteTargetType === 'visit'
               ? `确定删除拜访记录“${deleteTarget?.title || ''}”吗？`
-              : `确定删除客户“${deleteTarget?.name || ''}”吗？` }}
+              : deleteTargetType === 'project'
+                ? `确定删除项目“${deleteTarget?.name || ''}”吗？`
+                : deleteTargetType === 'todo'
+                  ? `确定删除待办事项“${deleteTarget?.title || ''}”吗？`
+                : `确定删除客户“${deleteTarget?.name || ''}”吗？` }}
           </p>
           <div class="dialog-actions">
             <button class="dialog-button cancel" type="button" @click="cancelDeleteCustomer">取消</button>
@@ -2573,6 +3823,26 @@
             need: ""
           },
           editingVisitId: null,
+          editingProjectId: null,
+          editingTodoId: null,
+          projectFormError: "",
+          todoFormError: "",
+          projectSearchKeyword: "",
+          todoSearchKeyword: "",
+          activeProjectTab: "all",
+          activeTodoTab: "all",
+          projectCategoryOpen: false,
+          todoCategoryOpen: false,
+          activeProjectCategoryParent: "设计",
+          activeTodoCategoryParent: "设计",
+          selectedProjectCategoryParent: "",
+          selectedProjectCategoryChild: "",
+          selectedTodoCategoryParent: "",
+          selectedTodoCategoryChild: "",
+          projectFormCategoryOpen: false,
+          activeProjectFormCategoryParent: "设计",
+          todoFormCategoryOpen: false,
+          activeTodoFormCategoryParent: "设计",
           cityMenuOpen: false,
           cityKeyword: "",
           activeProvince: "北京市",
@@ -2580,12 +3850,22 @@
           deleteDialogOpen: false,
           deleteTarget: null,
           deleteTargetType: "customer",
-          // customerTabs: [
-          //   { label: "全部", value: "all" },
-          //   { label: "待跟进", value: "follow" },
-          //   { label: "已成交", value: "won" },
-          //   { label: "高意向", value: "high" }
-          // ],
+          customerTabs: [
+            { label: "全部", value: "all" },
+            { label: "待跟进", value: "follow" },
+            { label: "已成交", value: "won" },
+            { label: "高意向", value: "high" }
+          ],
+          projectCategoryTree: [
+            { name: "设计", children: ["地产", "办公", "公寓", "商业", "酒店"] },
+            { name: "软装", children: ["地产", "办公", "公寓", "商业", "酒店"] }
+          ],
+          projectStageTabs: [
+            { label: "投标中", value: "bidding" },
+            { label: "合同签订", value: "contract" },
+            { label: "实施中", value: "executing" },
+            { label: "项目完工", value: "completed" }
+          ],
           provinces: [
             { name: "北京市", cities: ["东城区", "西城区", "朝阳区", "海淀区", "丰台区", "石景山区", "门头沟区", "房山区", "通州区", "顺义区", "昌平区", "大兴区", "怀柔区", "平谷区", "密云区", "延庆区"] },
             { name: "天津市", cities: ["和平区", "河东区", "河西区", "南开区", "河北区", "红桥区", "东丽区", "西青区", "津南区", "北辰区", "武清区", "宝坻区", "滨海新区", "宁河区", "静海区", "蓟州区"] },
@@ -2674,13 +3954,43 @@
             { id: 111, customerId: 1, title: "试用反馈拜访", time: "2023-09-08 15:20", need: "整理移动端表单与统计建议", createdAt: "2023-09-08T15:20" },
             { id: 112, customerId: 1, title: "售前回访", time: "2022-04-17 11:40", need: "确认老项目升级意愿", createdAt: "2022-04-17T11:40" }
           ],
+          projects: [],
+          todos: [],
+          projectForm: {
+            name: "",
+            description: "",
+            clientName: "",
+            categoryParent: "",
+            categoryChild: "",
+            contractAmount: "",
+            receipts: [],
+            receivableAmount: "",
+            contractSignedAt: "",
+            schemeDesigners: [],
+            drawingDesigners: [],
+            attachments: [],
+            stage: "bidding",
+            statusData: {
+              bidding: { deadline: "", note: "" },
+              contract: { time: "", note: "" },
+              executing: { note: "" },
+              completed: { time: "", note: "" }
+            },
+            businessStatus: "follow"
+          },
+          todoForm: {
+            title: "",
+            dueDate: "",
+            remark: "",
+            categoryParent: "",
+            categoryChild: "",
+            businessStatus: "follow"
+          },
           modules: [
             { name: "客户管理", icon: "fa-regular fa-address-book", route: "customers", message: "已打开客户管理" },
-            { name: "项目管理", icon: "fa-regular fa-folder", message: "已进入项目，查看当前项目进度与节点" },
-            
-            { name: "待办事项", icon: "fa-regular fa-square-check", message: "已打开待办，查看今日任务与处理进度" }
+            { name: "项目管理", icon: "fa-regular fa-folder", route: "projects", message: "已进入项目，查看当前项目进度与节点" },
+            { name: "待办事项", icon: "fa-regular fa-square-check", route: "todos", message: "已打开待办，查看今日任务与处理进度" }
           ],
-          todos: [],
           followUps: [
             {
               name: "李女士 · 华东渠道",
@@ -2724,6 +4034,8 @@
           try {
             const storedCustomers = window.localStorage.getItem("workbench-customers");
             const storedVisitRecords = window.localStorage.getItem("workbench-visit-records");
+            const storedProjects = window.localStorage.getItem("workbench-projects");
+            const storedTodos = window.localStorage.getItem("workbench-todos");
             if (storedCustomers !== null) {
               const parsedCustomers = JSON.parse(storedCustomers);
               if (Array.isArray(parsedCustomers)) {
@@ -2738,6 +4050,44 @@
               const parsedVisitRecords = JSON.parse(storedVisitRecords);
               if (Array.isArray(parsedVisitRecords)) {
                 this.visitRecords = parsedVisitRecords;
+              }
+            }
+            if (storedProjects !== null) {
+              const parsedProjects = JSON.parse(storedProjects);
+              if (Array.isArray(parsedProjects)) {
+                this.projects = parsedProjects.map((project) => ({
+                  ...this.getDefaultProjectForm(),
+                  ...project,
+                  receipts: Array.isArray(project.receipts) ? project.receipts : [],
+                  schemeDesigners: Array.isArray(project.schemeDesigners) ? project.schemeDesigners : [],
+                  drawingDesigners: Array.isArray(project.drawingDesigners) ? project.drawingDesigners : [],
+                  attachments: Array.isArray(project.attachments) ? project.attachments : [],
+                  statusData: {
+                    bidding: { deadline: "", note: "", ...(project.statusData?.bidding || {}) },
+                    contract: { time: "", note: "", ...(project.statusData?.contract || {}) },
+                    executing: { note: "", ...(project.statusData?.executing || {}) },
+                    completed: { time: "", note: "", ...(project.statusData?.completed || {}) }
+                  }
+                }));
+              }
+            }
+            if (storedTodos !== null) {
+              const parsedTodos = JSON.parse(storedTodos);
+              if (Array.isArray(parsedTodos)) {
+                this.todos = parsedTodos.map((item) => ({
+                  id: item.id,
+                  title: item.title || "",
+                  dueDate: item.dueDate || "",
+                  remark: item.remark || "",
+                  categoryParent: item.categoryParent || "",
+                  categoryChild: item.categoryChild || "",
+                  businessStatus: item.businessStatus || "follow",
+                  icon: item.icon || "fa-regular fa-square-check",
+                  level: item.level || this.projectBusinessStatusLabel(item.businessStatus || "follow"),
+                  desc: item.desc || item.remark || "待跟进事项",
+                  time: item.time || item.dueDate || "未设置日期",
+                  owner: item.owner || (item.categoryParent && item.categoryChild ? `${item.categoryParent} · ${item.categoryChild}` : "待办中心")
+                }));
               }
             }
           } catch (error) {
@@ -2758,9 +4108,27 @@
             console.warn("persistVisitRecords failed", error);
           }
         },
+        persistProjects() {
+          try {
+            window.localStorage.setItem("workbench-projects", JSON.stringify(this.projects));
+          } catch (error) {
+            console.warn("persistProjects failed", error);
+          }
+        },
+        persistTodos() {
+          try {
+            window.localStorage.setItem("workbench-todos", JSON.stringify(this.todos));
+          } catch (error) {
+            console.warn("persistTodos failed", error);
+          }
+        },
         goTo(page) {
           this.currentPage = page;
           this.formCityMenuOpen = false;
+          this.projectCategoryOpen = false;
+          this.projectFormCategoryOpen = false;
+          this.todoCategoryOpen = false;
+          this.todoFormCategoryOpen = false;
           if (page === "customers") {
             this.searchKeyword = "";
             this.selectedCity = "全部城市";
@@ -2768,6 +4136,20 @@
             this.cityKeyword = "";
             this.activeProvince = "北京市";
             this.activeCustomerTab = "all";
+          }
+          if (page === "projects") {
+            this.projectSearchKeyword = "";
+            this.activeProjectTab = "all";
+            this.selectedProjectCategoryParent = "";
+            this.selectedProjectCategoryChild = "";
+            this.activeProjectCategoryParent = "设计";
+          }
+          if (page === "todos") {
+            this.todoSearchKeyword = "";
+            this.activeTodoTab = "all";
+            this.selectedTodoCategoryParent = "";
+            this.selectedTodoCategoryChild = "";
+            this.activeTodoCategoryParent = "设计";
           }
           this.$nextTick(() => {
             const content = this.$el.querySelector(".content");
@@ -2929,6 +4311,297 @@
           this.formCityMenuOpen = false;
           this.formError = "";
         },
+        getDefaultProjectForm() {
+          return {
+            name: "",
+            description: "",
+            clientName: "",
+            categoryParent: "",
+            categoryChild: "",
+            contractAmount: "",
+            receipts: [],
+            receivableAmount: "",
+            contractSignedAt: "",
+            schemeDesigners: [],
+            drawingDesigners: [],
+            attachments: [],
+            stage: "bidding",
+            statusData: {
+              bidding: { deadline: "", note: "" },
+              contract: { time: "", note: "" },
+              executing: { note: "" },
+              completed: { time: "", note: "" }
+            },
+            businessStatus: this.activeProjectTab !== "all" ? this.activeProjectTab : "follow"
+          };
+        },
+        resetProjectForm() {
+          this.editingProjectId = null;
+          this.projectFormError = "";
+          this.projectFormCategoryOpen = false;
+          this.activeProjectFormCategoryParent = "设计";
+          this.projectForm = this.getDefaultProjectForm();
+        },
+        openProjectForm() {
+          this.resetProjectForm();
+          this.currentPage = "project-form";
+          this.$nextTick(() => {
+            const content = this.$el.querySelector(".content");
+            if (content) content.scrollTop = 0;
+          });
+        },
+        editProject(project) {
+          this.editingProjectId = project.id;
+          this.projectFormError = "";
+          this.projectFormCategoryOpen = false;
+          this.activeProjectFormCategoryParent = project.categoryParent || "设计";
+          this.projectForm = {
+            ...this.getDefaultProjectForm(),
+            ...project,
+            receipts: (project.receipts || []).map((item) => ({ id: item.id || this.makeProjectItemId(), amount: item.amount || "" })),
+            schemeDesigners: (project.schemeDesigners || []).map((item) => ({ id: item.id || this.makeProjectItemId(), name: item.name || "" })),
+            drawingDesigners: (project.drawingDesigners || []).map((item) => ({ id: item.id || this.makeProjectItemId(), name: item.name || "" })),
+            attachments: (project.attachments || []).map((item) => ({ ...item })),
+            statusData: {
+              bidding: { deadline: "", note: "", ...(project.statusData?.bidding || {}) },
+              contract: { time: "", note: "", ...(project.statusData?.contract || {}) },
+              executing: { note: "", ...(project.statusData?.executing || {}) },
+              completed: { time: "", note: "", ...(project.statusData?.completed || {}) }
+            }
+          };
+          this.currentPage = "project-form";
+          this.$nextTick(() => {
+            const content = this.$el.querySelector(".content");
+            if (content) content.scrollTop = 0;
+          });
+        },
+        cancelProjectForm() {
+          this.currentPage = "projects";
+          this.projectFormCategoryOpen = false;
+          this.projectFormError = "";
+        },
+        makeProjectItemId() {
+          return `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+        },
+        addProjectReceipt() {
+          this.projectForm.receipts.push({ id: this.makeProjectItemId(), amount: "" });
+        },
+        removeProjectReceipt(index) {
+          this.projectForm.receipts.splice(index, 1);
+        },
+        addProjectDesigner(field) {
+          this.projectForm[field].push({ id: this.makeProjectItemId(), name: "" });
+        },
+        removeProjectDesigner(field, index) {
+          this.projectForm[field].splice(index, 1);
+        },
+        triggerProjectFileInput() {
+          this.$refs.projectFileInput?.click();
+        },
+        formatFileSize(size) {
+          if (!size) return "0 KB";
+          if (size >= 1024 * 1024) return `${(size / (1024 * 1024)).toFixed(1)} MB`;
+          return `${Math.max(1, Math.round(size / 1024))} KB`;
+        },
+        handleProjectFileChange(event) {
+          const files = Array.from(event.target.files || []);
+          if (!files.length) return;
+          const nextFiles = files.map((file) => ({
+            id: this.makeProjectItemId(),
+            name: file.name,
+            size: file.size,
+            sizeLabel: this.formatFileSize(file.size),
+            type: file.type || "application/octet-stream"
+          }));
+          this.projectForm.attachments = [...this.projectForm.attachments, ...nextFiles];
+          event.target.value = "";
+        },
+        removeProjectAttachment(index) {
+          this.projectForm.attachments.splice(index, 1);
+        },
+        selectProjectCategory(parent, child) {
+          this.selectedProjectCategoryParent = parent;
+          this.selectedProjectCategoryChild = child;
+          this.activeProjectCategoryParent = parent || "设计";
+          this.projectCategoryOpen = false;
+        },
+        selectProjectFormCategory(parent, child) {
+          this.projectForm.categoryParent = parent;
+          this.projectForm.categoryChild = child;
+          this.activeProjectFormCategoryParent = parent || "设计";
+          this.projectFormCategoryOpen = false;
+        },
+        saveProject() {
+          if (!this.projectForm.name) {
+            this.projectFormError = "请输入项目名称";
+            return;
+          }
+          if (!this.projectForm.clientName) {
+            this.projectFormError = "请输入客户名称";
+            return;
+          }
+          const payload = {
+            name: this.projectForm.name,
+            description: this.projectForm.description,
+            clientName: this.projectForm.clientName,
+            categoryParent: this.projectForm.categoryParent,
+            categoryChild: this.projectForm.categoryChild,
+            contractAmount: this.projectForm.contractAmount,
+            receipts: this.projectForm.receipts
+              .filter((item) => item.amount && item.amount.trim())
+              .map((item) => ({ id: item.id, amount: item.amount.trim() })),
+            receivableAmount: this.projectForm.receivableAmount,
+            contractSignedAt: this.projectForm.contractSignedAt,
+            schemeDesigners: this.projectForm.schemeDesigners
+              .filter((item) => item.name && item.name.trim())
+              .map((item) => ({ id: item.id, name: item.name.trim() })),
+            drawingDesigners: this.projectForm.drawingDesigners
+              .filter((item) => item.name && item.name.trim())
+              .map((item) => ({ id: item.id, name: item.name.trim() })),
+            attachments: this.projectForm.attachments.map((item) => ({ ...item })),
+            stage: this.projectForm.stage,
+            statusData: {
+              bidding: { ...this.projectForm.statusData.bidding },
+              contract: { ...this.projectForm.statusData.contract },
+              executing: { ...this.projectForm.statusData.executing },
+              completed: { ...this.projectForm.statusData.completed }
+            },
+            businessStatus: this.editingProjectId
+              ? this.projects.find((item) => item.id === this.editingProjectId)?.businessStatus || this.projectForm.businessStatus || "follow"
+              : this.projectForm.businessStatus || "follow"
+          };
+
+          if (this.editingProjectId) {
+            const index = this.projects.findIndex((item) => item.id === this.editingProjectId);
+            if (index !== -1) {
+              this.projects[index] = { ...this.projects[index], ...payload };
+            }
+            this.persistProjects();
+            this.notify("项目信息已更新");
+          } else {
+            this.projects.unshift({
+              id: Date.now(),
+              ...payload
+            });
+            this.persistProjects();
+            this.notify("项目新增成功");
+          }
+
+          this.currentPage = "projects";
+          this.resetProjectForm();
+        },
+        deleteProject(project) {
+          this.deleteTarget = project;
+          this.deleteTargetType = "project";
+          this.deleteDialogOpen = true;
+        },
+        getDefaultTodoForm() {
+          return {
+            title: "",
+            dueDate: "",
+            remark: "",
+            categoryParent: "",
+            categoryChild: "",
+            businessStatus: this.activeTodoTab !== "all" ? this.activeTodoTab : "follow"
+          };
+        },
+        resetTodoForm() {
+          this.editingTodoId = null;
+          this.todoFormError = "";
+          this.todoFormCategoryOpen = false;
+          this.activeTodoFormCategoryParent = "设计";
+          this.todoForm = this.getDefaultTodoForm();
+        },
+        openTodoForm() {
+          this.resetTodoForm();
+          this.currentPage = "todo-form";
+          this.$nextTick(() => {
+            const content = this.$el.querySelector(".content");
+            if (content) content.scrollTop = 0;
+          });
+        },
+        editTodo(item) {
+          this.editingTodoId = item.id;
+          this.todoFormError = "";
+          this.todoFormCategoryOpen = false;
+          this.activeTodoFormCategoryParent = item.categoryParent || "设计";
+          this.todoForm = {
+            ...this.getDefaultTodoForm(),
+            title: item.title,
+            dueDate: item.dueDate || "",
+            remark: item.remark || "",
+            categoryParent: item.categoryParent || "",
+            categoryChild: item.categoryChild || "",
+            businessStatus: item.businessStatus || "follow"
+          };
+          this.currentPage = "todo-form";
+          this.$nextTick(() => {
+            const content = this.$el.querySelector(".content");
+            if (content) content.scrollTop = 0;
+          });
+        },
+        cancelTodoForm() {
+          this.currentPage = "todos";
+          this.todoFormCategoryOpen = false;
+          this.todoFormError = "";
+        },
+        selectTodoCategory(parent, child) {
+          this.selectedTodoCategoryParent = parent;
+          this.selectedTodoCategoryChild = child;
+          this.activeTodoCategoryParent = parent || "设计";
+          this.todoCategoryOpen = false;
+        },
+        selectTodoFormCategory(parent, child) {
+          this.todoForm.categoryParent = parent;
+          this.todoForm.categoryChild = child;
+          this.activeTodoFormCategoryParent = parent || "设计";
+          this.todoFormCategoryOpen = false;
+        },
+        saveTodo() {
+          if (!this.todoForm.title) {
+            this.todoFormError = "请输入任务标题";
+            return;
+          }
+          const payload = {
+            title: this.todoForm.title,
+            dueDate: this.todoForm.dueDate,
+            remark: this.todoForm.remark,
+            categoryParent: this.todoForm.categoryParent,
+            categoryChild: this.todoForm.categoryChild,
+            businessStatus: this.todoForm.businessStatus || "follow",
+            icon: "fa-regular fa-square-check",
+            level: this.projectBusinessStatusLabel(this.todoForm.businessStatus || "follow"),
+            desc: this.todoForm.remark || "待跟进事项",
+            time: this.todoForm.dueDate || "未设置日期",
+            owner: this.todoForm.categoryParent && this.todoForm.categoryChild
+              ? `${this.todoForm.categoryParent} · ${this.todoForm.categoryChild}`
+              : "待办中心"
+          };
+
+          if (this.editingTodoId) {
+            const index = this.todos.findIndex((item) => item.id === this.editingTodoId);
+            if (index !== -1) {
+              this.todos[index] = { ...this.todos[index], ...payload };
+            }
+            this.persistTodos();
+            this.notify("待办事项已更新");
+          } else {
+            this.todos.unshift({
+              id: Date.now(),
+              ...payload
+            });
+            this.persistTodos();
+            this.notify("待办事项新增成功");
+          }
+
+          this.currentPage = "todos";
+          this.resetTodoForm();
+        },
+        deleteTodo(item) {
+          this.deleteTarget = item;
+          this.deleteTargetType = "todo";
+          this.deleteDialogOpen = true;
+        },
         saveCustomer() {
           if (!this.customerForm.name) {
             this.formError = "请输入客户姓名";
@@ -2989,6 +4662,14 @@
             this.visitRecords = this.visitRecords.filter((item) => item.id !== this.deleteTarget.id);
             this.persistVisitRecords();
             this.notify("拜访记录已删除");
+          } else if (this.deleteTargetType === "project") {
+            this.projects = this.projects.filter((item) => item.id !== this.deleteTarget.id);
+            this.persistProjects();
+            this.notify("项目已删除");
+          } else if (this.deleteTargetType === "todo") {
+            this.todos = this.todos.filter((item) => item.id !== this.deleteTarget.id);
+            this.persistTodos();
+            this.notify("待办事项已删除");
           } else {
             const deletedCustomerId = this.deleteTarget.id;
             this.customers = this.customers.filter((item) => item.id !== this.deleteTarget.id);
@@ -3042,6 +4723,28 @@
           this.cityMenuOpen = false;
           this.cityKeyword = "";
         },
+        formatProjectCategory(project) {
+          if (!project?.categoryParent || !project?.categoryChild) return "";
+          return `${project.categoryParent} · ${project.categoryChild}`;
+        },
+        formatTodoCategory(item) {
+          if (!item?.categoryParent || !item?.categoryChild) return "";
+          return `${item.categoryParent} · ${item.categoryChild}`;
+        },
+        projectStageLabel(stage) {
+          return this.projectStageTabs.find((item) => item.value === stage)?.label || "投标中";
+        },
+        projectBusinessStatusLabel(status) {
+          return this.customerTabs.find((item) => item.value === status)?.label || "待跟进";
+        },
+        formatProjectReceiptTotal(receipts) {
+          const amounts = Array.isArray(receipts) ? receipts : [];
+          const total = amounts.reduce((sum, item) => {
+            const value = Number(String(item.amount || "").replace(/[^0-9.-]/g, ""));
+            return Number.isFinite(value) ? sum + value : sum;
+          }, 0);
+          return total > 0 ? total.toLocaleString("zh-CN") : "0";
+        },
         notify(message) {
           this.toastMessage = message;
           this.toastVisible = true;
@@ -3057,6 +4760,12 @@
             "客户新增成功",
             "客户信息已更新",
             "客户已删除",
+            "项目新增成功",
+            "项目信息已更新",
+            "项目已删除",
+            "待办事项新增成功",
+            "待办事项已更新",
+            "待办事项已删除",
             "拜访记录已删除",
             "拜访记录已更新",
             "拜访记录新增成功"
@@ -3096,6 +4805,66 @@
             year: records.filter((item) => String(new Date(item.createdAt).getFullYear()) === String(currentYear)).length,
             month: records.filter((item) => item.createdAt.startsWith(currentMonth)).length
           };
+        },
+        filteredProjects() {
+          const keyword = this.projectSearchKeyword.trim().toLowerCase();
+          return this.projects.filter((project) => {
+            const matchesKeyword = !keyword || project.name.toLowerCase().includes(keyword);
+            const matchesBusinessStatus = this.activeProjectTab === "all" || project.businessStatus === this.activeProjectTab;
+            const matchesCategory = !this.selectedProjectCategoryParent
+              || (project.categoryParent === this.selectedProjectCategoryParent && project.categoryChild === this.selectedProjectCategoryChild);
+            return matchesKeyword && matchesBusinessStatus && matchesCategory;
+          });
+        },
+        filteredTodoItems() {
+          const keyword = this.todoSearchKeyword.trim().toLowerCase();
+          return this.todos.filter((item) => {
+            const matchesKeyword = !keyword || item.title.toLowerCase().includes(keyword);
+            const matchesBusinessStatus = this.activeTodoTab === "all" || item.businessStatus === this.activeTodoTab;
+            const matchesCategory = !this.selectedTodoCategoryParent
+              || (item.categoryParent === this.selectedTodoCategoryParent && item.categoryChild === this.selectedTodoCategoryChild);
+            return matchesKeyword && matchesBusinessStatus && matchesCategory;
+          });
+        },
+        todayTodoItems() {
+          const now = new Date();
+          const todayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+          return this.todos.filter((item) => item.dueDate === todayKey);
+        },
+        activeProjectCategoryChildren() {
+          return this.projectCategoryTree.find((item) => item.name === this.activeProjectCategoryParent)?.children || [];
+        },
+        activeTodoCategoryChildren() {
+          return this.projectCategoryTree.find((item) => item.name === this.activeTodoCategoryParent)?.children || [];
+        },
+        activeProjectFormCategoryChildren() {
+          return this.projectCategoryTree.find((item) => item.name === this.activeProjectFormCategoryParent)?.children || [];
+        },
+        activeTodoFormCategoryChildren() {
+          return this.projectCategoryTree.find((item) => item.name === this.activeTodoFormCategoryParent)?.children || [];
+        },
+        projectCategoryFilterLabel() {
+          return this.selectedProjectCategoryParent && this.selectedProjectCategoryChild
+            ? `${this.selectedProjectCategoryParent} · ${this.selectedProjectCategoryChild}`
+            : "项目类别";
+        },
+        todoCategoryFilterLabel() {
+          return this.selectedTodoCategoryParent && this.selectedTodoCategoryChild
+            ? `${this.selectedTodoCategoryParent} · ${this.selectedTodoCategoryChild}`
+            : "项目类别";
+        },
+        projectFormCategoryLabel() {
+          return this.projectForm.categoryParent && this.projectForm.categoryChild
+            ? `${this.projectForm.categoryParent} · ${this.projectForm.categoryChild}`
+            : "请选择项目类别";
+        },
+        todoFormCategoryLabel() {
+          return this.todoForm.categoryParent && this.todoForm.categoryChild
+            ? `${this.todoForm.categoryParent} · ${this.todoForm.categoryChild}`
+            : "请选择项目类别";
+        },
+        projectReceiptTotalText() {
+          return this.formatProjectReceiptTotal(this.projectForm.receipts);
         },
         visibleProvinces() {
           const keyword = this.cityKeyword.trim().toLowerCase();
