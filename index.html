@@ -1577,6 +1577,10 @@
       color: var(--primary);
     }
 
+    .customer-card-action.project {
+      color: var(--primary);
+    }
+
     .customer-card-action.danger {
       color: #e56a6a;
     }
@@ -1747,6 +1751,8 @@
 
     .datetime-field {
       position: relative;
+      border-radius: 13px;
+      background: #f6f7f9;
     }
 
     .datetime-field .form-control {
@@ -1763,7 +1769,7 @@
       color: #a5a9b0;
       font-size: 13px;
       pointer-events: none;
-      z-index: 0;
+      z-index: 2;
     }
 
     .form-city-wrap {
@@ -2784,6 +2790,10 @@
                   <i class="fa-regular fa-calendar-check"></i>
                   去拜访
                 </button>
+                <button class="customer-card-action project" type="button" @click.stop="convertCustomerToProject(customer)">
+                  <i class="fa-solid fa-folder-plus"></i>
+                  转项目
+                </button>
                 <button class="customer-card-action danger" type="button" @click.stop="deleteCustomer(customer)">
                   <i class="fa-regular fa-trash-can"></i>
                   删除
@@ -2870,11 +2880,18 @@
         </div>
 
         <div v-if="filteredProjects.length" class="project-list">
-          <article v-for="project in filteredProjects" :key="project.id" class="project-card">
+          <article
+            v-for="project in filteredProjects"
+            :key="project.id"
+            class="project-card"
+            role="button"
+            tabindex="0"
+            @click="openProjectDetail(project)"
+            @keyup.enter="openProjectDetail(project)"
+          >
             <div class="project-card-head">
               <div class="project-card-title">
                 <strong>{{ project.name }}</strong>
-                <span class="project-card-badge" :class="project.businessStatus">{{ projectBusinessStatusLabel(project.businessStatus) }}</span>
               </div>
               <p>{{ project.clientName || '未填写客户姓名' }}</p>
             </div>
@@ -2885,25 +2902,27 @@
                 <span class="project-card-value">{{ formatProjectCategory(project) || '未选择类别' }}</span>
               </div>
               <div>
-                <span class="project-card-label">项目阶段</span>
-                <span class="project-card-value">{{ projectStageLabel(project.stage) }}</span>
-              </div>
-              <div>
                 <span class="project-card-label">合同金额</span>
                 <span class="project-card-value">{{ project.contractAmount || '未填写' }}</span>
               </div>
               <div>
-                <span class="project-card-label">回款总额</span>
+                <span class="project-card-label">回款总金额</span>
                 <span class="project-card-value">{{ formatProjectReceiptTotal(project.receipts) }}</span>
               </div>
+              <div>
+                <span class="project-card-label">剩余回款总金额</span>
+                <span class="project-card-value">{{ formatProjectRemainingReceipt(project) }}</span>
+              </div>
+              
+              
             </div>
 
             <div class="project-card-actions">
-              <button class="customer-card-action primary" type="button" @click="editProject(project)">
+              <button class="customer-card-action primary" type="button" @click.stop="editProject(project)">
                 <i class="fa-solid fa-pen"></i>
                 编辑
               </button>
-              <button class="customer-card-action danger" type="button" @click="deleteProject(project)">
+              <button class="customer-card-action danger" type="button" @click.stop="deleteProject(project)">
                 <i class="fa-regular fa-trash-can"></i>
                 删除
               </button>
@@ -2921,6 +2940,139 @@
           </button>
         </div>
 
+      </main>
+
+      <main v-else-if="currentPage === 'project-detail'" class="content customer-detail-page project-detail-page">
+        <div class="detail-topbar">
+          <button class="detail-back" type="button" aria-label="返回项目管理" @click="closeProjectDetail">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <h1>项目详情</h1>
+        </div>
+
+        <section v-if="selectedProject" class="detail-card">
+          <div class="detail-profile">
+            <div class="detail-avatar">
+              <i class="fa-regular fa-folder-open"></i>
+            </div>
+            <div>
+              <h2>{{ selectedProject.name }}</h2>
+              <p>{{ selectedProject.clientName || '未填写客户姓名' }}</p>
+            </div>
+          </div>
+
+          <section class="detail-section">
+            <h3 class="detail-section-title">基础信息</h3>
+            <div class="detail-grid">
+              <div>
+                <span class="detail-item-label">客户姓名</span>
+                <span class="detail-item-value">{{ selectedProject.clientName || '未填写' }}</span>
+              </div>
+              <div>
+                <span class="detail-item-label">项目类别</span>
+                <span class="detail-item-value">{{ formatProjectCategory(selectedProject) || '未选择类别' }}</span>
+              </div>
+              <div>
+                <span class="detail-item-label">项目描述</span>
+                <span class="detail-item-value">{{ selectedProject.description || '暂无项目描述' }}</span>
+              </div>
+              <div>
+                <span class="detail-item-label">合同签订时间</span>
+                <span class="detail-item-value">{{ selectedProject.contractSignedAt || '未设置' }}</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="detail-section">
+            <h3 class="detail-section-title">金额信息</h3>
+            <div class="detail-grid">
+              <div>
+                <span class="detail-item-label">合同金额</span>
+                <span class="detail-item-value">{{ selectedProject.contractAmount || '未填写' }}</span>
+              </div>
+              <div>
+                <span class="detail-item-label">回款总金额</span>
+                <span class="detail-item-value">{{ formatProjectReceiptTotal(selectedProject.receipts) }}</span>
+              </div>
+              <div>
+                <span class="detail-item-label">剩余回款总金额</span>
+                <span class="detail-item-value">{{ formatProjectRemainingReceipt(selectedProject) }}</span>
+              </div>
+              <div>
+                <span class="detail-item-label">应收金额</span>
+                <span class="detail-item-value">{{ selectedProject.receivableAmount || '未填写' }}</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="detail-section">
+            <h3 class="detail-section-title">项目成员</h3>
+            <div class="detail-grid">
+              <div>
+                <span class="detail-item-label">方案设计师</span>
+                <span class="detail-item-value">{{ selectedProject.schemeDesigners?.map((item) => item.name).join('、') || '暂无' }}</span>
+              </div>
+              <div>
+                <span class="detail-item-label">施工图设计师</span>
+                <span class="detail-item-value">{{ selectedProject.drawingDesigners?.map((item) => item.name).join('、') || '暂无' }}</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="detail-section">
+            <h3 class="detail-section-title">项目状态</h3>
+            <div class="detail-grid">
+              <div>
+                <span class="detail-item-label">当前阶段</span>
+                <span class="detail-item-value">{{ projectStageLabel(selectedProject.stage) }}</span>
+              </div>
+              <div v-if="selectedProject.stage === 'bidding'">
+                <span class="detail-item-label">投标截止时间</span>
+                <span class="detail-item-value">{{ selectedProject.statusData?.bidding?.deadline || '未设置' }}</span>
+              </div>
+              <div v-else-if="selectedProject.stage === 'contract'">
+                <span class="detail-item-label">签订时间</span>
+                <span class="detail-item-value">{{ selectedProject.statusData?.contract?.time || '未设置' }}</span>
+              </div>
+              <div v-else-if="selectedProject.stage === 'completed'">
+                <span class="detail-item-label">完工时间</span>
+                <span class="detail-item-value">{{ selectedProject.statusData?.completed?.time || '未设置' }}</span>
+              </div>
+              <div>
+                <span class="detail-item-label">注意事项</span>
+                <span class="detail-item-value">{{ selectedProject.stage === 'bidding'
+                  ? (selectedProject.statusData?.bidding?.note || '暂无')
+                  : selectedProject.stage === 'contract'
+                    ? (selectedProject.statusData?.contract?.note || '暂无')
+                    : selectedProject.stage === 'executing'
+                      ? (selectedProject.statusData?.executing?.note || '暂无')
+                      : (selectedProject.statusData?.completed?.note || '暂无') }}</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="detail-section">
+            <h3 class="detail-section-title">上传附件</h3>
+            <div v-if="selectedProject.attachments && selectedProject.attachments.length" class="detail-grid">
+              <div v-for="file in selectedProject.attachments" :key="file.id || file.name">
+                <span class="detail-item-label">{{ file.name }}</span>
+                <span class="detail-item-value">{{ file.sizeLabel || '已上传' }}</span>
+              </div>
+            </div>
+            <p v-else class="detail-empty">暂无上传附件</p>
+          </section>
+
+          <div class="detail-actions">
+            <button class="detail-action secondary" type="button" @click="editProject(selectedProject)">
+              <i class="fa-solid fa-pen"></i>
+              编辑项目
+            </button>
+            <button class="detail-action primary" type="button" @click="deleteProject(selectedProject)">
+              <i class="fa-regular fa-trash-can"></i>
+              删除项目
+            </button>
+          </div>
+        </section>
       </main>
 
       <main v-else-if="currentPage === 'todos'" class="content todo-page" @click="todoCategoryOpen = false">
@@ -3179,6 +3331,10 @@
                     <div class="visit-kv-label">客户需求</div>
                     <div class="visit-kv-value">{{ record.need || '暂无' }}</div>
                   </div>
+                  <div class="visit-kv">
+                    <div class="visit-kv-label">备注信息</div>
+                    <div class="visit-kv-value">{{ record.remark || '暂无' }}</div>
+                  </div>
                 </div>
               </article>
             </div>
@@ -3207,12 +3363,22 @@
 
             <div class="form-field">
               <label class="form-field-label" for="visit-time">拜访日期<span class="required-mark">*</span></label>
-              <input id="visit-time" v-model="visitForm.time" class="form-control" type="date">
+              <div class="datetime-field">
+                <span v-if="!visitForm.time" class="datetime-placeholder">请选择拜访日期</span>
+                <input id="visit-time" v-model="visitForm.time" class="form-control" type="date">
+              </div>
             </div>
 
             <div class="form-field">
               <label class="form-field-label" for="visit-need">客户需求</label>
-              <textarea id="visit-need" v-model="visitForm.need" class="form-control" placeholder="请输入客户需求" maxlength="200"></textarea>
+              <textarea id="visit-need" v-model="visitForm.need" class="form-control" placeholder="请输入客户需求" maxlength="100"></textarea>
+              <div class="remark-count">{{ visitForm.need.length }}/100字</div>
+            </div>
+
+            <div class="form-field">
+              <label class="form-field-label" for="visit-remark">备注信息</label>
+              <textarea id="visit-remark" v-model="visitForm.remark" class="form-control" placeholder="请输入备注信息" maxlength="100"></textarea>
+              <div class="remark-count">{{ visitForm.remark.length }}/100字</div>
             </div>
 
             <p v-if="visitFormError" class="form-error">{{ visitFormError }}</p>
@@ -3337,7 +3503,7 @@
             </div>
 
             <div class="form-field">
-              <label class="form-field-label" for="project-contract-amount">合同金额</label>
+              <label class="form-field-label" for="project-contract-amount">合同金额（元）</label>
               <input
                 id="project-contract-amount"
                 v-model.trim="projectForm.contractAmount"
@@ -3378,6 +3544,11 @@
                 <span>回款总金额</span>
                 <strong>{{ projectReceiptTotalText }}</strong>
               </div>
+              <div class="project-total-card project-remaining-total-card">
+                <span>剩余回款总金额</span>
+                <strong>{{ projectRemainingReceiptText }}</strong>
+              </div>
+              
             </section>
 
             <div class="form-field">
@@ -3885,6 +4056,7 @@
           currentPage: "home",
           previousPage: "customers",
           selectedCustomer: null,
+          selectedProject: null,
           editingCustomerId: null,
           formError: "",
           formCityMenuOpen: false,
@@ -3909,7 +4081,8 @@
           visitForm: {
             title: "",
             time: "",
-            need: ""
+            need: "",
+            remark: ""
           },
           editingVisitId: null,
           editingProjectId: null,
@@ -4285,6 +4458,18 @@
           this.selectedCustomer = null;
           this.currentPage = "customers";
         },
+        openProjectDetail(project) {
+          this.selectedProject = project;
+          this.currentPage = "project-detail";
+          this.$nextTick(() => {
+            const content = this.$el.querySelector(".content");
+            if (content) content.scrollTop = 0;
+          });
+        },
+        closeProjectDetail() {
+          this.selectedProject = null;
+          this.currentPage = "projects";
+        },
         openVisitRecords(customer) {
           this.selectedCustomer = customer;
           this.previousPage = this.currentPage === "customer-detail" ? "customer-detail" : "customers";
@@ -4299,7 +4484,7 @@
         },
         openVisitForm() {
           this.visitFormError = "";
-          this.visitForm = { title: "", time: "", need: "" };
+          this.visitForm = { title: "", time: "", need: "", remark: "" };
           this.editingVisitId = null;
           this.currentPage = "visit-form";
           this.$nextTick(() => {
@@ -4314,7 +4499,8 @@
           this.visitForm = {
             title: record.title,
             time: `${dt.getFullYear()}-${pad(dt.getMonth() + 1)}-${pad(dt.getDate())}`,
-            need: record.need || ""
+            need: record.need || "",
+            remark: record.remark || ""
           };
           this.visitFormError = "";
           this.currentPage = "visit-form";
@@ -4342,6 +4528,7 @@
             title: this.visitForm.title,
             time: dateText,
             need: this.visitForm.need,
+            remark: this.visitForm.remark,
             createdAt: `${this.visitForm.time}T00:00:00`
           };
           if (this.editingVisitId) {
@@ -4360,7 +4547,7 @@
             this.notify("拜访记录新增成功");
           }
           this.currentPage = "visit-records";
-          this.visitForm = { title: "", time: "", need: "" };
+          this.visitForm = { title: "", time: "", need: "", remark: "" };
           this.visitFormError = "";
           this.editingVisitId = null;
         },
@@ -4432,6 +4619,16 @@
         },
         openProjectForm() {
           this.resetProjectForm();
+          this.currentPage = "project-form";
+          this.$nextTick(() => {
+            const content = this.$el.querySelector(".content");
+            if (content) content.scrollTop = 0;
+          });
+        },
+        convertCustomerToProject(customer) {
+          this.resetProjectForm();
+          this.projectForm.clientName = customer.name || "";
+          this.projectCustomerOpen = false;
           this.currentPage = "project-form";
           this.$nextTick(() => {
             const content = this.$el.querySelector(".content");
@@ -4759,6 +4956,10 @@
           } else if (this.deleteTargetType === "project") {
             this.projects = this.projects.filter((item) => item.id !== this.deleteTarget.id);
             this.persistProjects();
+            if (this.selectedProject?.id === this.deleteTarget.id) {
+              this.selectedProject = null;
+              this.currentPage = "projects";
+            }
             this.notify("项目已删除");
           } else if (this.deleteTargetType === "todo") {
             this.todos = this.todos.filter((item) => item.id !== this.deleteTarget.id);
@@ -4838,6 +5039,19 @@
             return Number.isFinite(value) ? sum + value : sum;
           }, 0);
           return total > 0 ? total.toLocaleString("zh-CN") : "0";
+        },
+        getProjectReceiptTotal(receipts) {
+          const amounts = Array.isArray(receipts) ? receipts : [];
+          return amounts.reduce((sum, item) => {
+            const value = Number(String(item.amount || "").replace(/[^0-9.-]/g, ""));
+            return Number.isFinite(value) ? sum + value : sum;
+          }, 0);
+        },
+        formatProjectRemainingReceipt(project) {
+          const contractAmount = Number(String(project?.contractAmount || "").replace(/[^0-9.-]/g, ""));
+          const contractTotal = Number.isFinite(contractAmount) ? contractAmount : 0;
+          const remaining = contractTotal - this.getProjectReceiptTotal(project?.receipts);
+          return remaining.toLocaleString("zh-CN");
         },
         notify(message) {
           this.toastMessage = message;
@@ -4957,6 +5171,12 @@
         },
         projectReceiptTotalText() {
           return this.formatProjectReceiptTotal(this.projectForm.receipts);
+        },
+        projectRemainingReceiptText() {
+          const contractAmount = Number(String(this.projectForm.contractAmount || "").replace(/[^0-9.-]/g, ""));
+          const contractTotal = Number.isFinite(contractAmount) ? contractAmount : 0;
+          const receiptTotal = this.getProjectReceiptTotal(this.projectForm.receipts);
+          return (contractTotal - receiptTotal).toLocaleString("zh-CN");
         },
         visibleProvinces() {
           const keyword = this.cityKeyword.trim().toLowerCase();
