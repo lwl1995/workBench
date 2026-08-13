@@ -404,6 +404,45 @@
       margin-left: 18px;
     }
 
+    .list-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 9px;
+      width: calc(100% - 36px);
+      margin: 12px 18px 0;
+      padding-bottom: 92px;
+    }
+
+    .list-page-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 32px;
+      border: 0;
+      border-radius: 10px;
+      background: #ffffff;
+      color: #168cff;
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 0 6px 14px rgba(35, 84, 166, 0.08);
+      cursor: pointer;
+    }
+
+    .list-page-button:disabled {
+      background: #eef2f7;
+      color: #b3bdca;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    .list-page-text {
+      color: #7f8da3;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
     .customer-card {
       display: flex;
       align-items: center;
@@ -499,6 +538,18 @@
       margin-left: 18px;
     }
 
+    .project-filter-subrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: calc(100% - 36px);
+      margin: 10px 18px 0;
+    }
+
+    .project-filter-subrow .project-select-wrap {
+      flex: 1 1 0;
+    }
+
     .project-search {
       display: flex;
       align-items: center;
@@ -570,6 +621,35 @@
 
     .project-form-category-control.has-value {
       color: #111111;
+    }
+
+    .project-status-menu {
+      left: 0;
+      right: auto;
+      width: 100%;
+      max-width: 100%;
+      padding: 8px;
+    }
+
+    .project-status-option {
+      display: block;
+      width: 100%;
+      min-height: 36px;
+      border: 0;
+      border-radius: 10px;
+      padding: 0 10px;
+      background: transparent;
+      color: #536b89;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .project-status-option.active,
+    .project-status-option:hover {
+      background: #e2efff;
+      color: var(--primary);
     }
 
     .project-customer-picker {
@@ -722,7 +802,6 @@
       width: calc(100% - 36px);
       margin-right: 18px;
       margin-left: 18px;
-      padding-bottom: 92px;
     }
 
     .project-card {
@@ -804,6 +883,36 @@
       font-size: 12px;
       line-height: 1.5;
       word-break: break-word;
+    }
+
+    .project-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .project-card-top .project-status-pill {
+      flex: 0 0 auto;
+    }
+
+    .project-status-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 58px;
+      height: 26px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: #edf5ff;
+      color: #168cff;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .project-status-pill.completed {
+      background: #e9f9ef;
+      color: #16a34a;
     }
 
     .project-card-actions {
@@ -924,7 +1033,6 @@
       width: calc(100% - 36px);
       margin-right: 18px;
       margin-left: 18px;
-      padding-bottom: 92px;
     }
 
     .todo-manage-card {
@@ -2471,7 +2579,7 @@
     .home-todo-pagination {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
       gap: 10px;
       margin-top: 12px;
     }
@@ -2576,6 +2684,11 @@
     .badge.warn {
       background: #fff1e2;
       color: #ff8c37;
+    }
+
+    .todo-item .badge {
+      background: #fff5cf;
+      color: #c78b00;
     }
 
     .todo-body p,
@@ -3015,7 +3128,7 @@
               <div class="statistics-card-head">
                 <div class="statistics-card-title">
                   <span class="statistics-card-icon"><i class="fa-regular fa-folder"></i></span>
-                  <span>项目合同总金额</span>
+                  <span>合同总金额</span>
                 </div>
                 <i class="fa-solid fa-chevron-right statistics-card-arrow"></i>
               </div>
@@ -3171,7 +3284,7 @@
 
         <div v-if="filteredCustomers.length" class="customer-list">
           <article
-            v-for="customer in filteredCustomers"
+            v-for="customer in customerPageItems"
             :key="customer.id"
             class="customer-card"
             role="button"
@@ -3209,7 +3322,29 @@
           </article>
         </div>
 
-        <div v-else class="customer-empty">
+        <div v-if="filteredCustomers.length > 5" class="list-pagination" aria-label="客户列表分页">
+          <button
+            class="list-page-button"
+            type="button"
+            aria-label="上一页"
+            :disabled="customerPage === 1"
+            @click="customerPage = Math.max(1, customerPage - 1)"
+          >
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <span class="list-page-text">{{ customerPage }} / {{ customerPageCount }}</span>
+          <button
+            class="list-page-button"
+            type="button"
+            aria-label="下一页"
+            :disabled="customerPage === customerPageCount"
+            @click="customerPage = Math.min(customerPageCount, customerPage + 1)"
+          >
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <div v-if="!filteredCustomers.length" class="customer-empty">
           <div class="customer-empty-icon">
             <i class="fa-regular fa-user"></i>
           </div>
@@ -3220,7 +3355,7 @@
         </div>
       </main>
 
-      <main v-else-if="currentPage === 'projects'" class="content project-page" @click="projectCategoryOpen = false">
+      <main v-else-if="currentPage === 'projects'" class="content project-page" @click="projectCategoryOpen = false; projectStatusFilterOpen = false">
         <h1 class="customer-title">项目管理</h1>
 
         <div class="project-filter-row">
@@ -3233,6 +3368,39 @@
               aria-label="搜索项目名称"
             >
           </label>
+
+          <button class="customer-add-inline" type="button" aria-label="新增项目" @click="openProjectForm()">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+
+        <div class="project-filter-subrow">
+          <div class="project-select-wrap">
+            <button
+              class="project-select"
+              :class="{ open: projectStatusFilterOpen }"
+              type="button"
+              :aria-expanded="projectStatusFilterOpen"
+              aria-label="项目状态筛选"
+              @click.stop="projectStatusFilterOpen = !projectStatusFilterOpen"
+            >
+              <span>{{ projectStatusFilterLabel }}</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div v-if="projectStatusFilterOpen" class="project-category-menu project-status-menu" @click.stop>
+              <button
+                v-for="option in projectStatusOptions"
+                :key="`status-filter-${option.value}`"
+                class="project-status-option"
+                :class="{ active: activeProjectStatusFilter === option.value }"
+                type="button"
+                @click="selectProjectStatusFilter(option.value)"
+              >
+                {{ option.label }}
+              </button>
+            </div>
+          </div>
 
           <div class="project-select-wrap">
             <button
@@ -3279,15 +3447,11 @@
               </div>
             </div>
           </div>
-
-          <button class="customer-add-inline" type="button" aria-label="新增项目" @click="openProjectForm()">
-            <i class="fa-solid fa-plus"></i>
-          </button>
         </div>
 
         <div v-if="filteredProjects.length" class="project-list">
           <article
-            v-for="project in filteredProjects"
+            v-for="project in projectPageItems"
             :key="project.id"
             class="project-card"
             role="button"
@@ -3296,8 +3460,13 @@
             @keyup.enter="openProjectDetail(project)"
           >
             <div class="project-card-head">
-              <div class="project-card-title">
+              <div class="project-card-top">
+                <div class="project-card-title">
                 <strong>{{ project.name }}</strong>
+                </div>
+                <span class="project-status-pill" :class="projectStatusClass(project.projectStatus)">
+                  {{ projectStatusLabel(project.projectStatus) }}
+                </span>
               </div>
               <p>{{ project.clientName || '未填写客户姓名' }}</p>
             </div>
@@ -3324,6 +3493,24 @@
             </div>
 
             <div class="project-card-actions">
+              <button
+                v-if="project.projectStatus !== 'completed'"
+                class="customer-card-action primary"
+                type="button"
+                @click.stop="requestCompleteProject(project)"
+              >
+                <i class="fa-solid fa-check"></i>
+                完成
+              </button>
+              <button
+                v-else
+                class="customer-card-action primary"
+                type="button"
+                @click.stop="requestReopenProject(project)"
+              >
+                <i class="fa-solid fa-rotate-left"></i>
+                撤回
+              </button>
               <button class="customer-card-action primary" type="button" @click.stop="editProject(project)">
                 <i class="fa-solid fa-pen"></i>
                 编辑
@@ -3336,7 +3523,29 @@
           </article>
         </div>
 
-        <div v-else class="project-empty">
+        <div v-if="filteredProjects.length > 5" class="list-pagination" aria-label="项目列表分页">
+          <button
+            class="list-page-button"
+            type="button"
+            aria-label="上一页"
+            :disabled="projectPage === 1"
+            @click="projectPage = Math.max(1, projectPage - 1)"
+          >
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <span class="list-page-text">{{ projectPage }} / {{ projectPageCount }}</span>
+          <button
+            class="list-page-button"
+            type="button"
+            aria-label="下一页"
+            :disabled="projectPage === projectPageCount"
+            @click="projectPage = Math.min(projectPageCount, projectPage + 1)"
+          >
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <div v-if="!filteredProjects.length" class="project-empty">
           <div class="project-empty-icon">
             <i class="fa-regular fa-folder-open"></i>
           </div>
@@ -3383,6 +3592,10 @@
                 <span class="detail-item-value">{{ selectedProject.description || '暂无项目描述' }}</span>
               </div>
               <div>
+                <span class="detail-item-label">项目状态</span>
+                <span class="detail-item-value">{{ projectStatusLabel(selectedProject.projectStatus) }}</span>
+              </div>
+              <div>
                 <span class="detail-item-label">合同签订日期</span>
                 <span class="detail-item-value">{{ selectedProject.contractSignedAt || '未设置' }}</span>
               </div>
@@ -3426,7 +3639,7 @@
           </section>
 
           <section class="detail-section">
-            <h3 class="detail-section-title">项目状态</h3>
+            <h3 class="detail-section-title">项目阶段</h3>
             <div class="project-status-tabs">
               <button
                 v-for="tab in projectStageTabs"
@@ -3556,7 +3769,7 @@
 
         <div v-if="filteredTodoItems.length" class="todo-manage-list">
           <article
-            v-for="item in filteredTodoItems"
+            v-for="item in todoPageItems"
             :key="item.id"
             class="todo-manage-card"
             tabindex="0"
@@ -3625,7 +3838,29 @@
           </article>
         </div>
 
-        <div v-else class="project-empty">
+        <div v-if="filteredTodoItems.length > 5" class="list-pagination" aria-label="待办事项列表分页">
+          <button
+            class="list-page-button"
+            type="button"
+            aria-label="上一页"
+            :disabled="todoPage === 1"
+            @click="todoPage = Math.max(1, todoPage - 1)"
+          >
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <span class="list-page-text">{{ todoPage }} / {{ todoPageCount }}</span>
+          <button
+            class="list-page-button"
+            type="button"
+            aria-label="下一页"
+            :disabled="todoPage === todoPageCount"
+            @click="todoPage = Math.min(todoPageCount, todoPage + 1)"
+          >
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <div v-if="!filteredTodoItems.length" class="project-empty">
           <div class="project-empty-icon">
             <i class="fa-regular fa-square-check"></i>
           </div>
@@ -3881,7 +4116,7 @@
         </form>
       </main>
 
-      <main v-else-if="currentPage === 'project-form'" class="content customer-form-page project-form-page" @click="projectFormCategoryOpen = false; projectCustomerOpen = false">
+      <main v-else-if="currentPage === 'project-form'" class="content customer-form-page project-form-page" @click="projectFormCategoryOpen = false; projectCustomerOpen = false; projectFormStatusOpen = false">
         <div class="form-topbar">
           <button class="form-back" type="button" aria-label="返回项目管理" @click="cancelProjectForm">
             <i class="fa-solid fa-arrow-left"></i>
@@ -3915,6 +4150,35 @@
                 maxlength="100"
               ></textarea>
               <div class="remark-count">{{ projectForm.description.length }}/100字</div>
+            </div>
+
+            <div class="form-field">
+              <label class="form-field-label" for="project-status-select">项目状态</label>
+              <div class="project-select-wrap">
+                <button
+                  id="project-status-select"
+                  class="form-control project-form-category-control"
+                  :class="{ open: projectFormStatusOpen, 'has-value': projectForm.projectStatus }"
+                  type="button"
+                  @click.stop="projectFormStatusOpen = !projectFormStatusOpen"
+                >
+                  <span>{{ projectFormStatusLabel }}</span>
+                  <i class="fa-solid fa-chevron-down"></i>
+                </button>
+
+                <div v-if="projectFormStatusOpen" class="project-category-menu project-form-category-menu project-status-menu" @click.stop>
+                  <button
+                    v-for="option in projectFormStatusOptions"
+                    :key="`status-form-${option.value}`"
+                    class="project-status-option"
+                    :class="{ active: projectForm.projectStatus === option.value }"
+                    type="button"
+                    @click="selectProjectFormStatus(option.value)"
+                  >
+                    {{ option.label }}
+                  </button>
+                </div>
+              </div>
             </div>
 
             <div class="form-field">
@@ -4159,7 +4423,7 @@
             </section>
 
             <section class="project-status-section">
-              <h3 class="tag-section-title project-status-title">项目状态</h3>
+              <h3 class="tag-section-title project-status-title">项目阶段</h3>
               <div class="project-status-tabs">
                 <button
                   v-for="tab in projectStageTabs"
@@ -4522,6 +4786,10 @@
             ? '删除拜访记录'
             : deleteTargetType === 'project'
               ? '删除项目'
+              : deleteTargetType === 'project-complete'
+                ? '完成项目'
+                : deleteTargetType === 'project-reopen'
+                  ? '撤回项目'
               : deleteTargetType === 'todo'
                 ? '删除待办事项'
                 : deleteTargetType === 'todo-complete'
@@ -4534,6 +4802,10 @@
               ? `确定删除拜访记录“${deleteTarget?.title || ''}”吗？`
               : deleteTargetType === 'project'
                 ? `确定删除项目“${deleteTarget?.name || ''}”吗？`
+                : deleteTargetType === 'project-complete'
+                  ? `项目“${deleteTarget?.name || ''}”确定已完成了吗？`
+                  : deleteTargetType === 'project-reopen'
+                    ? `项目“${deleteTarget?.name || ''}”确定要撤回吗？`
                 : deleteTargetType === 'todo'
                   ? `确定删除待办事项“${deleteTarget?.title || ''}”吗？`
                   : deleteTargetType === 'todo-complete'
@@ -4546,14 +4818,18 @@
             <button class="dialog-button cancel" type="button" @click="cancelDeleteCustomer">取消</button>
             <button
               class="dialog-button"
-              :class="deleteTargetType === 'todo-complete' || deleteTargetType === 'todo-reopen' ? 'primary' : 'danger'"
+              :class="deleteTargetType === 'project-complete' || deleteTargetType === 'project-reopen' || deleteTargetType === 'todo-complete' || deleteTargetType === 'todo-reopen' ? 'primary' : 'danger'"
               type="button"
               @click="confirmDeleteCustomer"
             >
-              {{ deleteTargetType === 'todo-complete'
+              {{ deleteTargetType === 'project-complete'
                 ? '完成'
-                : deleteTargetType === 'todo-reopen'
+                : deleteTargetType === 'project-reopen'
                   ? '撤回'
+                : deleteTargetType === 'todo-complete'
+                  ? '完成'
+                  : deleteTargetType === 'todo-reopen'
+                    ? '撤回'
                   : '删除' }}
             </button>
           </div>
@@ -4613,10 +4889,15 @@
           todoFormError: "",
           projectSearchKeyword: "",
           todoSearchKeyword: "",
+          customerPage: 1,
+          projectPage: 1,
+          todoPage: 1,
+          activeProjectStatusFilter: "all",
           activeProjectTab: "all",
           activeTodoTab: "all",
           activeHomeTodoTab: "today",
           homeTodoPage: 1,
+          projectStatusFilterOpen: false,
           projectCategoryOpen: false,
           todoCategoryOpen: false,
           activeProjectCategoryParent: "设计",
@@ -4625,6 +4906,7 @@
           selectedProjectCategoryChild: "",
           selectedTodoCategoryParent: "",
           selectedTodoCategoryChild: "",
+          projectFormStatusOpen: false,
           projectFormCategoryOpen: false,
           activeProjectFormCategoryParent: "设计",
           projectCustomerOpen: false,
@@ -4657,6 +4939,15 @@
             { label: "合同签订", value: "contract" },
             { label: "实施中", value: "executing" },
             { label: "项目完工", value: "completed" }
+          ],
+          projectStatusOptions: [
+            { label: "全部", value: "all" },
+            { label: "进行中", value: "in_progress" },
+            { label: "已完成", value: "completed" }
+          ],
+          projectFormStatusOptions: [
+            { label: "进行中", value: "in_progress" },
+            { label: "已完成", value: "completed" }
           ],
           projectAttachmentCategories: [
             { label: "合同", key: "contract" },
@@ -4761,6 +5052,7 @@
             name: "",
             description: "",
             clientName: "",
+            projectStatus: "",
             categoryParent: "",
             categoryChild: "",
             contractAmount: "",
@@ -4865,6 +5157,7 @@
                   attachments: Array.isArray(project.attachments)
                     ? project.attachments.map((item) => ({ ...item, category: item.category || "other" }))
                     : [],
+                  projectStatus: project.projectStatus || (project.stage === "completed" ? "completed" : "in_progress"),
                   statusData: {
                     bidding: { deadline: "", note: "", ...(project.statusData?.bidding || {}) },
                     contract: { time: "", note: "", ...(project.statusData?.contract || {}) },
@@ -4928,7 +5221,9 @@
         goTo(page) {
           this.currentPage = page;
           this.formCityMenuOpen = false;
+          this.projectStatusFilterOpen = false;
           this.projectCategoryOpen = false;
+          this.projectFormStatusOpen = false;
           this.projectFormCategoryOpen = false;
           this.projectCustomerOpen = false;
           this.todoCategoryOpen = false;
@@ -4936,6 +5231,7 @@
           if (page === "customers") {
             this.searchKeyword = "";
             this.selectedCity = "全部城市";
+            this.customerPage = 1;
             this.cityMenuOpen = false;
             this.cityKeyword = "";
             this.activeProvince = "北京市";
@@ -4944,6 +5240,8 @@
           if (page === "projects") {
             this.projectSearchKeyword = "";
             this.activeProjectTab = "all";
+            this.projectPage = 1;
+            this.activeProjectStatusFilter = "all";
             this.selectedProjectCategoryParent = "";
             this.selectedProjectCategoryChild = "";
             this.activeProjectCategoryParent = "设计";
@@ -4951,6 +5249,7 @@
           if (page === "todos") {
             this.todoSearchKeyword = "";
             this.activeTodoTab = "all";
+            this.todoPage = 1;
             this.selectedTodoCategoryParent = "";
             this.selectedTodoCategoryChild = "";
             this.activeTodoCategoryParent = "设计";
@@ -5150,6 +5449,7 @@
             name: "",
             description: "",
             clientName: "",
+            projectStatus: "",
             categoryParent: "",
             categoryChild: "",
             contractAmount: "",
@@ -5172,6 +5472,7 @@
         resetProjectForm() {
           this.editingProjectId = null;
           this.projectFormError = "";
+          this.projectFormStatusOpen = false;
           this.projectFormCategoryOpen = false;
           this.projectCustomerOpen = false;
           this.activeProjectFormCategoryParent = "设计";
@@ -5198,12 +5499,14 @@
         editProject(project) {
           this.editingProjectId = project.id;
           this.projectFormError = "";
+          this.projectFormStatusOpen = false;
           this.projectFormCategoryOpen = false;
           this.projectCustomerOpen = false;
           this.activeProjectFormCategoryParent = project.categoryParent || "设计";
           this.projectForm = {
             ...this.getDefaultProjectForm(),
             ...project,
+            projectStatus: project.projectStatus || "in_progress",
             receipts: (project.receipts || []).map((item) => ({ id: item.id || this.makeProjectItemId(), amount: item.amount || "" })),
             schemeDesigners: (project.schemeDesigners || []).map((item) => ({ id: item.id || this.makeProjectItemId(), name: item.name || "" })),
             drawingDesigners: (project.drawingDesigners || []).map((item) => ({ id: item.id || this.makeProjectItemId(), name: item.name || "" })),
@@ -5278,15 +5581,29 @@
           this.activeProjectCategoryParent = parent || "设计";
           this.projectCategoryOpen = false;
         },
+        selectProjectStatusFilter(status) {
+          this.activeProjectStatusFilter = status;
+          this.projectStatusFilterOpen = false;
+        },
         selectProjectFormCategory(parent, child) {
           this.projectForm.categoryParent = parent;
           this.projectForm.categoryChild = child;
           this.activeProjectFormCategoryParent = parent || "设计";
           this.projectFormCategoryOpen = false;
         },
+        selectProjectFormStatus(status) {
+          this.projectForm.projectStatus = status;
+          this.projectFormStatusOpen = false;
+        },
         selectProjectCustomer(customer) {
           this.projectForm.clientName = customer.name;
           this.projectCustomerOpen = false;
+        },
+        projectStatusLabel(status) {
+          return status === "completed" ? "已完成" : "进行中";
+        },
+        projectStatusClass(status) {
+          return status === "completed" ? "completed" : "";
         },
         saveProject() {
           if (!this.projectForm.name) {
@@ -5301,6 +5618,7 @@
             name: this.projectForm.name,
             description: this.projectForm.description,
             clientName: this.projectForm.clientName,
+            projectStatus: this.projectForm.projectStatus || "in_progress",
             categoryParent: this.projectForm.categoryParent,
             categoryChild: this.projectForm.categoryChild,
             contractAmount: this.projectForm.contractAmount,
@@ -5350,6 +5668,46 @@
         deleteProject(project) {
           this.deleteTarget = project;
           this.deleteTargetType = "project";
+          this.deleteDialogOpen = true;
+        },
+        completeProject(project) {
+          const index = this.projects.findIndex((item) => item.id === project.id);
+          if (index === -1) return;
+          this.projects[index] = {
+            ...this.projects[index],
+            projectStatus: "completed",
+            stage: "completed"
+          };
+          if (this.selectedProject?.id === project.id) {
+            this.selectedProject = this.projects[index];
+            this.activeProjectDetailStage = "completed";
+          }
+          this.persistProjects();
+        },
+        requestCompleteProject(project) {
+          this.deleteTarget = project;
+          this.deleteTargetType = "project-complete";
+          this.deleteDialogOpen = true;
+        },
+        reopenProject(project) {
+          const index = this.projects.findIndex((item) => item.id === project.id);
+          if (index === -1) return;
+          this.projects[index] = {
+            ...this.projects[index],
+            projectStatus: "in_progress",
+            stage: this.projects[index].stage === "completed" ? "executing" : this.projects[index].stage
+          };
+          if (this.selectedProject?.id === project.id) {
+            this.selectedProject = this.projects[index];
+            if (this.activeProjectDetailStage === "completed") {
+              this.activeProjectDetailStage = "executing";
+            }
+          }
+          this.persistProjects();
+        },
+        requestReopenProject(project) {
+          this.deleteTarget = project;
+          this.deleteTargetType = "project-reopen";
           this.deleteDialogOpen = true;
         },
         completeTodo(item) {
@@ -5568,6 +5926,10 @@
               this.currentPage = "projects";
             }
             this.notify("项目已删除");
+          } else if (this.deleteTargetType === "project-complete") {
+            this.completeProject(this.deleteTarget);
+          } else if (this.deleteTargetType === "project-reopen") {
+            this.reopenProject(this.deleteTarget);
           } else if (this.deleteTargetType === "todo") {
             this.todos = this.todos.filter((item) => item.id !== this.deleteTarget.id);
             this.persistTodos();
@@ -5675,12 +6037,58 @@
           return remaining.toLocaleString("zh-CN");
         },
         notify(message) {
+          const silentMessages = [
+            "客户新增成功",
+            "客户信息已更新",
+            "客户已删除",
+            "项目新增成功",
+            "项目信息已更新",
+            "项目已删除",
+            "待办事项新增成功",
+            "待办事项已更新",
+            "待办事项已删除",
+            "拜访记录已删除",
+            "拜访记录已更新",
+            "拜访记录新增成功"
+          ];
+          if (silentMessages.includes(message)) {
+            this.toastVisible = false;
+            this.toastMessage = "";
+            window.clearTimeout(this.toastTimer);
+            return;
+          }
           this.toastMessage = message;
           this.toastVisible = true;
           window.clearTimeout(this.toastTimer);
           this.toastTimer = window.setTimeout(() => {
             this.toastVisible = false;
           }, 1800);
+        }
+      },
+      watch: {
+        searchKeyword() {
+          this.customerPage = 1;
+        },
+        selectedCity() {
+          this.customerPage = 1;
+        },
+        projectSearchKeyword() {
+          this.projectPage = 1;
+        },
+        selectedProjectCategoryParent() {
+          this.projectPage = 1;
+        },
+        selectedProjectCategoryChild() {
+          this.projectPage = 1;
+        },
+        activeProjectStatusFilter() {
+          this.projectPage = 1;
+        },
+        todoSearchKeyword() {
+          this.todoPage = 1;
+        },
+        activeTodoTab() {
+          this.todoPage = 1;
         }
       },
       computed: {
@@ -5731,6 +6139,13 @@
             return matchesKeyword && matchesCity;
           });
         },
+        customerPageCount() {
+          return Math.max(1, Math.ceil(this.filteredCustomers.length / 5));
+        },
+        customerPageItems() {
+          const page = Math.min(this.customerPage, this.customerPageCount);
+          return this.filteredCustomers.slice((page - 1) * 5, page * 5);
+        },
         filteredVisitRecords() {
           const customerId = this.selectedCustomer?.id;
           const keyword = this.visitSearchKeyword.trim().toLowerCase();
@@ -5751,12 +6166,30 @@
         },
         filteredProjects() {
           const keyword = this.projectSearchKeyword.trim().toLowerCase();
-          return this.projects.filter((project) => {
-            const matchesKeyword = !keyword || project.name.toLowerCase().includes(keyword);
-            const matchesCategory = !this.selectedProjectCategoryParent
-              || (project.categoryParent === this.selectedProjectCategoryParent && project.categoryChild === this.selectedProjectCategoryChild);
-            return matchesKeyword && matchesCategory;
-          });
+          return this.projects
+            .map((project, index) => ({ project, index }))
+            .filter(({ project }) => {
+              const matchesKeyword = !keyword || project.name.toLowerCase().includes(keyword);
+              const matchesStatus = this.activeProjectStatusFilter === "all"
+                || (project.projectStatus || "in_progress") === this.activeProjectStatusFilter;
+              const matchesCategory = !this.selectedProjectCategoryParent
+                || (project.categoryParent === this.selectedProjectCategoryParent && project.categoryChild === this.selectedProjectCategoryChild);
+              return matchesKeyword && matchesStatus && matchesCategory;
+            })
+            .sort((a, b) => {
+              const statusA = a.project.projectStatus || "in_progress";
+              const statusB = b.project.projectStatus || "in_progress";
+              if (statusA === statusB) return a.index - b.index;
+              return statusA === "completed" ? 1 : -1;
+            })
+            .map(({ project }) => project);
+        },
+        projectPageCount() {
+          return Math.max(1, Math.ceil(this.filteredProjects.length / 5));
+        },
+        projectPageItems() {
+          const page = Math.min(this.projectPage, this.projectPageCount);
+          return this.filteredProjects.slice((page - 1) * 5, page * 5);
         },
         filteredProjectCustomers() {
           const keyword = this.projectForm.clientName.trim().toLowerCase();
@@ -5772,6 +6205,13 @@
             const matchesStatus = this.activeTodoTab === "all" || todoStatus === this.activeTodoTab;
             return matchesKeyword && matchesStatus;
           });
+        },
+        todoPageCount() {
+          return Math.max(1, Math.ceil(this.filteredTodoItems.length / 5));
+        },
+        todoPageItems() {
+          const page = Math.min(this.todoPage, this.todoPageCount);
+          return this.filteredTodoItems.slice((page - 1) * 5, page * 5);
         },
         todayTodoItems() {
           const now = new Date();
@@ -5811,10 +6251,16 @@
             ? `${this.selectedProjectCategoryParent} · ${this.selectedProjectCategoryChild}`
             : "项目类别";
         },
+        projectStatusFilterLabel() {
+          return this.projectStatusOptions.find((item) => item.value === this.activeProjectStatusFilter)?.label || "项目状态";
+        },
         todoCategoryFilterLabel() {
           return this.selectedTodoCategoryParent && this.selectedTodoCategoryChild
             ? `${this.selectedTodoCategoryParent} · ${this.selectedTodoCategoryChild}`
             : "项目类别";
+        },
+        projectFormStatusLabel() {
+          return this.projectFormStatusOptions.find((item) => item.value === this.projectForm.projectStatus)?.label || "请选择项目状态";
         },
         projectFormCategoryLabel() {
           return this.projectForm.categoryParent && this.projectForm.categoryChild
