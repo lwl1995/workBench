@@ -915,6 +915,408 @@
       color: #16a34a;
     }
 
+    .profile-page,
+    .file-center-page {
+      min-height: 100%;
+      padding-bottom: 24px;
+      background: #f3f5f7;
+    }
+
+    .profile-page {
+      padding-top: 0;
+    }
+
+    .profile-header {
+      min-height: 246px;
+      padding: 34px 20px 28px;
+      border-radius: 0 0 34px 34px;
+      background: #168cff;
+      text-align: center;
+    }
+
+    .profile-avatar-wrap {
+      position: relative;
+      width: 92px;
+      height: 92px;
+      margin: 0 auto 14px;
+    }
+
+    .profile-avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 92px;
+      height: 92px;
+      overflow: hidden;
+      border: 4px solid rgba(255, 255, 255, 0.92);
+      border-radius: 50%;
+      background: #ffe2a9;
+      color: #b87527;
+      font-size: 42px;
+    }
+
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-avatar-edit {
+      position: absolute;
+      right: -2px;
+      bottom: -2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border: 3px solid #168cff;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #168cff;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .profile-name {
+      display: inline-block;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .profile-card {
+      margin: -18px 18px 0;
+      padding: 18px 16px;
+      border-radius: 22px;
+      background: #ffffff;
+    }
+
+    .profile-storage-card {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .profile-storage-icon,
+    .file-center-storage-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 42px;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: #e6f2ff;
+      color: #168cff;
+      font-size: 19px;
+    }
+
+    .profile-storage-copy {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .profile-storage-copy strong,
+    .file-center-storage-copy strong {
+      display: block;
+      color: #111111;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .profile-storage-stats,
+    .file-center-storage-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .profile-storage-stats {
+      width: 100%;
+      margin-left: 0;
+      justify-items: center;
+    }
+
+    .storage-stat {
+      min-width: 0;
+      width: 100%;
+      text-align: center;
+    }
+
+    .storage-stat + .storage-stat {
+      border-left: 1px solid #edf0f4;
+      padding-left: 14px;
+    }
+
+    .storage-stat strong {
+      display: block;
+      color: #111111;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .storage-stat span {
+      display: block;
+      margin-top: 5px;
+      color: #9aa5b3;
+      font-size: 11px;
+    }
+
+    .profile-card-arrow {
+      margin-top: 4px;
+      color: #9aa5b3;
+      font-size: 14px;
+    }
+
+    .profile-section {
+      margin: 22px 18px 0;
+    }
+
+    .profile-section .profile-card {
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    .profile-section-title {
+      margin: 0 0 12px;
+      color: #111111;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .file-center-page {
+      overflow-y: auto;
+      padding: 18px 18px 28px;
+    }
+
+    .file-center-topbar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      margin-bottom: 14px;
+    }
+
+    .file-center-topbar h1 {
+      margin: 0;
+      color: #111111;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .file-center-back {
+      position: absolute;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 50%;
+      background: #f2f5f8;
+      color: #111111;
+      cursor: pointer;
+    }
+
+    .file-center-storage-card,
+    .data-management-card {
+      border-radius: 22px;
+      background: #ffffff;
+    }
+
+    .file-center-storage-card {
+      padding: 18px;
+    }
+
+    .file-center-storage-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .file-center-storage-copy {
+      flex: 1;
+    }
+
+    .file-center-storage-stats {
+      margin-top: 20px;
+    }
+
+    .file-center-storage-stats .storage-stat {
+      padding: 0 12px;
+    }
+
+    .file-center-storage-stats .storage-stat:first-child {
+      padding-left: 0;
+    }
+
+    .file-center-storage-stats .storage-stat:last-child {
+      padding-right: 0;
+    }
+
+    .folder-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .folder-card {
+      min-height: 136px;
+      border: 1px solid #f0f2f5;
+      border-radius: 20px;
+      padding: 16px;
+      background: #ffffff;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .folder-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 16px;
+      border-radius: 50%;
+      font-size: 18px;
+    }
+
+    .folder-icon.green {
+      background: #e8f8ed;
+      color: #4bb36b;
+    }
+
+    .folder-icon.blue {
+      background: #e7f2ff;
+      color: #4c9cff;
+    }
+
+    .folder-icon.yellow {
+      background: #fff6dc;
+      color: #d4a529;
+    }
+
+    .folder-icon.purple {
+      background: #f1eaff;
+      color: #9b7be7;
+    }
+
+    .folder-card strong {
+      display: block;
+      overflow: hidden;
+      color: #111111;
+      font-size: 13px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .folder-card span {
+      display: block;
+      margin-top: 6px;
+      color: #9aa5b3;
+      font-size: 11px;
+    }
+
+    .data-management-card {
+      overflow: hidden;
+    }
+
+    .data-management-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 0 12px;
+    }
+
+    .data-management-head strong {
+      color: #111111;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .data-management-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      min-height: 72px;
+      border: 0;
+      border-bottom: 1px solid #f0f2f5;
+      padding: 12px 2px;
+      background: #ffffff;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .data-management-item:last-child {
+      border-bottom: 0;
+    }
+
+    .data-management-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 38px;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: #eef5ff;
+      color: #168cff;
+      font-size: 16px;
+    }
+
+    .data-management-icon.warning {
+      background: #fff5d7;
+      color: #e4ad16;
+    }
+
+    .data-management-copy {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .data-management-copy strong {
+      display: block;
+      color: #111111;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .data-management-copy strong.danger {
+      color: #e05252;
+    }
+
+    .data-management-copy span {
+      display: block;
+      overflow: hidden;
+      margin-top: 4px;
+      color: #9aa5b3;
+      font-size: 11px;
+      line-height: 1.45;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .data-management-item > i {
+      color: #aab2bc;
+      font-size: 13px;
+    }
+
+    .profile-hidden-input,
+    .backup-hidden-input {
+      display: none;
+    }
+
     .project-card-actions {
       display: flex;
       justify-content: flex-end;
@@ -2912,6 +3314,15 @@
       color: #ffffff;
     }
 
+    .dialog-button.primary {
+      background: #168cff;
+      color: #ffffff;
+    }
+
+    .import-mode-actions {
+      grid-template-columns: 1fr;
+    }
+
     @keyframes floatY {
       0%,
       100% {
@@ -4755,7 +5166,134 @@
         </form>
       </main>
 
-      <nav v-if="currentPage === 'home' || currentPage === 'customers' || currentPage === 'projects'" class="bottom-nav" aria-label="底部导航">
+      <main v-else-if="currentPage === 'profile'" class="content profile-page">
+        <section class="profile-header">
+          <div class="profile-avatar-wrap">
+            <div class="profile-avatar">
+              <img v-if="profileAvatar" :src="profileAvatar" alt="个人头像">
+              <i v-else class="fa-solid fa-paw"></i>
+            </div>
+            <button class="profile-avatar-edit" type="button" aria-label="编辑头像" @click="$refs.profileAvatarInput?.click()">
+              <i class="fa-solid fa-camera"></i>
+            </button>
+            <input ref="profileAvatarInput" class="profile-hidden-input" type="file" accept="image/*" @change="handleProfileAvatarChange">
+          </div>
+          <button class="profile-name" type="button" @click="editProfileName">
+            {{ profileName || '点击设置姓名' }}
+          </button>
+        </section>
+
+        <section class="profile-card profile-storage-card" role="button" tabindex="0" @click="openFileCenter" @keyup.enter="openFileCenter">
+          <div class="profile-storage-copy">
+            <strong>文件存储</strong>
+            <div class="profile-storage-stats">
+              <div class="storage-stat">
+                <strong>{{ attachmentStats.count }}</strong>
+                <span>文件</span>
+              </div>
+              <div class="storage-stat">
+                <strong>{{ attachmentStats.sizeLabel }}</strong>
+                <span>存储占用</span>
+              </div>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right profile-card-arrow"></i>
+        </section>
+
+        <section class="profile-section">
+          <div class="profile-card data-management-card">
+            <div class="data-management-head">
+              <strong>数据管理</strong>
+            </div>
+            <button class="data-management-item" type="button" @click="exportBackup">
+              <span class="data-management-icon"><i class="fa-solid fa-database"></i></span>
+              <span class="data-management-copy">
+                <strong>导出数据</strong>
+                <span>导出所有数据到本地文件</span>
+              </span>
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <button class="data-management-item" type="button" @click="$refs.backupInput?.click()">
+              <span class="data-management-icon"><i class="fa-solid fa-file-import"></i></span>
+              <span class="data-management-copy">
+                <strong>导入数据</strong>
+                <span>从备份文件恢复数据</span>
+              </span>
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <!-- <button class="data-management-item" type="button" @click="cleanAttachmentCache">
+              <span class="data-management-icon"><i class="fa-solid fa-broom"></i></span>
+              <span class="data-management-copy">
+                <strong>清理缓存</strong>
+                <span>清理已删除数据的附件残留信息</span>
+              </span>
+              <i class="fa-solid fa-chevron-right"></i>
+            </button> -->
+            <button class="data-management-item" type="button" @click="requestClearAllData">
+              <span class="data-management-icon warning"><i class="fa-solid fa-triangle-exclamation"></i></span>
+              <span class="data-management-copy">
+                <strong class="danger">清空全部数据</strong>
+                <span>删除所有数据，此操作不可恢复</span>
+              </span>
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+          <input ref="backupInput" class="backup-hidden-input" type="file" accept=".zip,application/zip" @change="handleBackupImport">
+        </section>
+      </main>
+
+      <main v-else-if="currentPage === 'file-center'" class="content file-center-page">
+        <div class="file-center-topbar">
+          <button class="file-center-back" type="button" aria-label="返回个人中心" @click="closeFileCenter">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <h1>文件中心</h1>
+        </div>
+
+        <section class="file-center-storage-card">
+          <div class="file-center-storage-head">
+            <div class="file-center-storage-copy"><strong>文件存储</strong></div>
+          </div>
+          <div class="file-center-storage-stats">
+            <div class="storage-stat">
+              <strong>{{ attachmentStats.count }}</strong>
+              <span>文件</span>
+            </div>
+            <div class="storage-stat">
+              <strong>{{ attachmentStats.sizeLabel }}</strong>
+              <span>存储占用</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="profile-section">
+          <h2 class="profile-section-title">我的文件夹</h2>
+          <div class="folder-grid">
+            <button class="folder-card" type="button" @click="notify('客户管理文件夹暂未单独开放')">
+              <span class="folder-icon green"><i class="fa-solid fa-users"></i></span>
+              <strong>客户管理相关</strong>
+              <span>{{ folderFileCount('customer') }} 个文件</span>
+            </button>
+            <button class="folder-card" type="button" @click="notify('项目管理文件夹已包含全部项目附件')">
+              <span class="folder-icon blue"><i class="fa-solid fa-table-cells-large"></i></span>
+              <strong>项目管理相关</strong>
+              <span>{{ folderFileCount('project') }} 个文件</span>
+            </button>
+            <button class="folder-card" type="button" @click="notify('待办事项文件夹暂未单独开放')">
+              <span class="folder-icon yellow"><i class="fa-solid fa-check"></i></span>
+              <strong>待办事项相关</strong>
+              <span>{{ folderFileCount('todo') }} 个文件</span>
+            </button>
+            <button class="folder-card" type="button" @click="notify('独立文件页面暂未开放')">
+              <span class="folder-icon purple"><i class="fa-solid fa-folder"></i></span>
+              <strong>独立文件</strong>
+              <span>{{ folderFileCount('independent') }} 个文件</span>
+            </button>
+          </div>
+        </section>
+      </main>
+
+      <nav v-if="currentPage === 'home' || currentPage === 'customers' || currentPage === 'projects' || currentPage === 'profile'" class="bottom-nav" aria-label="底部导航">
         <button class="nav-item" :class="{ active: currentPage === 'home' }" type="button" @click="goTo('home')">
           <i class="fa-solid fa-house"></i>
           <span>首页</span>
@@ -4772,7 +5310,7 @@
           <i class="fa-regular fa-square-check"></i>
           <span>待办事项</span>
         </button> -->
-        <button class="nav-item" type="button" @click="notify('我的模块暂未开放')">
+        <button class="nav-item" :class="{ active: currentPage === 'profile' }" type="button" @click="goTo('profile')">
           <i class="fa-regular fa-user"></i>
           <span>我的</span>
         </button>
@@ -4788,8 +5326,10 @@
               ? '删除项目'
               : deleteTargetType === 'project-complete'
                 ? '完成项目'
-                : deleteTargetType === 'project-reopen'
-                  ? '撤回项目'
+              : deleteTargetType === 'project-reopen'
+                ? '撤回项目'
+                : deleteTargetType === 'clear-all'
+                  ? '清空全部数据'
               : deleteTargetType === 'todo'
                 ? '删除待办事项'
                 : deleteTargetType === 'todo-complete'
@@ -4804,8 +5344,10 @@
                 ? `确定删除项目“${deleteTarget?.name || ''}”吗？`
                 : deleteTargetType === 'project-complete'
                   ? `项目“${deleteTarget?.name || ''}”确定已完成了吗？`
-                  : deleteTargetType === 'project-reopen'
+              : deleteTargetType === 'project-reopen'
                     ? `项目“${deleteTarget?.name || ''}”确定要撤回吗？`
+                    : deleteTargetType === 'clear-all'
+                      ? '确定要删除全部客户、项目、拜访和待办数据吗？此操作不可恢复。'
                 : deleteTargetType === 'todo'
                   ? `确定删除待办事项“${deleteTarget?.title || ''}”吗？`
                   : deleteTargetType === 'todo-complete'
@@ -4828,16 +5370,31 @@
                   ? '撤回'
                 : deleteTargetType === 'todo-complete'
                   ? '完成'
-                  : deleteTargetType === 'todo-reopen'
-                    ? '撤回'
+                : deleteTargetType === 'todo-reopen'
+                  ? '撤回'
+                  : deleteTargetType === 'clear-all'
+                    ? '清空'
                   : '删除' }}
             </button>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="importModeDialogOpen" class="dialog-mask" @click.self="cancelImport">
+        <div class="dialog-card">
+          <h3>导入数据</h3>
+          <p>请选择导入方式，覆盖会替换当前数据，合并会保留当前数据并按编号更新同名记录。</p>
+          <div class="dialog-actions import-mode-actions">
+            <button class="dialog-button cancel" type="button" @click="cancelImport">取消</button>
+            <button class="dialog-button primary" type="button" @click="importBackup('merge')">合并导入</button>
+            <button class="dialog-button primary" type="button" @click="importBackup('overwrite')">覆盖导入</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <script>
     const { createApp } = Vue;
@@ -4848,8 +5405,12 @@
           toastVisible: false,
           toastMessage: "",
           toastTimer: null,
+          dbPromise: null,
+          attachmentIndex: [],
           currentPage: "home",
           previousPage: "customers",
+          profileName: "",
+          profileAvatar: "",
           selectedCustomer: null,
           selectedProject: null,
           selectedTodo: null,
@@ -4919,6 +5480,8 @@
           deleteDialogOpen: false,
           deleteTarget: null,
           deleteTargetType: "customer",
+          importModeDialogOpen: false,
+          pendingImportFile: null,
           customerTabs: [
             { label: "全部", value: "all" },
             { label: "待跟进", value: "follow" },
@@ -5123,100 +5686,208 @@
           });
           return { normalized, changed };
         },
-        loadPersistedData() {
+        openWorkbenchDb() {
+          if (this.dbPromise) return this.dbPromise;
+          this.dbPromise = new Promise((resolve, reject) => {
+            const request = window.indexedDB.open("workbench-db", 1);
+            request.onupgradeneeded = () => {
+              const db = request.result;
+              if (!db.objectStoreNames.contains("data")) {
+                db.createObjectStore("data", { keyPath: "key" });
+              }
+              if (!db.objectStoreNames.contains("attachments")) {
+                db.createObjectStore("attachments", { keyPath: "id" });
+              }
+            };
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+          });
+          return this.dbPromise;
+        },
+        requestIndexedDb(request) {
+          return new Promise((resolve, reject) => {
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+          });
+        },
+        async readStoredData(key) {
+          const db = await this.openWorkbenchDb();
+          const transaction = db.transaction("data", "readonly");
+          const request = transaction.objectStore("data").get(key);
+          const result = await this.requestIndexedDb(request);
+          return result?.value ?? null;
+        },
+        async writeStoredData(key, value) {
+          const db = await this.openWorkbenchDb();
+          const transaction = db.transaction("data", "readwrite");
+          transaction.objectStore("data").put({ key, value });
+          return new Promise((resolve, reject) => {
+            transaction.oncomplete = resolve;
+            transaction.onerror = () => reject(transaction.error);
+          });
+        },
+        async readAllStoredAttachments() {
+          const db = await this.openWorkbenchDb();
+          const transaction = db.transaction("attachments", "readonly");
+          return this.requestIndexedDb(transaction.objectStore("attachments").getAll());
+        },
+        async writeStoredAttachment(attachment) {
+          const db = await this.openWorkbenchDb();
+          const transaction = db.transaction("attachments", "readwrite");
+          transaction.objectStore("attachments").put(attachment);
+          return new Promise((resolve, reject) => {
+            transaction.oncomplete = resolve;
+            transaction.onerror = () => reject(transaction.error);
+          });
+        },
+        async deleteStoredAttachment(id) {
+          const db = await this.openWorkbenchDb();
+          const transaction = db.transaction("attachments", "readwrite");
+          transaction.objectStore("attachments").delete(id);
+          return new Promise((resolve, reject) => {
+            transaction.oncomplete = resolve;
+            transaction.onerror = () => reject(transaction.error);
+          });
+        },
+        async getStoredAttachment(id) {
+          const db = await this.openWorkbenchDb();
+          const transaction = db.transaction("attachments", "readonly");
+          return this.requestIndexedDb(transaction.objectStore("attachments").get(id));
+        },
+        async clearWorkbenchDb() {
+          const db = await this.openWorkbenchDb();
+          const transaction = db.transaction(["data", "attachments"], "readwrite");
+          transaction.objectStore("data").clear();
+          transaction.objectStore("attachments").clear();
+          return new Promise((resolve, reject) => {
+            transaction.oncomplete = resolve;
+            transaction.onerror = () => reject(transaction.error);
+          });
+        },
+        async loadPersistedData() {
           try {
-            const storedCustomers = window.localStorage.getItem("workbench-customers");
-            const storedVisitRecords = window.localStorage.getItem("workbench-visit-records");
-            const storedProjects = window.localStorage.getItem("workbench-projects");
-            const storedTodos = window.localStorage.getItem("workbench-todos");
-            if (storedCustomers !== null) {
-              const parsedCustomers = JSON.parse(storedCustomers);
-              if (Array.isArray(parsedCustomers)) {
-                const { normalized, changed } = this.normalizeCustomerPhones(parsedCustomers);
-                this.customers = normalized;
-                if (changed) {
-                  this.persistCustomers();
-                }
+            const [storedCustomers, storedVisitRecords, storedProjects, storedTodos, storedProfile] = await Promise.all([
+              this.readStoredData("customers"),
+              this.readStoredData("visitRecords"),
+              this.readStoredData("projects"),
+              this.readStoredData("todos"),
+              this.readStoredData("profile")
+            ]);
+            const hasIndexedData = [storedCustomers, storedVisitRecords, storedProjects, storedTodos, storedProfile]
+              .some((value) => value !== null);
+
+            if (!hasIndexedData) {
+              const legacyCustomers = JSON.parse(window.localStorage.getItem("workbench-customers") || "null");
+              const legacyVisitRecords = JSON.parse(window.localStorage.getItem("workbench-visit-records") || "null");
+              const legacyProjects = JSON.parse(window.localStorage.getItem("workbench-projects") || "null");
+              const legacyTodos = JSON.parse(window.localStorage.getItem("workbench-todos") || "null");
+              if (Array.isArray(legacyCustomers)) {
+                this.customers = this.normalizeCustomerPhones(legacyCustomers).normalized;
+              }
+              if (Array.isArray(legacyVisitRecords)) {
+                this.visitRecords = legacyVisitRecords;
+              }
+              if (Array.isArray(legacyProjects)) {
+                this.projects = legacyProjects.map((project) => this.normalizeProjectRecord(project));
+              }
+              if (Array.isArray(legacyTodos)) {
+                this.todos = legacyTodos.map((item) => this.normalizeTodoRecord(item));
+              }
+              await Promise.all([
+                this.persistCustomers(),
+                this.persistVisitRecords(),
+                this.persistProjects(),
+                this.persistTodos()
+              ]);
+            } else {
+              if (Array.isArray(storedCustomers)) {
+                this.customers = this.normalizeCustomerPhones(storedCustomers).normalized;
+              }
+              if (Array.isArray(storedVisitRecords)) {
+                this.visitRecords = storedVisitRecords;
+              }
+              if (Array.isArray(storedProjects)) {
+                this.projects = storedProjects.map((project) => this.normalizeProjectRecord(project));
+              }
+              if (Array.isArray(storedTodos)) {
+                this.todos = storedTodos.map((item) => this.normalizeTodoRecord(item));
               }
             }
-            if (storedVisitRecords !== null) {
-              const parsedVisitRecords = JSON.parse(storedVisitRecords);
-              if (Array.isArray(parsedVisitRecords)) {
-                this.visitRecords = parsedVisitRecords;
-              }
+            if (storedProfile) {
+              this.profileName = storedProfile.name || "";
+              this.profileAvatar = storedProfile.avatar || "";
             }
-            if (storedProjects !== null) {
-              const parsedProjects = JSON.parse(storedProjects);
-              if (Array.isArray(parsedProjects)) {
-                this.projects = parsedProjects.map((project) => ({
-                  ...this.getDefaultProjectForm(),
-                  ...project,
-                  receipts: Array.isArray(project.receipts) ? project.receipts : [],
-                  schemeDesigners: Array.isArray(project.schemeDesigners) ? project.schemeDesigners : [],
-                  drawingDesigners: Array.isArray(project.drawingDesigners) ? project.drawingDesigners : [],
-                  attachments: Array.isArray(project.attachments)
-                    ? project.attachments.map((item) => ({ ...item, category: item.category || "other" }))
-                    : [],
-                  projectStatus: project.projectStatus || (project.stage === "completed" ? "completed" : "in_progress"),
-                  statusData: {
-                    bidding: { deadline: "", note: "", ...(project.statusData?.bidding || {}) },
-                    contract: { time: "", note: "", ...(project.statusData?.contract || {}) },
-                    executing: { note: "", ...(project.statusData?.executing || {}) },
-                    completed: { time: "", note: "", ...(project.statusData?.completed || {}) }
-                  }
-                }));
-              }
-            }
-            if (storedTodos !== null) {
-              const parsedTodos = JSON.parse(storedTodos);
-              if (Array.isArray(parsedTodos)) {
-                this.todos = parsedTodos.map((item) => ({
-                  id: item.id,
-                  title: item.title || "",
-                  dueDate: item.dueDate || "",
-                  remark: item.remark || "",
-                  categoryParent: item.categoryParent || "",
-                  categoryChild: item.categoryChild || "",
-                  status: item.status || (item.businessStatus === "done" ? "done" : "pending"),
-                  icon: item.icon || "fa-regular fa-square-check",
-                  level: item.level || this.todoStatusLabel(item.status || (item.businessStatus === "done" ? "done" : "pending")),
-                  desc: item.desc || item.remark || "待办事项",
-                  time: item.time || item.dueDate || "未设置日期",
-                  owner: item.owner || (item.categoryParent && item.categoryChild ? `${item.categoryParent} · ${item.categoryChild}` : "待办中心")
-                }));
-              }
-            }
+            this.attachmentIndex = await this.readAllStoredAttachments();
           } catch (error) {
             console.warn("loadPersistedData failed", error);
           }
         },
+        normalizeProjectRecord(project) {
+          return {
+            ...this.getDefaultProjectForm(),
+            ...project,
+            receipts: Array.isArray(project.receipts) ? project.receipts : [],
+            schemeDesigners: Array.isArray(project.schemeDesigners) ? project.schemeDesigners : [],
+            drawingDesigners: Array.isArray(project.drawingDesigners) ? project.drawingDesigners : [],
+            attachments: Array.isArray(project.attachments)
+              ? project.attachments.map((item) => ({ ...item, category: item.category || "other" }))
+              : [],
+            projectStatus: project.projectStatus || (project.stage === "completed" ? "completed" : "in_progress"),
+            statusData: {
+              bidding: { deadline: "", note: "", ...(project.statusData?.bidding || {}) },
+              contract: { time: "", note: "", ...(project.statusData?.contract || {}) },
+              executing: { note: "", ...(project.statusData?.executing || {}) },
+              completed: { time: "", note: "", ...(project.statusData?.completed || {}) }
+            }
+          };
+        },
+        normalizeTodoRecord(item) {
+          const status = item.status || (item.businessStatus === "done" ? "done" : "pending");
+          return {
+            id: item.id,
+            title: item.title || "",
+            dueDate: item.dueDate || "",
+            remark: item.remark || "",
+            categoryParent: item.categoryParent || "",
+            categoryChild: item.categoryChild || "",
+            status,
+            icon: item.icon || "fa-regular fa-square-check",
+            level: item.level || this.todoStatusLabel(status),
+            desc: item.desc || item.remark || "待办事项",
+            time: item.time || item.dueDate || "未设置日期",
+            owner: item.owner || (item.categoryParent && item.categoryChild ? `${item.categoryParent} · ${item.categoryChild}` : "待办中心")
+          };
+        },
         persistCustomers() {
-          try {
-            window.localStorage.setItem("workbench-customers", JSON.stringify(this.customers));
-          } catch (error) {
-            console.warn("persistCustomers failed", error);
-          }
+          return this.writeStoredData("customers", this.customers);
         },
         persistVisitRecords() {
-          try {
-            window.localStorage.setItem("workbench-visit-records", JSON.stringify(this.visitRecords));
-          } catch (error) {
-            console.warn("persistVisitRecords failed", error);
-          }
+          return this.writeStoredData("visitRecords", this.visitRecords);
         },
         persistProjects() {
-          try {
-            window.localStorage.setItem("workbench-projects", JSON.stringify(this.projects));
-          } catch (error) {
-            console.warn("persistProjects failed", error);
-          }
+          const projects = this.projects.map((project) => ({
+            ...project,
+            attachments: (project.attachments || []).map(({ blob, ...metadata }) => metadata)
+          }));
+          return this.writeStoredData("projects", projects);
         },
         persistTodos() {
-          try {
-            window.localStorage.setItem("workbench-todos", JSON.stringify(this.todos));
-          } catch (error) {
-            console.warn("persistTodos failed", error);
-          }
+          return this.writeStoredData("todos", this.todos);
+        },
+        persistProfile() {
+          return this.writeStoredData("profile", {
+            name: this.profileName,
+            avatar: this.profileAvatar
+          });
+        },
+        async persistAllData() {
+          await Promise.all([
+            this.persistCustomers(),
+            this.persistVisitRecords(),
+            this.persistProjects(),
+            this.persistTodos(),
+            this.persistProfile()
+          ]);
         },
         goTo(page) {
           this.currentPage = page;
@@ -5554,22 +6225,228 @@
           if (size >= 1024 * 1024) return `${(size / (1024 * 1024)).toFixed(1)} MB`;
           return `${Math.max(1, Math.round(size / 1024))} KB`;
         },
+        formatStorageSize(size) {
+          if (!size) return "0 B";
+          if (size >= 1024 * 1024 * 1024) return `${(size / (1024 * 1024 * 1024)).toFixed(1)} GB`;
+          if (size >= 1024 * 1024) return `${(size / (1024 * 1024)).toFixed(1)} MB`;
+          if (size >= 1024) return `${(size / 1024).toFixed(1)} KB`;
+          return `${size} B`;
+        },
+        folderFileCount(folder) {
+          if (folder === "project") {
+            return this.attachmentIndex.filter((item) => item.projectId || item.category).length;
+          }
+          return 0;
+        },
         handleProjectFileChange(event) {
           const files = Array.from(event.target.files || []);
           if (!files.length) return;
-          const nextFiles = files.map((file) => ({
-            id: this.makeProjectItemId(),
-            name: file.name,
-            size: file.size,
-            sizeLabel: this.formatFileSize(file.size),
-            type: file.type || "application/octet-stream",
-            category: this.projectAttachmentUploadCategory || "other"
-          }));
+          const category = this.projectAttachmentUploadCategory || "other";
+          const nextFiles = files.map((file) => {
+            const id = this.makeProjectItemId();
+            const metadata = {
+              id,
+              name: file.name,
+              size: file.size,
+              sizeLabel: this.formatFileSize(file.size),
+              type: file.type || "application/octet-stream",
+              category,
+              storageId: id
+            };
+            this.writeStoredAttachment({ id, storageId: id, projectId: this.editingProjectId || null, ...metadata, blob: file })
+              .then(() => {
+                const existing = this.attachmentIndex.findIndex((item) => item.id === id);
+                if (existing === -1) this.attachmentIndex.push(metadata);
+                else this.attachmentIndex[existing] = metadata;
+              })
+              .catch((error) => console.warn("store attachment failed", error));
+            return metadata;
+          });
           this.projectForm.attachments = [...this.projectForm.attachments, ...nextFiles];
           event.target.value = "";
         },
         removeProjectAttachment(file) {
           this.projectForm.attachments = this.projectForm.attachments.filter((item) => item !== file && item.id !== file?.id);
+          if (file?.storageId) {
+            this.deleteStoredAttachment(file.storageId).catch((error) => console.warn("delete attachment failed", error));
+            this.attachmentIndex = this.attachmentIndex.filter((item) => item.storageId !== file.storageId);
+          }
+        },
+        editProfileName() {
+          const nextName = window.prompt("请输入姓名", this.profileName || "");
+          if (nextName === null) return;
+          this.profileName = nextName.trim();
+          this.persistProfile();
+        },
+        handleProfileAvatarChange(event) {
+          const file = event.target.files?.[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = () => {
+            this.profileAvatar = String(reader.result || "");
+            this.persistProfile();
+          };
+          reader.readAsDataURL(file);
+          event.target.value = "";
+        },
+        openFileCenter() {
+          this.currentPage = "file-center";
+          this.$nextTick(() => {
+            const content = this.$el.querySelector(".file-center-page");
+            if (content) content.scrollTop = 0;
+          });
+        },
+        closeFileCenter() {
+          this.currentPage = "profile";
+        },
+        async exportBackup() {
+          try {
+            if (!window.JSZip) {
+              this.notify("备份组件加载失败，请检查网络");
+              return;
+            }
+            const zip = new JSZip();
+            const attachmentRecords = await this.readAllStoredAttachments();
+            const projects = this.projects.map((project) => ({
+              ...project,
+              attachments: (project.attachments || []).map(({ blob, ...metadata }) => metadata)
+            }));
+            const data = {
+              customers: this.customers,
+              visitRecords: this.visitRecords,
+              projects,
+              todos: this.todos,
+              profile: {
+                name: this.profileName,
+                avatar: this.profileAvatar
+              }
+            };
+            const manifest = {
+              format: "crm-backup",
+              version: 1,
+              exportedAt: new Date().toISOString(),
+              device: navigator.userAgent,
+              attachmentCount: attachmentRecords.length
+            };
+            zip.file("manifest.json", JSON.stringify(manifest, null, 2));
+            zip.file("data.json", JSON.stringify(data, null, 2));
+            for (const attachment of attachmentRecords) {
+              if (attachment.blob) {
+                zip.file(`attachments/${attachment.storageId || attachment.id}-${attachment.name}`, attachment.blob);
+              }
+            }
+            const blob = await zip.generateAsync({ type: "blob", compression: "DEFLATE" });
+            const url = URL.createObjectURL(blob);
+            const anchor = document.createElement("a");
+            anchor.href = url;
+            anchor.download = "crm-backup.zip";
+            anchor.click();
+            URL.revokeObjectURL(url);
+            this.notify("数据已导出");
+          } catch (error) {
+            console.error("export backup failed", error);
+            this.notify("数据导出失败");
+          }
+        },
+        handleBackupImport(event) {
+          const file = event.target.files?.[0];
+          if (!file) return;
+          this.pendingImportFile = file;
+          this.importModeDialogOpen = true;
+          event.target.value = "";
+        },
+        async importBackup(mode) {
+          if (!this.pendingImportFile || !window.JSZip) return;
+          try {
+            const zip = await JSZip.loadAsync(this.pendingImportFile);
+            const dataFile = zip.file("data.json");
+            if (!dataFile) throw new Error("data.json missing");
+            const data = JSON.parse(await dataFile.async("text"));
+            const incomingProjects = Array.isArray(data.projects)
+              ? data.projects.map((project) => this.normalizeProjectRecord(project))
+              : [];
+            const incomingCustomers = Array.isArray(data.customers) ? data.customers : [];
+            const incomingVisitRecords = Array.isArray(data.visitRecords) ? data.visitRecords : [];
+            const incomingTodos = Array.isArray(data.todos) ? data.todos.map((item) => this.normalizeTodoRecord(item)) : [];
+
+            if (mode === "overwrite") {
+              this.customers = incomingCustomers;
+              this.visitRecords = incomingVisitRecords;
+              this.projects = incomingProjects;
+              this.todos = incomingTodos;
+              await this.clearWorkbenchDb();
+            } else {
+              this.customers = this.mergeById(this.customers, incomingCustomers);
+              this.visitRecords = this.mergeById(this.visitRecords, incomingVisitRecords);
+              this.projects = this.mergeById(this.projects, incomingProjects);
+              this.todos = this.mergeById(this.todos, incomingTodos);
+            }
+
+            if (data.profile) {
+              this.profileName = data.profile.name || this.profileName;
+              this.profileAvatar = data.profile.avatar || this.profileAvatar;
+            }
+
+            const importedAttachments = [];
+            for (const project of this.projects) {
+              for (const attachment of project.attachments || []) {
+                const pathPrefix = `attachments/${attachment.storageId || attachment.id}-`;
+                const matchedPath = Object.keys(zip.files).find((path) => path.startsWith(pathPrefix));
+                if (!matchedPath) continue;
+                const blob = await zip.file(matchedPath).async("blob");
+                const storageId = attachment.storageId || attachment.id;
+                const record = { ...attachment, id: storageId, storageId, projectId: project.id, blob };
+                await this.writeStoredAttachment(record);
+                importedAttachments.push({
+                  id: storageId,
+                  storageId,
+                  name: attachment.name,
+                  size: attachment.size,
+                  sizeLabel: attachment.sizeLabel || this.formatFileSize(attachment.size),
+                  type: attachment.type || blob.type || "application/octet-stream",
+                  category: attachment.category || "other",
+                  projectId: project.id
+                });
+              }
+            }
+            this.attachmentIndex = mode === "overwrite"
+              ? importedAttachments
+              : this.mergeById(this.attachmentIndex, importedAttachments);
+            await this.persistAllData();
+            this.importModeDialogOpen = false;
+            this.pendingImportFile = null;
+            this.notify("数据已导入");
+          } catch (error) {
+            console.error("import backup failed", error);
+            this.notify("数据导入失败");
+          }
+        },
+        mergeById(existing, incoming) {
+          const result = Array.isArray(existing) ? [...existing] : [];
+          (Array.isArray(incoming) ? incoming : []).forEach((item) => {
+            const index = result.findIndex((current) => current.id === item.id);
+            if (index === -1) result.push(item);
+            else result[index] = { ...result[index], ...item };
+          });
+          return result;
+        },
+        cleanAttachmentCache() {
+          const activeIds = new Set(this.projects.flatMap((project) => (project.attachments || []).map((item) => item.storageId || item.id)));
+          const stale = this.attachmentIndex.filter((item) => !activeIds.has(item.storageId || item.id));
+          Promise.all(stale.map((item) => this.deleteStoredAttachment(item.storageId || item.id)))
+            .then(() => {
+              this.attachmentIndex = this.attachmentIndex.filter((item) => activeIds.has(item.storageId || item.id));
+              this.notify("缓存已清理");
+            })
+            .catch((error) => {
+              console.error("clean attachment cache failed", error);
+              this.notify("缓存清理失败");
+            });
+        },
+        requestClearAllData() {
+          this.deleteTarget = { name: "全部数据" };
+          this.deleteTargetType = "clear-all";
+          this.deleteDialogOpen = true;
         },
         projectAttachmentsByCategory(attachments, category) {
           return (Array.isArray(attachments) ? attachments : [])
@@ -5614,6 +6491,7 @@
             this.projectFormError = "请输入客户姓名";
             return;
           }
+          const projectId = this.editingProjectId || Date.now();
           const payload = {
             name: this.projectForm.name,
             description: this.projectForm.description,
@@ -5651,12 +6529,26 @@
             if (index !== -1) {
               this.projects[index] = { ...this.projects[index], ...payload };
             }
+            this.projectForm.attachments.forEach((attachment) => {
+              if (attachment.storageId) {
+                this.getStoredAttachment(attachment.storageId)
+                  .then((stored) => stored && this.writeStoredAttachment({ ...stored, ...attachment, id: attachment.storageId, projectId }))
+                  .catch((error) => console.warn("update attachment metadata failed", error));
+              }
+            });
             this.persistProjects();
             this.notify("项目信息已更新");
           } else {
             this.projects.unshift({
-              id: Date.now(),
+              id: projectId,
               ...payload
+            });
+            this.projectForm.attachments.forEach((attachment) => {
+              if (attachment.storageId) {
+                this.getStoredAttachment(attachment.storageId)
+                  .then((stored) => stored && this.writeStoredAttachment({ ...stored, projectId }))
+                  .catch((error) => console.warn("bind attachment to project failed", error));
+              }
             });
             this.persistProjects();
             this.notify("项目新增成功");
@@ -5919,7 +6811,16 @@
             this.persistVisitRecords();
             this.notify("拜访记录已删除");
           } else if (this.deleteTargetType === "project") {
+            const deletedProject = this.projects.find((item) => item.id === this.deleteTarget.id);
             this.projects = this.projects.filter((item) => item.id !== this.deleteTarget.id);
+            const deletedAttachmentIds = (deletedProject?.attachments || [])
+              .map((item) => item.storageId || item.id)
+              .filter(Boolean);
+            Promise.all(deletedAttachmentIds.map((id) => this.deleteStoredAttachment(id)))
+              .then(() => {
+                this.attachmentIndex = this.attachmentIndex.filter((item) => !deletedAttachmentIds.includes(item.storageId || item.id));
+              })
+              .catch((error) => console.warn("delete project attachments failed", error));
             this.persistProjects();
             if (this.selectedProject?.id === this.deleteTarget.id) {
               this.selectedProject = null;
@@ -5930,6 +6831,8 @@
             this.completeProject(this.deleteTarget);
           } else if (this.deleteTargetType === "project-reopen") {
             this.reopenProject(this.deleteTarget);
+          } else if (this.deleteTargetType === "clear-all") {
+            this.clearAllData();
           } else if (this.deleteTargetType === "todo") {
             this.todos = this.todos.filter((item) => item.id !== this.deleteTarget.id);
             this.persistTodos();
@@ -5962,6 +6865,30 @@
           this.deleteTarget = null;
           this.deleteDialogOpen = false;
           this.deleteTargetType = "customer";
+        },
+        cancelImport() {
+          this.pendingImportFile = null;
+          this.importModeDialogOpen = false;
+        },
+        async clearAllData() {
+          try {
+            this.customers = [];
+            this.visitRecords = [];
+            this.projects = [];
+            this.todos = [];
+            this.attachmentIndex = [];
+            this.profileName = "";
+            this.profileAvatar = "";
+            await this.clearWorkbenchDb();
+            this.selectedCustomer = null;
+            this.selectedProject = null;
+            this.selectedTodo = null;
+            this.currentPage = "profile";
+            this.notify("数据已清空");
+          } catch (error) {
+            console.error("clear all data failed", error);
+            this.notify("数据清空失败");
+          }
         },
         recordVisit(customer) {
           this.openVisitRecords(customer);
@@ -6092,6 +7019,15 @@
         }
       },
       computed: {
+        attachmentStats() {
+          const files = Array.isArray(this.attachmentIndex) ? this.attachmentIndex : [];
+          const totalSize = files.reduce((sum, item) => sum + Number(item.size || 0), 0);
+          return {
+            count: files.length,
+            size: totalSize,
+            sizeLabel: this.formatStorageSize(totalSize)
+          };
+        },
         statisticsContractAmount() {
           const total = this.projects.reduce((sum, project) => {
             const value = Number(String(project.contractAmount || "").replace(/[^0-9.-]/g, ""));
