@@ -1845,18 +1845,72 @@
       background: #ffffff;
     }
 
+    .project-attachment-item > div:first-child {
+      min-width: 0;
+      width: 0;
+      flex: 1 1 0;
+    }
+
     .project-attachment-item strong {
       display: block;
+      overflow: hidden;
       color: #111111;
       font-size: 12px;
       font-weight: 700;
       line-height: 1.5;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .attachment-name-trigger {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .attachment-name-edit-input {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      border: 0;
+      padding: 0;
+      outline: 0;
+      background: transparent;
+      color: #111111;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.5;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .attachment-name-edit-input:focus {
+      padding: 4px 6px;
+      border-radius: 8px;
+      background: #f3f7fc;
+      text-overflow: clip;
     }
 
     .project-attachment-item span {
       display: block;
+      overflow: hidden;
       color: #9aa5b3;
       font-size: 11px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .project-attachment-item button {
@@ -1892,8 +1946,26 @@
     }
 
     .attachment-detail-name {
+      display: block;
       overflow: hidden;
       max-width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .attachment-detail-name.attachment-name-trigger {
+      color: #6f7f95;
+    }
+
+    .attachment-detail-item {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .attachment-detail-item .detail-item-value {
+      display: block;
+      overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
@@ -1901,6 +1973,7 @@
     .attachment-actions {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
       gap: 8px;
       margin-top: 7px;
     }
@@ -3680,6 +3753,30 @@
       flex: 1;
     }
 
+    .attachment-name-dialog {
+      width: min(100%, 320px);
+    }
+
+    .attachment-name-dialog .dialog-actions {
+      display: flex;
+      justify-content: center;
+    }
+
+    .attachment-name-dialog .dialog-button {
+      width: 100px;
+    }
+
+    .attachment-name-text {
+      margin: 0;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: #f5f7fa;
+      color: #27364b;
+      font-size: 13px;
+      line-height: 1.7;
+      word-break: break-all;
+    }
+
     .import-mode-actions {
       grid-template-columns: 1fr;
     }
@@ -4480,8 +4577,15 @@
                   <span class="detail-item-label">{{ projectAttachmentsByCategory(selectedProject.attachments, category.key).length }} 个</span>
                 </div>
                 <div v-if="projectAttachmentsByCategory(selectedProject.attachments, category.key).length" class="detail-grid">
-                  <div v-for="file in projectAttachmentsByCategory(selectedProject.attachments, category.key)" :key="file.id || file.name">
-                    <span class="detail-item-label attachment-detail-name">{{ file.name }}</span>
+                  <div v-for="file in projectAttachmentsByCategory(selectedProject.attachments, category.key)" :key="file.id || file.name" class="attachment-detail-item">
+                    <button
+                      class="detail-item-label attachment-detail-name attachment-name-trigger"
+                      type="button"
+                      :title="file.name || '未命名附件'"
+                      @click.stop="openAttachmentNameDialog(file.name)"
+                    >
+                      {{ file.name }}
+                    </button>
                     <span class="detail-item-value">{{ file.sizeLabel || '已上传' }}</span>
                     <div class="attachment-actions">
                       <button type="button" @click.stop="previewAttachment(file)">
@@ -5191,7 +5295,14 @@
                       class="project-attachment-item"
                     >
                       <div>
-                        <strong>{{ file.name }}</strong>
+                        <input
+                          v-model="file.name"
+                          class="attachment-name-edit-input"
+                          type="text"
+                          :title="file.name || '未命名附件'"
+                          aria-label="修改附件名称"
+                          @blur="normalizeProjectAttachmentName(file)"
+                        >
                         <span>{{ file.sizeLabel }}</span>
                       </div>
                       <div class="project-attachment-item-actions">
@@ -5898,6 +6009,16 @@
           </div>
         </div>
       </div>
+
+      <div v-if="attachmentNameDialogOpen" class="dialog-mask" @click.self="closeAttachmentNameDialog">
+        <div class="dialog-card attachment-name-dialog">
+          <h3>附件名称</h3>
+          <p class="attachment-name-text">{{ attachmentNameDialogValue || '未命名附件' }}</p>
+          <div class="dialog-actions">
+            <button class="dialog-button primary" type="button" @click="closeAttachmentNameDialog">关闭</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -5923,6 +6044,8 @@
           attachmentPreviewKind: "",
           attachmentPreviewText: "",
           attachmentPreviewHtml: "",
+          attachmentNameDialogOpen: false,
+          attachmentNameDialogValue: "",
           reamLibraryPromise: null,
           currentPage: "home",
           previousPage: "customers",
@@ -6938,6 +7061,11 @@
             this.attachmentIndex = this.attachmentIndex.filter((item) => item.storageId !== file.storageId);
           }
         },
+        normalizeProjectAttachmentName(file) {
+          if (!file) return;
+          const name = String(file.name || "").trim();
+          file.name = name || "未命名附件";
+        },
         async resolveAttachmentBlob(file) {
           if (!file) return null;
           const storageId = file.storageId || file.id;
@@ -7053,6 +7181,14 @@
           this.attachmentPreviewKind = "";
           this.attachmentPreviewText = "";
           this.attachmentPreviewHtml = "";
+        },
+        openAttachmentNameDialog(name) {
+          this.attachmentNameDialogValue = String(name || "未命名附件");
+          this.attachmentNameDialogOpen = true;
+        },
+        closeAttachmentNameDialog() {
+          this.attachmentNameDialogOpen = false;
+          this.attachmentNameDialogValue = "";
         },
         async editProfileName() {
           const nextName = window.prompt("请输入姓名", this.profileName || "");
