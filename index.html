@@ -4814,10 +4814,10 @@
                 <span class="project-card-label">到期日期</span>
                 <span class="project-card-value">{{ item.dueDate || '未设置' }}</span>
               </div>
-              <div>
+              <!-- <div>
                 <span class="project-card-label">项目类别</span>
                 <span class="project-card-value">{{ formatTodoCategory(item) || '未选择类别' }}</span>
-              </div>
+              </div> -->
             </div>
 
             <div class="project-card-actions">
@@ -4923,17 +4923,17 @@
             <h3 class="detail-section-title">基础信息</h3>
             <div class="detail-grid">
               <div>
-                <span class="detail-item-label">任务标题</span>
+                <span class="detail-item-label">事项名称</span>
                 <span class="detail-item-value">{{ selectedTodo.title || '未填写' }}</span>
               </div>
               <div>
                 <span class="detail-item-label">到期日期</span>
                 <span class="detail-item-value">{{ selectedTodo.dueDate || '未设置' }}</span>
               </div>
-              <div>
+              <!-- <div>
                 <span class="detail-item-label">项目类别</span>
                 <span class="detail-item-value">{{ formatTodoCategory(selectedTodo) || '未选择类别' }}</span>
-              </div>
+              </div> -->
               <div>
                 <span class="detail-item-label">跟进状态</span>
                 <span class="detail-item-value">{{ todoStatusLabel(selectedTodo.status) }}</span>
@@ -5554,13 +5554,13 @@
             <h2 class="form-card-title">基础信息</h2>
 
             <div class="form-field">
-              <label class="form-field-label" for="todo-title">任务标题<span class="required-mark">*</span></label>
+              <label class="form-field-label" for="todo-title">事项名称<span class="required-mark">*</span></label>
               <input
                 id="todo-title"
                 v-model.trim="todoForm.title"
                 class="form-control"
                 type="text"
-                placeholder="请输入项目名称"
+                placeholder="请输入事项名称"
                 maxlength="40"
               >
             </div>
@@ -5576,7 +5576,7 @@
               </div>
             </div>
 
-            <div class="form-field">
+            <!-- <div class="form-field">
               <label class="form-field-label">项目类别</label>
               <div class="project-select-wrap">
                 <button
@@ -5621,7 +5621,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="form-field">
               <label class="form-field-label" for="todo-remark">事项备注</label>
@@ -7991,7 +7991,7 @@
         },
         async saveTodo() {
           if (!this.todoForm.title) {
-            this.todoFormError = "请输入任务标题";
+            this.todoFormError = "请输入事项名称";
             return;
           }
           const payload = {
