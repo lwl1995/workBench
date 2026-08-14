@@ -1548,6 +1548,42 @@
       border: 1px solid #f0f2f5;
     }
 
+    .project-form-page .project-designer-section {
+      padding: 0;
+      background: transparent;
+      border: 0;
+    }
+
+    .project-form-page .project-designer-section .project-group-head {
+      padding: 0 2px;
+      margin-bottom: 8px;
+    }
+
+    .project-form-page .project-designer-card {
+      padding: 16px;
+      border-radius: 20px;
+      background: #f6f7f9;
+      border: 1px solid #f0f2f5;
+    }
+
+    .project-form-page .project-receipt-section {
+      padding: 0;
+      background: transparent;
+      border: 0;
+    }
+
+    .project-form-page .project-receipt-section .project-group-head {
+      padding: 0 2px;
+      margin-bottom: 8px;
+    }
+
+    .project-form-page .project-receipt-card {
+      padding: 16px;
+      border-radius: 20px;
+      background: #f6f7f9;
+      border: 1px solid #f0f2f5;
+    }
+
     .todo-page {
       position: relative;
       display: flex;
@@ -5255,7 +5291,7 @@
               >
             </div>
 
-            <section class="project-group-section">
+            <section class="project-group-section project-receipt-section">
               <div class="project-group-head">
                 <h3>回款金额（万元）</h3>
                 <button class="project-inline-add" type="button" @click="addProjectReceipt">
@@ -5263,33 +5299,34 @@
                   新增
                 </button>
               </div>
-              <div v-if="projectForm.receipts.length" class="project-multi-list">
-                <div v-for="(receipt, index) in projectForm.receipts" :key="receipt.id" class="project-multi-item">
-                  <label class="project-multi-label">第{{ index + 1 }}笔回款</label>
-                  <div class="project-multi-row">
-                    <input
-                      v-model.trim="receipt.amount"
-                      class="form-control"
-                      type="text"
-                      :placeholder="`请输入第${index + 1}笔回款`"
-                      maxlength="20"
-                    >
-                    <button class="project-inline-delete" type="button" @click="removeProjectReceipt(index)">
-                      <i class="fa-solid fa-minus"></i>
-                    </button>
+              <div class="project-receipt-card">
+                <div v-if="projectForm.receipts.length" class="project-multi-list">
+                  <div v-for="(receipt, index) in projectForm.receipts" :key="receipt.id" class="project-multi-item">
+                    <label class="project-multi-label">第{{ index + 1 }}笔回款</label>
+                    <div class="project-multi-row">
+                      <input
+                        v-model.trim="receipt.amount"
+                        class="form-control"
+                        type="text"
+                        :placeholder="`请输入第${index + 1}笔回款`"
+                        maxlength="20"
+                      >
+                      <button class="project-inline-delete" type="button" @click="removeProjectReceipt(index)">
+                        <i class="fa-solid fa-minus"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
+                <p v-else class="project-group-empty">暂无回款记录</p>
+                <div class="project-total-card">
+                  <span>回款总金额</span>
+                  <strong>{{ projectReceiptTotalText }}</strong>
+                </div>
+                <div class="project-total-card project-remaining-total-card">
+                  <span>剩余回款总金额</span>
+                  <strong>{{ projectRemainingReceiptText }}</strong>
+                </div>
               </div>
-              <p v-else class="project-group-empty">暂无回款记录</p>
-              <div class="project-total-card">
-                <span>回款总金额</span>
-                <strong>{{ projectReceiptTotalText }}</strong>
-              </div>
-              <div class="project-total-card project-remaining-total-card">
-                <span>剩余回款总金额</span>
-                <strong>{{ projectRemainingReceiptText }}</strong>
-              </div>
-              
             </section>
 
             <div class="form-field">
@@ -5304,7 +5341,7 @@
               >
             </div>
 
-            <section class="project-group-section">
+            <section class="project-group-section project-designer-section">
               <div class="project-group-head">
                 <h3>方案设计师</h3>
                 <button class="project-inline-add" type="button" @click="addProjectDesigner('schemeDesigners')">
@@ -5312,27 +5349,29 @@
                   新增
                 </button>
               </div>
-              <div v-if="projectForm.schemeDesigners.length" class="project-multi-list">
-                <div v-for="(designer, index) in projectForm.schemeDesigners" :key="designer.id" class="project-multi-item">
-                  <label class="project-multi-label">设计师{{ index + 1 }}</label>
-                  <div class="project-multi-row">
-                    <input
-                      v-model.trim="designer.name"
-                      class="form-control"
-                      type="text"
-                      placeholder="请输入方案设计师姓名"
-                      maxlength="20"
-                    >
-                    <button class="project-inline-delete" type="button" @click="removeProjectDesigner('schemeDesigners', index)">
-                      <i class="fa-solid fa-minus"></i>
-                    </button>
+              <div class="project-designer-card">
+                <div v-if="projectForm.schemeDesigners.length" class="project-multi-list">
+                  <div v-for="(designer, index) in projectForm.schemeDesigners" :key="designer.id" class="project-multi-item">
+                    <label class="project-multi-label">设计师{{ index + 1 }}</label>
+                    <div class="project-multi-row">
+                      <input
+                        v-model.trim="designer.name"
+                        class="form-control"
+                        type="text"
+                        placeholder="请输入方案设计师姓名"
+                        maxlength="20"
+                      >
+                      <button class="project-inline-delete" type="button" @click="removeProjectDesigner('schemeDesigners', index)">
+                        <i class="fa-solid fa-minus"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
+                <p v-else class="project-group-empty">暂无方案设计师</p>
               </div>
-              <p v-else class="project-group-empty">暂无方案设计师</p>
             </section>
 
-            <section class="project-group-section">
+            <section class="project-group-section project-designer-section">
               <div class="project-group-head">
                 <h3>施工图设计师</h3>
                 <button class="project-inline-add" type="button" @click="addProjectDesigner('drawingDesigners')">
@@ -5340,24 +5379,26 @@
                   新增
                 </button>
               </div>
-              <div v-if="projectForm.drawingDesigners.length" class="project-multi-list">
-                <div v-for="(designer, index) in projectForm.drawingDesigners" :key="designer.id" class="project-multi-item">
-                  <label class="project-multi-label">设计师{{ index + 1 }}</label>
-                  <div class="project-multi-row">
-                    <input
-                      v-model.trim="designer.name"
-                      class="form-control"
-                      type="text"
-                      placeholder="请输入施工图设计师姓名"
-                      maxlength="20"
-                    >
-                    <button class="project-inline-delete" type="button" @click="removeProjectDesigner('drawingDesigners', index)">
-                      <i class="fa-solid fa-minus"></i>
-                    </button>
+              <div class="project-designer-card">
+                <div v-if="projectForm.drawingDesigners.length" class="project-multi-list">
+                  <div v-for="(designer, index) in projectForm.drawingDesigners" :key="designer.id" class="project-multi-item">
+                    <label class="project-multi-label">设计师{{ index + 1 }}</label>
+                    <div class="project-multi-row">
+                      <input
+                        v-model.trim="designer.name"
+                        class="form-control"
+                        type="text"
+                        placeholder="请输入施工图设计师姓名"
+                        maxlength="20"
+                      >
+                      <button class="project-inline-delete" type="button" @click="removeProjectDesigner('drawingDesigners', index)">
+                        <i class="fa-solid fa-minus"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
+                <p v-else class="project-group-empty">暂无施工图设计师</p>
               </div>
-              <p v-else class="project-group-empty">暂无施工图设计师</p>
             </section>
 
             <section class="project-group-section project-form-attachment-section">
