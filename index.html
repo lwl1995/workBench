@@ -2090,6 +2090,19 @@
       background: #ffffff;
     }
 
+    .project-detail-page .detail-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-detail-page .project-attachment-detail-section {
+      order: 5;
+    }
+
+    .project-detail-page .project-stage-detail-section {
+      order: 4;
+    }
+
     .detail-profile {
       display: flex;
       align-items: center;
@@ -2925,6 +2938,24 @@
     .project-form-page .form-card {
       flex: 0 0 auto;
       padding-bottom: 96px;
+    }
+
+    .project-form-page .form-card-scroll {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+.project-form-page .project-form-attachment-section {
+  order: 40;
+}
+
+.project-form-page .project-status-section {
+  order: 30;
+}
+
+    .project-form-page .form-card-scroll > .form-error {
+      order: 50;
     }
 
     .project-form-page .form-actions {
@@ -4538,10 +4569,6 @@
                 <span class="detail-item-label">项目状态</span>
                 <span class="detail-item-value">{{ projectStatusLabel(selectedProject.projectStatus) }}</span>
               </div>
-              <div>
-                <span class="detail-item-label">合同签订日期</span>
-                <span class="detail-item-value">{{ selectedProject.contractSignedAt || '未设置' }}</span>
-              </div>
             </div>
           </section>
 
@@ -4581,7 +4608,7 @@
             </div>
           </section>
 
-          <section class="detail-section">
+          <section class="detail-section project-stage-detail-section">
             <h3 class="detail-section-title">项目阶段</h3>
             <div class="project-status-tabs">
               <button
@@ -4642,7 +4669,7 @@
             </div>
           </section>
 
-          <section class="detail-section">
+          <section class="detail-section project-attachment-detail-section">
             <h3 class="detail-section-title">上传附件</h3>
             <div v-if="selectedProject.attachments && selectedProject.attachments.length" class="project-attachment-groups">
               <div v-for="category in projectAttachmentCategories" :key="`detail-${category.key}`" class="project-attachment-group">
@@ -5277,14 +5304,6 @@
               >
             </div>
 
-            <div class="form-field">
-              <label class="form-field-label" for="project-contract-date">合同签订日期</label>
-              <div class="datetime-field">
-                <span v-if="!projectForm.contractSignedAt" class="datetime-placeholder">请选择合同签订日期</span>
-                <input id="project-contract-date" v-model="projectForm.contractSignedAt" class="form-control" type="date">
-              </div>
-            </div>
-
             <section class="project-group-section">
               <div class="project-group-head">
                 <h3>方案设计师</h3>
@@ -5341,7 +5360,7 @@
               <p v-else class="project-group-empty">暂无施工图设计师</p>
             </section>
 
-            <section class="project-group-section">
+            <section class="project-group-section project-form-attachment-section">
               <div class="project-group-head">
                 <h3>上传附件</h3>
               </div>
