@@ -2036,9 +2036,12 @@
       border: 1px solid #f0f2f5;
     }
 
-    .project-status-card .form-control,
-    .project-status-card .datetime-field {
+    .project-status-card .form-control {
       border-color: #ffffff;
+    }
+
+    .project-status-card .datetime-select-field {
+      border: 1px solid #ffffff;
     }
 
     .customer-detail-page {
@@ -5504,9 +5507,12 @@
 
             <div class="form-field">
               <label class="form-field-label" for="todo-due-date">到期日期</label>
-              <div class="datetime-field">
-                <span v-if="!todoForm.dueDate" class="datetime-placeholder">请选择到期日期</span>
-                <input id="todo-due-date" v-model="todoForm.dueDate" class="form-control" type="date">
+              <div class="datetime-field datetime-select-field">
+                <span class="datetime-select-value" :class="{ 'has-value': todoForm.dueDate }">
+                  {{ todoForm.dueDate ? formatProjectDateTime(todoForm.dueDate) : '请选择到期日期' }}
+                </span>
+                <i class="fa-solid fa-chevron-down"></i>
+                <input id="todo-due-date" v-model="todoForm.dueDate" class="datetime-picker-input" type="date">
               </div>
             </div>
 
