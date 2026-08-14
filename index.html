@@ -5364,7 +5364,10 @@
               <div v-if="projectForm.stage === 'bidding'" class="project-status-card">
                 <div class="form-field">
                   <label class="form-field-label" for="project-bid-deadline">投标截止时间</label>
-                  <input id="project-bid-deadline" v-model="projectForm.statusData.bidding.deadline" class="form-control" type="datetime-local">
+                  <div class="datetime-field">
+                    <span v-if="!projectForm.statusData.bidding.deadline" class="datetime-placeholder">请选择投标截止时间</span>
+                    <input id="project-bid-deadline" v-model="projectForm.statusData.bidding.deadline" class="form-control" type="datetime-local">
+                  </div>
                 </div>
                 <div class="form-field">
                   <label class="form-field-label" for="project-bid-note">注意事项</label>
@@ -5375,7 +5378,10 @@
               <div v-else-if="projectForm.stage === 'contract'" class="project-status-card">
                 <div class="form-field">
                   <label class="form-field-label" for="project-contract-time">签订时间</label>
-                  <input id="project-contract-time" v-model="projectForm.statusData.contract.time" class="form-control" type="datetime-local">
+                  <div class="datetime-field">
+                    <span v-if="!projectForm.statusData.contract.time" class="datetime-placeholder">请选择签订时间</span>
+                    <input id="project-contract-time" v-model="projectForm.statusData.contract.time" class="form-control" type="datetime-local">
+                  </div>
                 </div>
                 <div class="form-field">
                   <label class="form-field-label" for="project-contract-note">注意事项</label>
@@ -5393,7 +5399,10 @@
               <div v-else class="project-status-card">
                 <div class="form-field">
                   <label class="form-field-label" for="project-completed-time">完工时间</label>
-                  <input id="project-completed-time" v-model="projectForm.statusData.completed.time" class="form-control" type="datetime-local">
+                  <div class="datetime-field">
+                    <span v-if="!projectForm.statusData.completed.time" class="datetime-placeholder">请选择完工时间</span>
+                    <input id="project-completed-time" v-model="projectForm.statusData.completed.time" class="form-control" type="datetime-local">
+                  </div>
                 </div>
                 <div class="form-field">
                   <label class="form-field-label" for="project-completed-note">注意事项</label>
