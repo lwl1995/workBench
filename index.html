@@ -3195,6 +3195,13 @@
       gap: 6px;
     }
 
+    .statistics-card-value.stacked strong {
+      overflow: visible;
+      white-space: normal;
+      word-break: break-all;
+      line-height: 1.15;
+    }
+
     .grid-card {
       background: rgba(255, 255, 255, 0.98);
       border-radius: 28px;
@@ -4029,7 +4036,10 @@
                 </div>
                 <i class="fa-solid fa-chevron-right statistics-card-arrow"></i>
               </div>
-              <div class="statistics-card-value stacked">
+              <div
+                class="statistics-card-value"
+                :class="{ stacked: String(statisticsRemainingReceiptAmount).length > 5 }"
+              >
                 <strong>{{ statisticsRemainingReceiptAmount }}</strong>
                 <span>万元</span>
               </div>
