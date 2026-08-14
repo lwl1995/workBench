@@ -2036,6 +2036,11 @@
       border: 1px solid #f0f2f5;
     }
 
+    .project-status-card .form-control,
+    .project-status-card .datetime-field {
+      border-color: #ffffff;
+    }
+
     .customer-detail-page {
       display: flex;
       flex-direction: column;
@@ -2708,6 +2713,49 @@
       font-size: 13px;
       pointer-events: none;
       z-index: 2;
+    }
+
+    .datetime-select-field {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 46px;
+      padding: 0 13px;
+      color: #a5a9b0;
+      cursor: pointer;
+    }
+
+    .datetime-select-value {
+      min-width: 0;
+      overflow: hidden;
+      color: #a5a9b0;
+      font-size: 13px;
+      line-height: 1.4;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .datetime-select-value.has-value {
+      color: #111111;
+    }
+
+    .datetime-select-field > i {
+      flex: 0 0 auto;
+      margin-left: 10px;
+      color: #8e98a6;
+      font-size: 12px;
+      pointer-events: none;
+    }
+
+    .datetime-picker-input {
+      position: absolute !important;
+      inset: 0;
+      z-index: 2 !important;
+      width: 100% !important;
+      height: 100% !important;
+      min-height: 0 !important;
+      opacity: 0;
+      cursor: pointer;
     }
 
     .form-city-wrap {
@@ -5364,9 +5412,12 @@
               <div v-if="projectForm.stage === 'bidding'" class="project-status-card">
                 <div class="form-field">
                   <label class="form-field-label" for="project-bid-deadline">投标截止时间</label>
-                  <div class="datetime-field">
-                    <span v-if="!projectForm.statusData.bidding.deadline" class="datetime-placeholder">请选择投标截止时间</span>
-                    <input id="project-bid-deadline" v-model="projectForm.statusData.bidding.deadline" class="form-control" type="datetime-local">
+                  <div class="datetime-field datetime-select-field">
+                    <span class="datetime-select-value" :class="{ 'has-value': projectForm.statusData.bidding.deadline }">
+                      {{ projectForm.statusData.bidding.deadline ? formatProjectDateTime(projectForm.statusData.bidding.deadline) : '请选择投标截止时间' }}
+                    </span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                    <input id="project-bid-deadline" v-model="projectForm.statusData.bidding.deadline" class="datetime-picker-input" type="datetime-local">
                   </div>
                 </div>
                 <div class="form-field">
@@ -5378,9 +5429,12 @@
               <div v-else-if="projectForm.stage === 'contract'" class="project-status-card">
                 <div class="form-field">
                   <label class="form-field-label" for="project-contract-time">签订时间</label>
-                  <div class="datetime-field">
-                    <span v-if="!projectForm.statusData.contract.time" class="datetime-placeholder">请选择签订时间</span>
-                    <input id="project-contract-time" v-model="projectForm.statusData.contract.time" class="form-control" type="datetime-local">
+                  <div class="datetime-field datetime-select-field">
+                    <span class="datetime-select-value" :class="{ 'has-value': projectForm.statusData.contract.time }">
+                      {{ projectForm.statusData.contract.time ? formatProjectDateTime(projectForm.statusData.contract.time) : '请选择签订时间' }}
+                    </span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                    <input id="project-contract-time" v-model="projectForm.statusData.contract.time" class="datetime-picker-input" type="datetime-local">
                   </div>
                 </div>
                 <div class="form-field">
@@ -5399,9 +5453,12 @@
               <div v-else class="project-status-card">
                 <div class="form-field">
                   <label class="form-field-label" for="project-completed-time">完工时间</label>
-                  <div class="datetime-field">
-                    <span v-if="!projectForm.statusData.completed.time" class="datetime-placeholder">请选择完工时间</span>
-                    <input id="project-completed-time" v-model="projectForm.statusData.completed.time" class="form-control" type="datetime-local">
+                  <div class="datetime-field datetime-select-field">
+                    <span class="datetime-select-value" :class="{ 'has-value': projectForm.statusData.completed.time }">
+                      {{ projectForm.statusData.completed.time ? formatProjectDateTime(projectForm.statusData.completed.time) : '请选择完工时间' }}
+                    </span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                    <input id="project-completed-time" v-model="projectForm.statusData.completed.time" class="datetime-picker-input" type="datetime-local">
                   </div>
                 </div>
                 <div class="form-field">
@@ -7016,6 +7073,9 @@
           if (size >= 1024 * 1024) return `${(size / (1024 * 1024)).toFixed(1)} MB`;
           if (size >= 1024) return `${(size / 1024).toFixed(1)} KB`;
           return `${size} B`;
+        },
+        formatProjectDateTime(value) {
+          return String(value || "").replace("T", " ");
         },
         folderFileCount(folder) {
           if (folder === "project") {
