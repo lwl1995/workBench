@@ -1647,6 +1647,10 @@
       box-shadow: var(--shadow-sm);
     }
 
+    .todo-manage-card .project-card-grid {
+      grid-template-columns: 1fr;
+    }
+
     .todo-manage-head {
       margin-bottom: 14px;
     }
@@ -3764,6 +3768,93 @@
       color: #ffffff;
     }
 
+    .customer-add-dialog .dialog-card {
+      position: relative;
+      width: min(100%, 340px);
+    }
+
+    .customer-add-dialog-head {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 24px;
+    }
+
+    .customer-add-dialog-head h3 {
+      margin-bottom: 10px;
+    }
+
+    .customer-add-dialog-close {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border: 0;
+      border-radius: 50%;
+      background: #f1f4f8;
+      color: #8793a3;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .customer-add-dialog-options {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .customer-add-choice,
+    .customer-import-action {
+      width: 100%;
+      min-height: 48px;
+      border: 0;
+      border-radius: 16px;
+      background: #eaf3ff;
+      color: #168cff;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .customer-import-panel {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .customer-import-note {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: #f6f8fb;
+      color: #7c8b9f;
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .customer-import-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .customer-import-upload {
+      position: relative;
+    }
+
+    .customer-import-hidden-input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
     .attachment-preview-dialog {
       width: min(100%, 360px);
       max-height: min(86vh, 680px);
@@ -4287,7 +4378,7 @@
             >
           </label>
 
-          <button class="customer-add-inline" type="button" aria-label="新增客户" @click="openCustomerForm()">
+          <button class="customer-add-inline" type="button" aria-label="新增客户" @click="openCustomerAddDialog()">
             <i class="fa-solid fa-plus"></i>
           </button>
         </div>
@@ -4359,7 +4450,7 @@
             <i class="fa-regular fa-user"></i>
           </div>
           <p>暂无客户数据</p>
-          <button class="customer-empty-action" type="button" @click="openCustomerForm()">
+          <button class="customer-empty-action" type="button" @click="openCustomerAddDialog()">
             添加第一个客户
           </button>
         </div>
@@ -4379,7 +4470,7 @@
             >
           </label>
 
-          <button class="customer-add-inline" type="button" aria-label="新增项目" @click="openProjectForm()">
+          <button class="customer-add-inline" type="button" aria-label="新增项目" @click="openProjectAddDialog()">
             <i class="fa-solid fa-plus"></i>
           </button>
         </div>
@@ -4560,7 +4651,7 @@
             <i class="fa-regular fa-folder-open"></i>
           </div>
           <p>暂无项目数据</p>
-          <button class="customer-empty-action project-empty-action" type="button" @click="openProjectForm()">
+          <button class="customer-empty-action project-empty-action" type="button" @click="openProjectAddDialog()">
             添加第一个项目
           </button>
         </div>
@@ -6108,6 +6199,111 @@
         </div>
       </div>
 
+      <div v-if="customerAddDialogOpen" class="dialog-mask customer-add-dialog" @click.self="closeCustomerAddDialog">
+        <div class="dialog-card">
+          <div class="customer-add-dialog-head">
+            <h3>新增客户</h3>
+            <button class="customer-add-dialog-close" type="button" aria-label="关闭新增客户弹窗" @click="closeCustomerAddDialog">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <template v-if="customerAddDialogMode === 'choice'">
+            <p>请选择客户创建方式</p>
+            <div class="customer-add-dialog-options">
+              <button class="customer-add-choice" type="button" @click="chooseCustomerAddMode('manual')">
+                <i class="fa-solid fa-pen"></i>
+                手动创建
+              </button>
+              <button class="customer-add-choice" type="button" @click="chooseCustomerAddMode('import')">
+                <i class="fa-solid fa-file-import"></i>
+                模板导入
+              </button>
+            </div>
+          </template>
+
+          <template v-else>
+            <p>下载模板后填写客户信息，再选择 Excel 文件导入。</p>
+            <div class="customer-import-panel">
+              <button class="customer-import-action" type="button" @click="downloadCustomerTemplate">
+                <i class="fa-solid fa-file-arrow-down"></i>
+                下载模板 Excel 文件
+              </button>
+              <div class="customer-import-actions">
+                <button class="customer-import-action" type="button" @click="triggerCustomerTemplateInput" :disabled="customerTemplateImporting">
+                  <i class="fa-solid fa-upload"></i>
+                  {{ customerTemplateImporting ? '正在导入' : '选择上传文件' }}
+                </button>
+                <button class="dialog-button cancel" type="button" @click="customerAddDialogMode = 'choice'">
+                  返回
+                </button>
+              </div>
+              <input
+                ref="customerTemplateInput"
+                class="customer-import-hidden-input"
+                type="file"
+                accept=".xlsx,.xls"
+                @change="handleCustomerTemplateImport"
+              >
+            </div>
+          </template>
+        </div>
+      </div>
+
+      <div v-if="projectAddDialogOpen" class="dialog-mask project-add-dialog customer-add-dialog" @click.self="closeProjectAddDialog">
+        <div class="dialog-card">
+          <div class="customer-add-dialog-head">
+            <h3>新增项目</h3>
+            <button class="customer-add-dialog-close" type="button" aria-label="关闭新增项目弹窗" @click="closeProjectAddDialog">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <template v-if="projectAddDialogMode === 'choice'">
+            <p>请选择项目创建方式</p>
+            <div class="customer-add-dialog-options">
+              <button class="customer-add-choice" type="button" @click="chooseProjectAddMode('manual')">
+                <i class="fa-solid fa-pen"></i>
+                手动创建
+              </button>
+              <button class="customer-add-choice" type="button" @click="chooseProjectAddMode('import')">
+                <i class="fa-solid fa-file-import"></i>
+                模板导入
+              </button>
+            </div>
+          </template>
+
+          <template v-else>
+            <p>下载模板后填写项目信息，再选择 Excel 文件导入。</p>
+            <div class="customer-import-note">
+              回款金额、设计师和附件名称支持使用“、”分隔；附件列仅记录附件名称，实际文件请在项目编辑界面上传。
+            </div>
+            <div class="customer-import-panel">
+              <button class="customer-import-action" type="button" @click="downloadProjectTemplate">
+                <i class="fa-solid fa-file-arrow-down"></i>
+                下载模板 Excel 文件
+              </button>
+              <div class="customer-import-actions">
+                <button class="customer-import-action" type="button" @click="triggerProjectTemplateInput" :disabled="projectTemplateImporting">
+                  <i class="fa-solid fa-upload"></i>
+                  {{ projectTemplateImporting ? '正在导入' : '选择上传文件' }}
+                </button>
+                <button class="dialog-button cancel" type="button" @click="projectAddDialogMode = 'choice'">
+                  返回
+                </button>
+              </div>
+              <input
+                ref="projectTemplateInput"
+                class="customer-import-hidden-input"
+                type="file"
+                accept=".xlsx,.xls"
+                @change="handleProjectTemplateImport"
+              >
+            </div>
+          </template>
+        </div>
+      </div>
+
       <div v-if="importModeDialogOpen" class="dialog-mask" @click.self="cancelImport">
         <div class="dialog-card">
           <h3>导入数据</h3>
@@ -6179,6 +6375,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <script>
     const { createApp } = Vue;
@@ -6279,6 +6476,12 @@
           deleteTargetType: "customer",
           importModeDialogOpen: false,
           pendingImportFile: null,
+          customerAddDialogOpen: false,
+          customerAddDialogMode: "choice",
+          customerTemplateImporting: false,
+          projectAddDialogOpen: false,
+          projectAddDialogMode: "choice",
+          projectTemplateImporting: false,
           customerTabs: [
             { label: "全部", value: "all" },
             { label: "待跟进", value: "follow" },
@@ -6854,6 +7057,299 @@
             const content = this.$el.querySelector(".content");
             if (content) content.scrollTop = 0;
           });
+        },
+        openCustomerAddDialog() {
+          this.customerAddDialogMode = "choice";
+          this.customerAddDialogOpen = true;
+        },
+        closeCustomerAddDialog() {
+          this.customerAddDialogOpen = false;
+          this.customerAddDialogMode = "choice";
+          this.customerTemplateImporting = false;
+        },
+        chooseCustomerAddMode(mode) {
+          if (mode === "manual") {
+            this.closeCustomerAddDialog();
+            this.openCustomerForm();
+            return;
+          }
+          this.customerAddDialogMode = "import";
+        },
+        downloadCustomerTemplate() {
+          if (!window.XLSX) {
+            this.notify("模板生成中，请稍后重试");
+            return;
+          }
+          const headers = ["客户姓名", "公司名称", "联系电话", "所属城市", "角色名称", "客户属性", "备注信息"];
+          const sheet = window.XLSX.utils.aoa_to_sheet([headers, ["", "", "", "", "", "", ""]]);
+          sheet["!cols"] = [
+            { wch: 14 },
+            { wch: 20 },
+            { wch: 16 },
+            { wch: 14 },
+            { wch: 14 },
+            { wch: 18 },
+            { wch: 20 }
+          ];
+          const workbook = window.XLSX.utils.book_new();
+          window.XLSX.utils.book_append_sheet(workbook, sheet, "客户模板");
+          window.XLSX.writeFile(workbook, "客户管理导入模板.xlsx");
+        },
+        triggerCustomerTemplateInput() {
+          this.$refs.customerTemplateInput?.click();
+        },
+        async handleCustomerTemplateImport(event) {
+          const file = event.target.files?.[0];
+          event.target.value = "";
+          if (!file || !window.XLSX) return;
+          this.customerTemplateImporting = true;
+          try {
+            const buffer = await file.arrayBuffer();
+            const workbook = window.XLSX.read(buffer, { type: "array" });
+            const sheetName = workbook.SheetNames[0];
+            if (!sheetName) throw new Error("empty workbook");
+            const rows = window.XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { defval: "" });
+            const normalizeText = (value) => String(value ?? "").trim();
+            const splitTags = (value) => normalizeText(value)
+              .split(/[，,、;；\n\r\t ]+/)
+              .map((item) => item.trim())
+              .filter(Boolean);
+            const imported = rows
+              .map((row) => {
+                const name = normalizeText(row["客户姓名"] || row["姓名"]);
+                const phone = normalizeText(row["联系电话"] || row["电话"] || row["手机"]);
+                if (!name && !phone) return null;
+                const cityText = normalizeText(row["所属城市"] || row["城市"]);
+                let province = normalizeText(row["所属省份"] || row["省份"]);
+                let city = cityText;
+                if (!province && cityText.includes("·")) {
+                  const cityParts = cityText.split("·").map((item) => item.trim()).filter(Boolean);
+                  province = cityParts[0] || "";
+                  city = cityParts[1] || cityParts[0] || "";
+                }
+                if (!province && city) {
+                  province = this.provinces.find((item) => item.cities.includes(city))?.name || "";
+                }
+                return {
+                  id: Date.now() + Math.floor(Math.random() * 1000000),
+                  name,
+                  company: normalizeText(row["公司名称"] || row["公司"]) || "未填写公司",
+                  phone,
+                  province,
+                  city: city || "未选择城市",
+                  role: normalizeText(row["角色名称"] || row["角色"]) || "未填写角色",
+                  tags: splitTags(row["客户属性"] || row["标签"]),
+                  remark: normalizeText(row["备注信息"] || row["备注"]),
+                  status: "待跟进",
+                  category: "follow"
+                };
+              })
+              .filter(Boolean);
+            if (!imported.length) {
+              this.notify("未解析到客户数据");
+              return;
+            }
+            const previousCustomers = [...this.customers];
+            this.customers = [...imported, ...this.customers];
+            try {
+              await this.persistCustomers();
+            } catch (error) {
+              console.error("import customers failed", error);
+              this.customers = previousCustomers;
+              this.notify("模板导入失败");
+              return;
+            }
+            this.customerAddDialogOpen = false;
+            this.customerAddDialogMode = "choice";
+            this.customerTemplateImporting = false;
+            this.currentPage = "customers";
+            this.customerPage = 1;
+            this.notify(`已导入${imported.length}条客户`);
+          } catch (error) {
+            console.error("parse customer template failed", error);
+            this.notify("模板导入失败");
+          } finally {
+            this.customerTemplateImporting = false;
+          }
+        },
+        openProjectAddDialog() {
+          this.projectAddDialogMode = "choice";
+          this.projectAddDialogOpen = true;
+        },
+        closeProjectAddDialog() {
+          this.projectAddDialogOpen = false;
+          this.projectAddDialogMode = "choice";
+          this.projectTemplateImporting = false;
+        },
+        chooseProjectAddMode(mode) {
+          if (mode === "manual") {
+            this.closeProjectAddDialog();
+            this.openProjectForm();
+            return;
+          }
+          this.projectAddDialogMode = "import";
+        },
+        downloadProjectTemplate() {
+          if (!window.XLSX) {
+            this.notify("模板生成中，请稍后重试");
+            return;
+          }
+          const headers = [
+            "项目名称",
+            "项目描述",
+            "项目状态",
+            "客户姓名",
+            "项目类别",
+            "合同金额（万元）",
+            "回款金额（万元）",
+            "应收金额（万元）",
+            "方案设计师",
+            "施工图设计师",
+            "项目阶段",
+            "投标截止时间",
+            "投标注意事项",
+            "签订时间",
+            "合同签订注意事项",
+            "实施中注意事项",
+            "完工时间",
+            "项目完工注意事项",
+            "上传附件"
+          ];
+          const sheet = window.XLSX.utils.aoa_to_sheet([headers, Array(headers.length).fill("")]);
+          sheet["!cols"] = headers.map((header) => ({
+            wch: Math.min(28, Math.max(14, header.length + 4))
+          }));
+          const workbook = window.XLSX.utils.book_new();
+          window.XLSX.utils.book_append_sheet(workbook, sheet, "项目模板");
+          window.XLSX.writeFile(workbook, "项目管理导入模板.xlsx");
+        },
+        triggerProjectTemplateInput() {
+          this.$refs.projectTemplateInput?.click();
+        },
+        async handleProjectTemplateImport(event) {
+          const file = event.target.files?.[0];
+          event.target.value = "";
+          if (!file || !window.XLSX) return;
+          this.projectTemplateImporting = true;
+          try {
+            const buffer = await file.arrayBuffer();
+            const workbook = window.XLSX.read(buffer, { type: "array", cellDates: true });
+            const sheetName = workbook.SheetNames[0];
+            if (!sheetName) throw new Error("empty workbook");
+            const rows = window.XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { defval: "" });
+            const normalizeText = (value) => String(value ?? "").trim();
+            const splitList = (value) => normalizeText(value)
+              .split(/[，,、;；\n\r\t|]+/)
+              .map((item) => item.trim())
+              .filter(Boolean);
+            const normalizeDateValue = (value) => {
+              if (value instanceof Date && !Number.isNaN(value.getTime())) {
+                const pad = (item) => String(item).padStart(2, "0");
+                return `${value.getFullYear()}-${pad(value.getMonth() + 1)}-${pad(value.getDate())}T${pad(value.getHours())}:${pad(value.getMinutes())}`;
+              }
+              return normalizeText(value).replace(/\//g, "-").replace(" ", "T");
+            };
+            const parseCategory = (value, row) => {
+              const parent = normalizeText(row["项目类别一级"] || row["类别一级"]);
+              const child = normalizeText(row["项目类别二级"] || row["类别二级"]);
+              if (parent || child) return { parent, child };
+              const parts = normalizeText(value).split(/[·>/／/]+/).map((item) => item.trim()).filter(Boolean);
+              return { parent: parts[0] || "", child: parts[1] || "" };
+            };
+            const parseStatus = (value) => {
+              const text = normalizeText(value);
+              return text === "已完成" || text === "completed" ? "completed" : "in_progress";
+            };
+            const parseStage = (value) => {
+              const text = normalizeText(value);
+              if (text === "合同签订" || text === "contract") return "contract";
+              if (text === "实施中" || text === "executing") return "executing";
+              if (text === "项目完工" || text === "completed") return "completed";
+              return "bidding";
+            };
+            const imported = rows
+              .map((row, index) => {
+                const name = normalizeText(row["项目名称"] || row["名称"]);
+                const clientName = normalizeText(row["客户姓名"] || row["客户"]);
+                if (!name || !clientName) return null;
+                const category = parseCategory(row["项目类别"] || row["类别"], row);
+                const receiptValues = splitList(row["回款金额（万元）"] || row["回款金额"]);
+                const schemeDesigners = splitList(row["方案设计师"]).map((item) => ({
+                  id: this.makeProjectItemId(),
+                  name: item
+                }));
+                const drawingDesigners = splitList(row["施工图设计师"]).map((item) => ({
+                  id: this.makeProjectItemId(),
+                  name: item
+                }));
+                const attachmentNames = splitList(row["上传附件"] || row["附件名称"]);
+                return {
+                  id: Date.now() + index,
+                  name,
+                  description: normalizeText(row["项目描述"] || row["描述"]),
+                  clientName,
+                  projectStatus: parseStatus(row["项目状态"] || row["状态"]),
+                  categoryParent: category.parent,
+                  categoryChild: category.child,
+                  contractAmount: normalizeText(row["合同金额（万元）"] || row["合同金额"]),
+                  receipts: receiptValues.map((amount) => ({
+                    id: this.makeProjectItemId(),
+                    amount
+                  })),
+                  receivableAmount: normalizeText(row["应收金额（万元）"] || row["应收金额"]),
+                  contractSignedAt: "",
+                  schemeDesigners,
+                  drawingDesigners,
+                  attachments: [],
+                  attachmentNames,
+                  stage: parseStage(row["项目阶段"] || row["阶段"]),
+                  statusData: {
+                    bidding: {
+                      deadline: normalizeDateValue(row["投标截止时间"]),
+                      note: normalizeText(row["投标注意事项"])
+                    },
+                    contract: {
+                      time: normalizeDateValue(row["签订时间"]),
+                      note: normalizeText(row["合同签订注意事项"])
+                    },
+                    executing: {
+                      note: normalizeText(row["实施中注意事项"])
+                    },
+                    completed: {
+                      time: normalizeDateValue(row["完工时间"]),
+                      note: normalizeText(row["项目完工注意事项"])
+                    }
+                  },
+                  businessStatus: "follow"
+                };
+              })
+              .filter(Boolean);
+            if (!imported.length) {
+              this.notify("未解析到有效项目数据，请检查项目名称和客户姓名");
+              return;
+            }
+            const previousProjects = [...this.projects];
+            this.projects = [...imported, ...this.projects];
+            try {
+              await this.persistProjects();
+            } catch (error) {
+              console.error("import projects failed", error);
+              this.projects = previousProjects;
+              this.notify("模板导入失败");
+              return;
+            }
+            this.projectAddDialogOpen = false;
+            this.projectAddDialogMode = "choice";
+            this.projectTemplateImporting = false;
+            this.currentPage = "projects";
+            this.projectPage = 1;
+            this.notify(`已导入${imported.length}个项目`);
+          } catch (error) {
+            console.error("parse project template failed", error);
+            this.notify("模板导入失败");
+          } finally {
+            this.projectTemplateImporting = false;
+          }
         },
         openCustomerDetail(customer) {
           this.selectedCustomer = customer;
