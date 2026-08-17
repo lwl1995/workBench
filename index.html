@@ -6376,6 +6376,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <script>
     const { createApp } = Vue;
@@ -7075,25 +7076,70 @@
           }
           this.customerAddDialogMode = "import";
         },
-        downloadCustomerTemplate() {
-          if (!window.XLSX) {
+        async downloadExcelTemplate(columns, sheetName, fileName) {
+          if (!window.ExcelJS && !window.XLSX) {
             this.notify("模板生成中，请稍后重试");
             return;
           }
-          const headers = ["客户姓名", "公司名称", "联系电话", "所属城市", "角色名称", "客户属性", "备注信息"];
-          const sheet = window.XLSX.utils.aoa_to_sheet([headers, ["", "", "", "", "", "", ""]]);
-          sheet["!cols"] = [
-            { wch: 14 },
-            { wch: 20 },
-            { wch: 16 },
-            { wch: 14 },
-            { wch: 14 },
-            { wch: 18 },
-            { wch: 20 }
-          ];
+          if (window.ExcelJS) {
+            const workbook = new window.ExcelJS.Workbook();
+            const worksheet = workbook.addWorksheet(sheetName);
+            worksheet.columns = columns.map((column, index) => ({
+              key: `column${index}`,
+              width: column.width || 18
+            }));
+            const headerRow = worksheet.getRow(1);
+            columns.forEach((column, index) => {
+              const cell = headerRow.getCell(index + 1);
+              cell.value = column.required
+                ? {
+                    richText: [
+                      { text: "* ", font: { color: { argb: "FFFF0000" }, bold: true } },
+                      { text: column.label, font: { color: { argb: "FF111111" }, bold: true } }
+                    ]
+                  }
+                : { richText: [{ text: column.label, font: { color: { argb: "FF111111" }, bold: true } }] };
+              cell.alignment = { vertical: "middle", horizontal: "center", wrapText: true };
+              cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFEAF3FF" } };
+              cell.border = {
+                top: { style: "thin", color: { argb: "FFD9E6F5" } },
+                left: { style: "thin", color: { argb: "FFD9E6F5" } },
+                bottom: { style: "thin", color: { argb: "FFD9E6F5" } },
+                right: { style: "thin", color: { argb: "FFD9E6F5" } }
+              };
+            });
+            headerRow.height = 24;
+            worksheet.addRow(Array(columns.length).fill(""));
+            const buffer = await workbook.xlsx.writeBuffer();
+            const blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            URL.revokeObjectURL(url);
+            return;
+          }
+
+          const headers = columns.map((column) => column.required ? `* ${column.label}` : column.label);
+          const sheet = window.XLSX.utils.aoa_to_sheet([headers, Array(headers.length).fill("")]);
+          sheet["!cols"] = columns.map((column) => ({ wch: column.width || 18 }));
           const workbook = window.XLSX.utils.book_new();
-          window.XLSX.utils.book_append_sheet(workbook, sheet, "客户模板");
-          window.XLSX.writeFile(workbook, "客户管理导入模板.xlsx");
+          window.XLSX.utils.book_append_sheet(workbook, sheet, sheetName);
+          window.XLSX.writeFile(workbook, fileName);
+        },
+        async downloadCustomerTemplate() {
+          await this.downloadExcelTemplate([
+            { label: "客户姓名", required: true, width: 14 },
+            { label: "公司名称", width: 20 },
+            { label: "联系电话", required: true, width: 16 },
+            { label: "所属城市", width: 18 },
+            { label: "角色名称", width: 14 },
+            { label: "客户属性", width: 18 },
+            { label: "备注信息", width: 24 }
+          ], "客户模板", "客户管理导入模板.xlsx");
         },
         triggerCustomerTemplateInput() {
           this.$refs.customerTemplateInput?.click();
@@ -7109,12 +7155,15 @@
             const sheetName = workbook.SheetNames[0];
             if (!sheetName) throw new Error("empty workbook");
             const rows = window.XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { defval: "" });
+            const normalizedRows = rows.map((row) => Object.fromEntries(
+              Object.entries(row).map(([key, value]) => [key.replace(/^[\s★*]+/, ""), value])
+            ));
             const normalizeText = (value) => String(value ?? "").trim();
             const splitTags = (value) => normalizeText(value)
               .split(/[，,、;；\n\r\t ]+/)
               .map((item) => item.trim())
               .filter(Boolean);
-            const imported = rows
+            const imported = normalizedRows
               .map((row) => {
                 const name = normalizeText(row["客户姓名"] || row["姓名"]);
                 const phone = normalizeText(row["联系电话"] || row["电话"] || row["手机"]);
@@ -7189,39 +7238,28 @@
           }
           this.projectAddDialogMode = "import";
         },
-        downloadProjectTemplate() {
-          if (!window.XLSX) {
-            this.notify("模板生成中，请稍后重试");
-            return;
-          }
-          const headers = [
-            "项目名称",
-            "项目描述",
-            "项目状态",
-            "客户姓名",
-            "项目类别",
-            "合同金额（万元）",
-            "回款金额（万元）",
-            "应收金额（万元）",
-            "方案设计师",
-            "施工图设计师",
-            "项目阶段",
-            "投标截止时间",
-            "投标注意事项",
-            "签订时间",
-            "合同签订注意事项",
-            "实施中注意事项",
-            "完工时间",
-            "项目完工注意事项",
-            "上传附件"
-          ];
-          const sheet = window.XLSX.utils.aoa_to_sheet([headers, Array(headers.length).fill("")]);
-          sheet["!cols"] = headers.map((header) => ({
-            wch: Math.min(28, Math.max(14, header.length + 4))
-          }));
-          const workbook = window.XLSX.utils.book_new();
-          window.XLSX.utils.book_append_sheet(workbook, sheet, "项目模板");
-          window.XLSX.writeFile(workbook, "项目管理导入模板.xlsx");
+        async downloadProjectTemplate() {
+          await this.downloadExcelTemplate([
+            { label: "项目名称", required: true, width: 18 },
+            { label: "项目描述", width: 26 },
+            { label: "项目状态", width: 14 },
+            { label: "客户姓名", required: true, width: 16 },
+            { label: "项目类别", width: 18 },
+            { label: "合同金额（万元）", width: 18 },
+            { label: "回款金额（万元）", width: 20 },
+            { label: "应收金额（万元）", width: 18 },
+            { label: "方案设计师", width: 24 },
+            { label: "施工图设计师", width: 24 },
+            { label: "项目阶段", width: 14 },
+            { label: "投标截止时间", width: 20 },
+            { label: "投标注意事项", width: 24 },
+            { label: "签订时间", width: 20 },
+            { label: "合同签订注意事项", width: 24 },
+            { label: "实施中注意事项", width: 24 },
+            { label: "完工时间", width: 20 },
+            { label: "项目完工注意事项", width: 24 },
+            { label: "上传附件", width: 24 }
+          ], "项目模板", "项目管理导入模板.xlsx");
         },
         triggerProjectTemplateInput() {
           this.$refs.projectTemplateInput?.click();
@@ -7237,6 +7275,9 @@
             const sheetName = workbook.SheetNames[0];
             if (!sheetName) throw new Error("empty workbook");
             const rows = window.XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { defval: "" });
+            const normalizedRows = rows.map((row) => Object.fromEntries(
+              Object.entries(row).map(([key, value]) => [key.replace(/^[\s★*]+/, ""), value])
+            ));
             const normalizeText = (value) => String(value ?? "").trim();
             const splitList = (value) => normalizeText(value)
               .split(/[，,、;；\n\r\t|]+/)
@@ -7267,7 +7308,7 @@
               if (text === "项目完工" || text === "completed") return "completed";
               return "bidding";
             };
-            const imported = rows
+            const imported = normalizedRows
               .map((row, index) => {
                 const name = normalizeText(row["项目名称"] || row["名称"]);
                 const clientName = normalizeText(row["客户姓名"] || row["客户"]);
